@@ -125,5 +125,10 @@
       "linkedin": "https://linkedin.com/company/mintlify"
     }
   },
-  "description": "Just Easy"
+  "description": "Just Easy",
+  "api": {
+    "playground": {
+      "display": "interactive"
+    }
+  }
 }
