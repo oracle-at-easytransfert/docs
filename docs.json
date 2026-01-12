@@ -50,6 +50,12 @@
             ]
           },
           {
+            "group": "Webhooks",
+            "pages": [
+              "guides/webhooks/introduction"
+            ]
+          },
+          {
             "group": "Paiements",
             "pages": [
               "guides/paiements/introduction",
