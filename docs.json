@@ -73,10 +73,16 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
+            "group": "Paiements",
+            "pages": []
+          },
+          {
+            "group": "Transferts",
+            "pages": []
+          },
+          {
+            "group": "Webhooks",
+            "pages": []
           },
           {
             "group": "Endpoint examples",
