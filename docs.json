@@ -38,31 +38,34 @@
             "pages": [
               "guides/introduction",
               "guides/quickstart",
+              "guides/getting-started/securite",
               "guides/development"
             ]
+          },
+          {
+            "group": "Transferts",
+            "pages": [
+              "guides/transferts/introduction",
+              "guides/transferts/integration"
+            ]
+          },
+          {
+            "group": "Paiements",
+            "pages": [
+              "guides/paiements/introduction",
+              "guides/paiements/integration",
+              "guides/paiements/authentication"
+            ]
+          },
+          {
+            "group": "Autres",
+            "pages": []
           },
           {
             "group": "Customization",
             "pages": [
               "essentials/settings",
               "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
             ]
           }
         ]
