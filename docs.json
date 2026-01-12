@@ -60,13 +60,6 @@
           {
             "group": "Autres",
             "pages": []
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
           }
         ]
       },
