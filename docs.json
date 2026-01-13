@@ -71,10 +71,16 @@
       },
       {
         "tab": "API reference",
+        "openapi": [
+          "openapi/API_EASYTRANSFERT.postman_collection.json",
+          "openapi/API_EASYTRANSFERT.postman_environment.json"
+        ],
         "groups": [
           {
             "group": "Paiements",
-            "pages": []
+            "pages": [
+              "api-reference/endpoints/transaction"
+            ]
           },
           {
             "group": "Transferts",
@@ -87,10 +93,7 @@
           {
             "group": "Endpoint examples",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoints/transaction"
             ]
           }
         ]

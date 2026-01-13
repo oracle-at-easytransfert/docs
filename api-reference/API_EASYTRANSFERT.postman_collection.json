@@ -1,0 +1,339 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "API MARCHAND EASYTRANSFERT",
+		"description": "Collection pour l'API EASYTRANSFERT BUSINESS API V1\n\nDocumentation: https://documenter.getpostman.com/view/23936159/2s84DoT3w1\n\nBASE_URL: http://proxy-airtime.easytransfert.app/api_v1/transaction\n\n**Prérequis:**\n- Clé API valide\n- Pour Cashout: au moins un wallet opérateur configuré\n- Pour Cashin: suffisamment de fonds sur le compte partenaire",
+		"licence": {
+			"name": "MIT"
+		},
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"servers": [
+		{
+			"url": "http://proxy-airtime.easytransfert.app/api_v1/transaction"
+		}
+	],
+	"security": [
+		{
+			"api_key": []
+		}
+	],
+	"item": [
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Initier Transaction (Cashout/Cashin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.transaction_id) {",
+									"        pm.environment.set(\"transaction_id\", jsonData.data.transaction_id);",
+									"        console.log(\"Transaction ID sauvegardé: \" + jsonData.data.transaction_id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000,\n    \"api_key\": \"{{api_key}}\",\n    \"destination\": \"0670123456\",\n    \"service_id\": {{service_id_mtn_cashin}},\n    \"ipn_url\": \"{{ipn_url}}\",\n    \"custom_data\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/airtime",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"airtime"
+							]
+						},
+						"description": "Initie une transaction (cashout ou cashin) avec l'API EASYTRANSFERT.\n\n**Paramètres:**\n- `amount`: Montant en FCFA (entier)\n- `api_key`: Votre clé API EASYTRANSFERT\n- `destination`: Numéro de téléphone au format local (ex: 0670123456)\n- `service_id`: Identifiant du service (utiliser les variables de la collection)\n- `ipn_url`: URL de callback pour recevoir les notifications IPN (optionnel)\n- `custom_data`: Données personnalisées pour identifier la transaction (optionnel)\n\n**Catalogue des Services (Variables disponibles):**\n- `{{service_id_mtn_cashin}}` - MTN Cashin (Ajout d'argent)\n- `{{service_id_mtn_cashout}}` - MTN Cashout (Retrait)\n- `{{service_id_orange_cashin}}` - Orange Cashin (Ajout d'argent)\n- `{{service_id_orange_cashout}}` - Orange Cashout (Retrait)\n- `{{service_id_moov_cashin}}` - Moov Cashin (Ajout d'argent)\n- `{{service_id_moov_cashout}}` - Moov Cashout (Retrait)\n- `{{service_id_flooz_cashin}}` - Flooz Cashin (Ajout d'argent)\n- `{{service_id_flooz_cashout}}` - Flooz Cashout (Retrait)\n\n**Note:** Les service_ids dans les variables sont des exemples. Vous devez les remplacer par les vrais IDs fournis par EASYTRANSFERT.\n\n**Réponse:**\nUne première réponse immédiate est envoyée pour confirmer que la requête est recevable. La confirmation finale arrive via l'IPN (webhook)."
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction - MTN Cashout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000,\n    \"api_key\": \"{{api_key}}\",\n    \"destination\": \"0670123456\",\n    \"service_id\": {{service_id_mtn_cashout}},\n    \"ipn_url\": \"{{ipn_url}}\",\n    \"custom_data\": \"transaction_ref_123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/airtime",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"airtime"
+							]
+						},
+						"description": "Exemple de transaction Cashout MTN (retrait depuis le mobile money du client)"
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction - Orange Cashin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 3000,\n    \"api_key\": \"{{api_key}}\",\n    \"destination\": \"0501234567\",\n    \"service_id\": {{service_id_orange_cashin}},\n    \"ipn_url\": \"{{ipn_url}}\",\n    \"custom_data\": \"deposit_456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/airtime",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"airtime"
+							]
+						},
+						"description": "Exemple de transaction Cashin Orange (ajout d'argent sur le mobile money du client)"
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction - Moov Cashout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 2000,\n    \"api_key\": \"{{api_key}}\",\n    \"destination\": \"0570123456\",\n    \"service_id\": {{service_id_moov_cashout}},\n    \"ipn_url\": \"{{ipn_url}}\",\n    \"custom_data\": \"withdrawal_789\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/airtime",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"airtime"
+							]
+						},
+						"description": "Exemple de transaction Cashout Moov"
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction - Flooz Cashin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 4000,\n    \"api_key\": \"{{api_key}}\",\n    \"destination\": \"970123456\",\n    \"service_id\": {{service_id_flooz_cashin}},\n    \"ipn_url\": \"{{ipn_url}}\",\n    \"custom_data\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/airtime",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"airtime"
+							]
+						},
+						"description": "Exemple de transaction Cashin Flooz"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints pour initier des transactions"
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Obtenir Statut Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"api_key\": \"{{api_key}}\",\n    \"transaction_id\": \"{{transaction_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"status"
+							]
+						},
+						"description": "Obtenir le statut d'une transaction.\n\n**⚠️ AVERTISSEMENT: À utiliser avec parcimonie. Si vous en abusez, vous serez bloqué par le système.**\n\n**Paramètres:**\n- `api_key`: Votre clé API\n- `transaction_id`: ID de la transaction (ex: EFB.001158)\n\n**Note:** La confirmation finale des transactions arrive normalement via l'IPN (webhook), il n'est pas nécessaire d'interroger le statut en continu."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint pour obtenir le statut d'une transaction (à utiliser avec parcimonie)"
+		},
+		{
+			"name": "Webhook IPN (Exemple)",
+			"item": [
+				{
+					"name": "Exemple Réponse IPN - SUCCESS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transaction_id\": \"EFB.144358\",\n    \"amount\": 1000,\n    \"benefice\": 1000,\n    \"commission\": 0,\n    \"destination\": \"0500156008\",\n    \"fee\": 0,\n    \"reponse\": \"operation succes\",\n    \"error\": \"\",\n    \"service_id\": 14,\n    \"customer_name\": \"easytransfert\",\n    \"state\": \"SUCCESS\",\n    \"custom_data\": \"custom_data\",\n    \"ipn_url\": \"\",\n    \"provider_id\": null,\n    \"sms_link\": 0,\n    \"created_at\": \"2022-10-18T02:38:44.000+00:00\",\n    \"updated_at\": \"2022-10-18T02:38:44.000+00:00\",\n    \"ipn_state\": 0,\n    \"w_amount_after_transaction\": \"\",\n    \"p_last_wallet_amount\": 11,\n    \"p_new_wallet_amount\": null,\n    \"p_id\": 1,\n    \"hash\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{ipn_url}}",
+							"host": [
+								"{{ipn_url}}"
+							]
+						},
+						"description": "Exemple de notification IPN reçue lorsque la transaction est réussie.\n\n**Note:** Ceci est un exemple pour comprendre le format. En réalité, c'est EASYTRANSFERT qui envoie cette requête POST à votre URL IPN configurée.\n\n**Champs importants:**\n- `transaction_id`: ID de la transaction\n- `state`: \"SUCCESS\" ou \"FAILED\"\n- `reponse`: Message de réponse (ex: \"operation succes\")\n- `error`: Message d'erreur (si échec)\n- `amount`: Montant de la transaction\n- `custom_data`: Données personnalisées envoyées lors de l'initiation"
+					},
+					"response": []
+				},
+				{
+					"name": "Exemple Réponse IPN - FAILED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transaction_id\": \"EFB.144359\",\n    \"amount\": 2000,\n    \"benefice\": 2000,\n    \"commission\": 0,\n    \"destination\": \"0670123456\",\n    \"fee\": 0,\n    \"reponse\": \"\",\n    \"error\": \"message de l'erreur (si transaction Echec)\",\n    \"service_id\": 10,\n    \"customer_name\": \"easytransfert\",\n    \"state\": \"FAILED\",\n    \"custom_data\": \"transaction_ref_123\",\n    \"ipn_url\": \"\",\n    \"provider_id\": null,\n    \"sms_link\": 0,\n    \"created_at\": \"2022-10-18T02:38:44.000+00:00\",\n    \"updated_at\": \"2022-10-18T02:38:44.000+00:00\",\n    \"ipn_state\": 0,\n    \"w_amount_after_transaction\": \"\",\n    \"p_last_wallet_amount\": 11,\n    \"p_new_wallet_amount\": null,\n    \"p_id\": 1,\n    \"hash\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{ipn_url}}",
+							"host": [
+								"{{ipn_url}}"
+							]
+						},
+						"description": "Exemple de notification IPN reçue lorsque la transaction a échoué."
+					},
+					"response": []
+				}
+			],
+			"description": "Exemples de notifications IPN reçues par votre webhook. En réalité, ces requêtes sont envoyées automatiquement par EASYTRANSFERT."
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://proxy-airtime.easytransfert.app/api_v1/transaction",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "votre_cle_api_ici",
+			"type": "string"
+		},
+		{
+			"key": "transaction_id",
+			"value": "EFB.001158",
+			"type": "string"
+		},
+		{
+			"key": "ipn_url",
+			"value": "http://votre-site.com/webhook/easytransfert",
+			"type": "string"
+		},
+		{
+			"key": "service_id_mtn_cashin",
+			"value": "10",
+			"type": "string",
+			"description": "MTN - Cashin (Ajout d'argent sur mobile money)"
+		},
+		{
+			"key": "service_id_mtn_cashout",
+			"value": "11",
+			"type": "string",
+			"description": "MTN - Cashout (Retrait depuis mobile money)"
+		},
+		{
+			"key": "service_id_orange_cashin",
+			"value": "12",
+			"type": "string",
+			"description": "Orange - Cashin (Ajout d'argent sur mobile money)"
+		},
+		{
+			"key": "service_id_orange_cashout",
+			"value": "13",
+			"type": "string",
+			"description": "Orange - Cashout (Retrait depuis mobile money)"
+		},
+		{
+			"key": "service_id_moov_cashin",
+			"value": "14",
+			"type": "string",
+			"description": "Moov - Cashin (Ajout d'argent sur mobile money)"
+		},
+		{
+			"key": "service_id_moov_cashout",
+			"value": "15",
+			"type": "string",
+			"description": "Moov - Cashout (Retrait depuis mobile money)"
+		},
+		{
+			"key": "service_id_flooz_cashin",
+			"value": "16",
+			"type": "string",
+			"description": "Flooz - Cashin (Ajout d'argent sur mobile money)"
+		},
+		{
+			"key": "service_id_flooz_cashout",
+			"value": "17",
+			"type": "string",
+			"description": "Flooz - Cashout (Retrait depuis mobile money)"
+		}
+	]
+}
+
