@@ -92,6 +92,7 @@
           },
           {
             "group": "Endpoint examples",
+            "icon": "square-code",
             "pages": [
               "api-reference/endpoints/transaction"
             ]
