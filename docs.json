@@ -72,7 +72,7 @@
       {
         "tab": "API reference",
         "openapi": [
-          "openapi.json"
+          "api-reference/openapi.json"
         ],
         "groups": [
           {
