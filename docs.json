@@ -71,12 +71,9 @@
       },
       {
         "tab": "API reference",
-        "openapi": [
-          "api-reference/openapi.json"
-        ],
         "groups": [
           {
-            "group": "Transaction",
+            "group": "Transactions",
             "pages": [
               "api-reference/endpoint/transaction"
             ]

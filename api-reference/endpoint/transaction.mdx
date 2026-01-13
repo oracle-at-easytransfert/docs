@@ -1,5 +1,5 @@
 ---
-title: 'Initier Transaction'
+title: 'Initier une transaction'
 openapi: 'POST /airtime'
 ---
 
@@ -23,7 +23,7 @@ Exemple de requête (JSON):
 ```
 
 Notes:
-- `service_id` identifie le fournisseur/service (MTN, Orange, etc.).
+- `service_id` identifie le fournisseur (MTN, Orange, etc.) et le type d'opération.
 - La réponse immédiate confirme la réception; la confirmation finale arrive via l'IPN.
 
-Exemples de services (variables disponibles dans la collection Postman): `service_id_mtn_cashin`, `service_id_mtn_cashout`, `service_id_orange_cashin`, etc.
+Vous trouverez la liste des services dans la [documentation](/documentation/services)
