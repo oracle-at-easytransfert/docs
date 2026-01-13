@@ -3,94 +3,322 @@
 	"info": {
 		"title": "API MARCHAND EASYTRANSFERT",
 		"description": "Collection pour l'API EASYTRANSFERT BUSINESS API V1\n\nDocumentation: https://documenter.getpostman.com/view/23936159/2s84DoT3w1\n\nBASE_URL: http://proxy-airtime.easytransfert.app/api_v1/transaction\n\n**Prérequis:**\n- Clé API valide\n- Pour Cashout: au moins un wallet opérateur configuré\n- Pour Cashin: suffisamment de fonds sur le compte partenaire",
-    "version": "1.0.0"
+		"version": "1.0.0"
 	},
 	"servers": [
 		{
 			"url": "http://proxy-airtime.easytransfert.app/api_v1/transaction"
 		}
 	],
-  "paths": {
-    "/airtime": {
-      "post": {
-        "description": "Il s'agit ici de l'initialisation d'une transaction de type Cash-out (paiement) ou Cash-in (transfert)",
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "amount":{
-                    "type": "integer",
-                    "description": "Montant de la transaction (doit être un multiple de 100)",
-                    "examples": [500]
-                  },
-                  "api_key":{
-                    "type": "string",
-                    "description": "Votre clé d'API",
-                    "examples": ["xxxxxxxxxxxxxxxxxxx"]
-                  },
-                  "destination":{
-                    "type": "string",
-                    "description": "Numéro de téléphone du payeur (pour le paiement) numéro du recepteur (pour le transfert sans l'indicatif (225)",
-                    "examples": ["0103444777"]
-                  },
-                  "ipn_url":{
-                    "type": "string",
-                    "description": "Url de notifaction. Sur cette url vous recevrez les status des opérations de cashin ou cashout",
-                    "examples": ["https://webhook.site/6da1dcfa-4cb2-4fb9-991a-8a841e246803"]
-                  },
-                  "service_id": {
-                    "type": "integer",
-                    "description": "Le numéro du service que vous souhaitez consommer",
-                    "examples": [
-                      12
-                    ]
-                  },
-                  "custom_data": {
-                    "type": "string",
-                    "description": "Il s'agit de données que vous souhaitez envoyer en plus dans la requette. cette données vous sera retourné dans l'IPN"
-                  },
-                  "om_otp": {
-                    "type": "string",
-                    "description": "À utiliser uniquement avec les service_id 27,29 et 23 cashout orange money. Il s'agit du code d'autorisation du débit obtenu par le client en composant #144*82# (pour la cote d'ivoire) ou le #144#391# (pour orange sénégal). La donnée doit être envoyée en chaine de caractère. Exemple otp: 1234 ==> om_otp: \"1234\""
-                  }
-                },
-                "required": [
-                  "amount",
-                  "api_key",
-                  "destination",
-                  "ipn_url",
-                  "service_id"
-                ]
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request Error"
-          },
-          "500": {
-            "description": "Internal Error"
-          }
-        }
-      }
-    }
-  }
+	"paths": {
+		"/airtime": {
+			"post": {
+				"description": "Il s'agit ici de l'initialisation d'une transaction de type Cash-out (paiement) ou Cash-in (transfert)",
+				"requestBody": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"amount": {
+										"type": "integer",
+										"description": "Montant de la transaction (doit être un multiple de 100)",
+										"examples": [
+											500
+										]
+									},
+									"api_key": {
+										"type": "string",
+										"description": "Votre clé d'API",
+										"examples": [
+											"xxxxxxxxxxxxxxxxxxx"
+										]
+									},
+									"destination": {
+										"type": "string",
+										"description": "Numéro de téléphone du payeur (pour le paiement) numéro du recepteur (pour le transfert sans l'indicatif (225)",
+										"examples": [
+											"0103444777"
+										]
+									},
+									"ipn_url": {
+										"type": "string",
+										"description": "Url de notifaction. Sur cette url vous recevrez les status des opérations de cashin ou cashout",
+										"examples": [
+											"https://webhook.site/6da1dcfa-4cb2-4fb9-991a-8a841e246803"
+										]
+									},
+									"service_id": {
+										"type": "integer",
+										"description": "Le numéro du service que vous souhaitez consommer",
+										"examples": [
+											12
+										]
+									},
+									"custom_data": {
+										"type": "string",
+										"description": "Il s'agit de données que vous souhaitez envoyer en plus dans la requette. cette données vous sera retourné dans l'IPN"
+									},
+									"om_otp": {
+										"type": "string",
+										"description": "À utiliser uniquement avec les service_id 27,29 et 23 cashout orange money. Il s'agit du code d'autorisation du débit obtenu par le client en composant #144*82# (pour la cote d'ivoire) ou le #144#391# (pour orange sénégal). La donnée doit être envoyée en chaine de caractère. Exemple otp: 1234 ==> om_otp: \"1234\""
+									}
+								},
+								"required": [
+									"amount",
+									"api_key",
+									"destination",
+									"ipn_url",
+									"service_id"
+								]
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"202": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"transaction_id": {
+											"type": "string",
+											"description": "Identifiant unique de la transaction",
+											"examples": [
+												"EFB.xxxx"
+											]
+										},
+										"amount": {
+											"type": "integer",
+											"description": "Montant de la transaction",
+											"examples": [
+												119000
+											]
+										},
+										"benefice": {
+											"type": "integer",
+											"description": "Bénéfice généré par la transaction",
+											"examples": [
+												119000
+											]
+										},
+										"comission": {
+											"type": "integer",
+											"description": "Commission prélevée sur la transaction",
+											"examples": [
+												0
+											]
+										},
+										"destination": {
+											"type": "string",
+											"description": "Numéro de téléphone du payeur (pour le paiement) numéro du recepteur (pour le transfert sans l'indicatif (225)",
+											"examples": [
+												"0708126834"
+											]
+										},
+										"fee": {
+											"type": "string",
+											"description": "Frais de transaction",
+											"examples": [
+												"0"
+											]
+										},
+										"response": {
+											"type": "null",
+											"description": "Réponse du service"
+										},
+										"service_id": {
+											"type": "integer",
+											"description": "Identifiant du service utilisé",
+											"examples": [
+												11
+											]
+										},
+										"customer_name": {
+											"type": "string",
+											"description": "Nom du client",
+											"examples": [
+												"easytransfert"
+											]
+										},
+										"state": {
+										    "type": "string",
+                                            "description": "État de la transaction",
+                                            "examples": [
+                                                "PENDING1"
+                                            ]
+                                        },
+										"custom_data": {
+											"type": "string",
+											"description": "Données personnalisées envoyées lors de la création de la transaction",
+											"examples": [
+												"PartenaireID-12345"
+											]
+										},
+										"ipn_url": {
+											"type": "string",
+											"description": "URL de notification",
+											"examples": [
+												"https://webhook.site/6da1dcfa-4cb2-4fb9-991a-8a841e246803"
+											]
+										},
+										"transaction_channel": {
+											"type": "string",
+											"description": "Canal de transaction",
+											"examples": [
+												""
+											]
+										},
+										"provider_id": {
+											"type": "string",
+											"description": "Identifiant du fournisseur",
+											"examples": [
+												""
+											]
+										},
+										"sms_link": {
+											"type": "string",
+											"description": "Lien SMS pour la validation de la transaction",
+											"examples": [
+												"https://api.easytransfert.app/sms/xxxx"
+											]
+										},
+										"p_id": {
+											"type": "integer",
+											"description": "Identifiant du partenaire",
+											"examples": [
+												1234
+											]
+										},
+										"p_last_wallet_amount": {
+											"type": "integer",
+											"description": "Dernier montant du portefeuille partenaire",
+											"examples": [
+												139403535
+											]
+										},
+										"p_new_wallet_amount": {
+											"type": "integer",
+											"description": "Nouveau montant du portefeuille partenaire",
+											"examples": [
+												139403535
+											]
+										},
+										"created_at": {
+											"type": "string",
+											"description": "Date de création de la transaction",
+											"examples": [
+												"2022-10-15T10:52:28.752+00:00"
+											]
+										},
+										"updated_at": {
+											"type": "string",
+											"description": "Date de la dernière mise à jour de la transaction",
+											"examples": [
+												"2022-10-15T10:52:46.222+00:00"
+											]
+										},
+										"message": {
+											"type": "string",
+											"description": "Message de confirmation si nécessaire",
+											"examples": [
+												"Merci de composer #120# sur le 0708126834 pour valider la tranaction. La demande expire dans 10 min"
+											]
+										},
+										"statut_code": {
+											"type": "integer",
+											"description": "Code de statut de la réponse",
+											"examples": [
+												200
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"200": {
+						"description": "Transaction échouée (refus client, solde insuffisant, etc.)",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": "Message d'erreur",
+											"examples": [
+												"Transaction failed due to insufficient funds"
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": "Message d'erreur",
+											"examples": [
+												"Invalid API Key"
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": "Message d'erreur",
+											"examples": [
+												"Amount must be a multiple of 100"
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": "Message d'erreur",
+											"examples": [
+												"Internal server error"
+											]
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
-
