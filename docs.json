@@ -76,25 +76,14 @@
         ],
         "groups": [
           {
-            "group": "Paiements",
+            "group": "Transaction",
             "pages": [
               "api-reference/endpoint/transaction"
             ]
-          },
-          {
-            "group": "Transferts",
-            "pages": []
           },
           {
             "group": "Webhooks",
             "pages": []
-          },
-          {
-            "group": "Endpoint examples",
-            "icon": "square-code",
-            "pages": [
-              "api-reference/endpoint/transaction"
-            ]
           }
         ]
       }
