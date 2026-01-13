@@ -72,14 +72,13 @@
       {
         "tab": "API reference",
         "openapi": [
-          "openapi/API_EASYTRANSFERT.postman_collection.json",
-          "openapi/API_EASYTRANSFERT.postman_environment.json"
+          "openapi.json"
         ],
         "groups": [
           {
             "group": "Paiements",
             "pages": [
-              "api-reference/endpoints/transaction"
+              "api-reference/endpoint/transaction"
             ]
           },
           {
@@ -94,7 +93,7 @@
             "group": "Endpoint examples",
             "icon": "square-code",
             "pages": [
-              "api-reference/endpoints/transaction"
+              "api-reference/endpoint/transaction"
             ]
           }
         ]
