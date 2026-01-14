@@ -1,0 +1,130 @@
+---
+title: "Sécurité"
+description: "Bonnes pratiques de sécurité pour l'API EASYTRANSFERT BUSINESS"
+icon: shield
+---
+
+La sécurité de l'API EASYTRANSFERT BUSINESS repose sur plusieurs principes clés : protection des clés API, transmission sécurisée des données et bonnes pratiques pour éviter toute exposition accidentelle.
+
+## Transmission sécurisée
+
+Toutes les requêtes doivent impérativement être envoyées via HTTPS.
+
+- HTTP (non sécurisé) n'est pas supporté en production.
+- HTTPS garantit que :
+  - La clé API n'est pas interceptée sur le réseau.
+  - Les données sensibles des transactions (montant, destination, etc.) restent confidentielles.
+
+**Exemple de base URL sécurisée dans Postman :**
+
+```
+https://proxy-airtime.easytransfert.app/api_v1/transaction
+```
+
+<Card title="HTTPS en production" icon="lock" color="#16a34a">
+  En production, utilisez toujours HTTPS pour garantir la sécurité des données.
+</Card>
+
+<Info>
+  Dans la collection Postman, vous pouvez définir base_url comme variable d'environnement et la passer facilement de sandbox (test) à production.
+</Info>
+
+## Protection des clés API
+
+La clé API est sensible et doit être stockée en secret, jamais exposée côté frontend ou dans des logs accessibles publiquement.
+
+### Dans Postman
+
+<CardGroup cols={2}>
+  <Card title="Variable de type secret" icon="lock">
+    Définir `api_key` comme variable d'environnement de type secret.
+  </Card>
+  <Card title="Ne pas exposer" icon="ban" color="#dc2626">
+    Ne pas inclure la clé directement dans les scripts côté client ou dans les repositories publics.
+  </Card>
+</CardGroup>
+
+**Exemple dans l'environnement Postman :**
+
+```json
+{
+  "key": "api_key",
+  "value": "votre_cle_api_ici",
+  "type": "secret",
+  "enabled": true
+}
+```
+
+## Bonnes pratiques recommandées
+
+| Bonnes pratiques | Description |
+|------------------|-------------|
+| HTTPS obligatoire | Toutes les requêtes doivent passer par HTTPS, même en sandbox |
+| Stockage sécurisé | Variables d'environnement Postman ou gestionnaire de secrets côté serveur |
+| Rotation des clés | Renouveler la clé API régulièrement pour limiter l'impact d'une éventuelle compromission |
+| Ne pas exposer la clé côté frontend | Toutes les transactions doivent passer par un serveur intermédiaire pour sécuriser la clé |
+| Limiter les IP si possible | Si votre infrastructure le permet, restreindre les requêtes API à vos serveurs uniquement |
+| Ne jamais loguer la clé | Logs côté serveur ou console ne doivent jamais afficher la clé API |
+
+## Exemple complet de requête sécurisée
+
+**Initier une transaction Cashin MTN :**
+
+```
+POST base_url/airtime
+```
+
+**Headers :**
+
+```
+Content-Type: application/json
+Accept: application/json
+```
+
+**Body (raw JSON) :**
+
+```json
+{
+  "api_key": "votre_cle_api",
+  "amount": 3000,
+  "destination": "0670123456",
+  "service_id": 10,
+  "ipn_url": "https://votre-site.com/webhook/easytransfert",
+  "custom_data": "deposit_001"
+}
+```
+
+<Info>
+  Dans Postman, utilisez les variables base_url, api_key, service_id_mtn_cashin et ipn_url pour faciliter la gestion des environnements.
+</Info>
+
+**Sécurité :**
+
+- HTTPS pour le transport
+- Clé API dans Postman comme variable secret
+- Réception des notifications IPN via URL sécurisée (ipn_url)
+
+<Warning>
+  La confirmation finale de la transaction est envoyée uniquement via IPN. Les développeurs ne doivent pas stocker la clé dans le frontend.
+</Warning>
+
+## Points clés à retenir
+
+<CardGroup cols={2}>
+  <Card title="HTTPS obligatoire" icon="lock" color="#16a34a">
+    Toutes les requêtes doivent utiliser HTTPS en production
+  </Card>
+  <Card title="Clé API = seule méthode" icon="key" color="#1d60d5">
+    La clé API est la seule méthode d'authentification
+  </Card>
+  <Card title="Ne jamais exposer" icon="ban" color="#dc2626">
+    Ne jamais exposer ou loguer la clé API
+  </Card>
+  <Card title="IPN sécurisé" icon="webhook" color="#1d60d5">
+    IPN sécurisé pour les notifications
+  </Card>
+</CardGroup>
+
+<Tip>
+  Respecter la structure Postman pour la clé et les headers garantit une intégration sécurisée.
+</Tip>

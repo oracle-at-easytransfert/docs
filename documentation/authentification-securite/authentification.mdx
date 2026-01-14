@@ -1,0 +1,99 @@
+---
+title: "Authentification"
+description: "Mécanisme d'authentification par clé API de l'API EASYTRANSFERT"
+icon: key
+---
+
+L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par clé API (`api_key`).
+
+## Principe général
+
+- L'authentification se fait exclusivement via une clé API statique
+- La clé API est transmise dans le corps (body) des requêtes, au format JSON
+- Aucun token dynamique n'est utilisé
+- Aucun header Authorization n'est requis
+- Il n'y a ni expiration, ni renouvellement automatique de la clé API
+
+<Info>
+  La clé API permet d'identifier de manière unique le compte partenaire appelant l'API.
+</Info>
+
+## Transmission de la clé API
+
+La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFERT, sous la forme du champ :
+
+```json
+"api_key": "votre_cle_api"
+```
+
+<Warning>
+  Ce champ est obligatoire. Toute requête sans clé API valide sera rejetée.
+</Warning>
+
+## Exemple complet de requête authentifiée
+
+**Endpoint :** `POST {{base_url}}/airtime`
+
+**Headers :**
+```
+Content-Type: application/json
+```
+
+**Body :**
+```json
+{
+  "api_key": "votre_cle_api",
+  "amount": 1000,
+  "destination": "0670123456",
+  "service_id": 10,
+  "ipn_url": "http://votre-site.com/webhook/easytransfert",
+  "custom_data": "reference_interne_123"
+}
+```
+
+## Gestion de la clé API
+
+- La clé API est fournie par EASYTRANSFERT
+- Elle doit être conservée de manière sécurisée
+- Dans Postman, elle est stockée comme variable d'environnement de type secret
+- En production, elle doit être stockée dans :
+  - variables d'environnement serveur
+  - gestionnaires de secrets (Vault, Secret Manager, etc.)
+
+## Bonnes pratiques de sécurité
+
+<CardGroup cols={2}>
+  <Card title="Ne jamais exposer" icon="ban" color="#dc2626">
+    Ne jamais exposer la clé API côté frontend
+    Ne jamais la versionner dans un dépôt public
+  </Card>
+  <Card title="Utiliser serveur à serveur" icon="server" color="#16a34a">
+    Utiliser uniquement des appels serveur à serveur
+    Restreindre l'accès à l'API aux adresses IP autorisées si possible
+  </Card>
+</CardGroup>
+
+## Points importants à retenir
+
+| Élément | Détail |
+|---------|--------|
+| Type d'authentification | Clé API statique |
+| Emplacement de la clé | Body JSON |
+| Header Authorization | Non utilisé |
+| Token / Bearer | Non utilisé |
+| Expiration | Aucune |
+| Renouvellement | Manuel (si nécessaire) |
+
+## Cycle de vie du token
+
+<Warning>
+  L'API n'utilise pas de token. La clé API reste valide indéfiniment jusqu'à révocation par EASYTRANSFERT.
+</Warning>
+
+Il n'existe aucun cycle de vie ni expiration automatique comme pour un Bearer Token classique.
+
+## Renouvellement
+
+- Il n'existe aucun mécanisme de renouvellement automatique
+- Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
+- Les applications doivent alors mettre à jour la variable `api_key` dans l'environnement Postman ou la configuration serveur

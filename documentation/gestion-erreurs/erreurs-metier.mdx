@@ -1,0 +1,128 @@
+---
+title: "Erreurs métier"
+description: "Comprendre les erreurs métier et comment les gérer"
+icon: exclamation-circle
+---
+
+Contrairement aux codes HTTP, les erreurs métier concernent le traitement logique des transactions et opérations financières dans l'API EASYTRANSFERT. Même si la requête HTTP retourne 200 OK, la transaction peut échouer pour des raisons métier.
+
+## Structure des erreurs
+
+L'API EASYTRANSFERT retourne des erreurs dans un format standardisé :
+
+| Nom du champ | Description |
+|--------------|-------------|
+| `transaction_id` | Il s'agit de l'identifiant unique de la requête qui a été effectuée |
+| `error` | Message d'erreur donnant la raison pour laquelle la transaction a échouée |
+
+### Exemple d'erreur
+
+```json
+{
+    "transaction_id": "req_RRg_xtA55q32PLIWYVLFL",
+    "error": "customer insuficient funds"
+}
+```
+
+## États possibles
+
+| status | description |
+|--------|-------------|
+| **SUCCESSFUL** | La transaction s'est bien passée |
+| **PENDING** | La transaction est en attente de validation |
+| **FAILED** | La transaction a échouée |
+
+## Structure typique de la réponse métier
+
+Les réponses JSON des endpoints transaction / statut contiennent généralement :
+
+```json
+{
+    "status": "FAILED",
+    "message": "Solde insuffisant",
+    "data": {
+        "transaction_id": "EFB.001158",
+        "state": "FAILED",
+        "error": "Solde insuffisant"
+    }
+}
+```
+
+## Champs importants
+
+| Champ | Description |
+|-------|-------------|
+| `status` | SUCCESS ou FAILED. Indique si l'opération a été traitée avec succès. |
+| `state` | Même valeur que status, répétée pour compatibilité IPN. |
+| `message` | Message clair décrivant la raison du succès ou de l'échec. |
+| `error` | Détail de l'erreur métier (peut être vide si SUCCESS). |
+| `transaction_id` | Identifiant unique de la transaction. |
+| `custom_data` | Données personnalisées passées lors de l'initiation. |
+
+## Types d'erreurs métier courantes
+
+<AccordionGroup>
+  <Accordion title="Solde insuffisant" icon="money-bill-wave">
+    **Description :** Le compte partenaire n'a pas suffisamment de fonds pour effectuer la transaction.
+    
+    **Exemple message :** "Solde insuffisant"
+    
+    **Action recommandée :** Vérifier le solde via l'endpoint /account avant d'initier la transaction.
+  </Accordion>
+  
+  <Accordion title="Service non disponible" icon="times-circle">
+    **Description :** Le service mobile money demandé n'est pas actif ou indisponible.
+    
+    **Exemple message :** "Service MTN Cashout indisponible"
+    
+    **Action :** Utiliser un autre service ou réessayer plus tard.
+  </Accordion>
+  
+  <Accordion title="Montant invalide" icon="exclamation-triangle">
+    **Description :** Le montant de la transaction n'est pas dans les limites autorisées ou est mal formaté.
+    
+    **Exemple message :** "Montant minimum : 500 FCFA"
+    
+    **Action :** Vérifier les règles de plafond / plancher définies par EASYTRANSFERT.
+  </Accordion>
+  
+  <Accordion title="Numéro de destination incorrect" icon="phone-slash">
+    **Description :** Numéro de téléphone invalide ou mal formaté.
+    
+    **Exemple message :** "Numéro de destination invalide"
+    
+    **Action :** Valider le format local (ex : 0670123456).
+  </Accordion>
+  
+  <Accordion title="Transaction déjà traitée" icon="redo">
+    **Description :** La transaction avec ce transaction_id a déjà été finalisée.
+    
+    **Exemple message :** "Transaction déjà exécutée"
+    
+    **Action :** Ne pas réémettre, utiliser le statut via /status ou attendre IPN.
+  </Accordion>
+</AccordionGroup>
+
+## Bonnes pratiques pour gérer les erreurs métier
+
+<CardGroup cols={2}>
+  <Card title="Toujours vérifier le state ou status" icon="check-circle" color="#16a34a">
+    Même si HTTP 200, le state peut être FAILED.
+  </Card>
+  <Card title="Consulter error et message" icon="file-alt">
+    Pour journalisation et débogage.
+  </Card>
+  <Card title="Réagir aux IPN" icon="webhook" color="#1d60d5">
+    La confirmation finale d'une transaction est reçue via webhook IPN. Ne pas compter uniquement sur la réponse initiale HTTP pour considérer la transaction comme réussie.
+  </Card>
+  <Card title="Réessayer avec prudence" icon="redo">
+    Pour les erreurs transitoires (service non disponible), implémenter un retry avec backoff.
+  </Card>
+  <Card title="Vérifier les variables Postman" icon="cog">
+    Vérifier que les variables comme {{api_key}} et {{service_id_mtn_cashout}} sont correctement configurées pour éviter les erreurs liées à la configuration.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Les erreurs métier sont toujours accompagnées d'un message explicite. Utilisez ce message pour informer l'utilisateur et prendre les actions appropriées.
+</Tip>

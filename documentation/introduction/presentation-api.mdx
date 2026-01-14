@@ -1,0 +1,127 @@
+---
+title: "Présentation de l'API"
+description: "Découvrez l'API EASYTRANSFERT BUSINESS v1 et ses fonctionnalités principales"
+icon: info-circle
+---
+
+## Objectif de l'API EASYTRANSFERT BUSINESS
+
+L'API EASYTRANSFERT BUSINESS – v1 est une API REST qui permet aux partenaires d'initier et de suivre des transactions Mobile Money à partir de leurs systèmes (applications web, mobiles ou back-office).
+
+<CardGroup cols={2}>
+  <Card title="Automatisation" icon="robot">
+    Automatiser les opérations de Cashin (encaissement) et Cashout (décaissement)
+  </Card>
+  <Card title="Notifications" icon="bell">
+    Recevoir des notifications asynchrones de statut via IPN (Instant Payment Notification)
+  </Card>
+</CardGroup>
+
+<Warning>
+  L'API ne gère pas :
+  - La création ou la gestion de clients
+  - La persistance des bénéficiaires
+  - La consultation de solde business
+</Warning>
+
+## Services couverts
+
+L'API v1 couvre exclusivement les services suivants :
+
+### Transferts d'argent Mobile Money
+
+Initiation de transactions Mobile Money via un point d'accès unique.
+
+**Support des opérations :**
+
+- **Cashin** : ajout d'argent sur le wallet Mobile Money du destinataire
+- **Cashout** : retrait d'argent depuis le wallet Mobile Money du destinataire
+
+**Support multi-opérateurs via des service_id distincts :**
+
+- MTN
+- Orange
+- Moov
+- Flooz
+
+<Info>
+  Chaque transaction est identifiée par un `transaction_id` unique généré par EASYTRANSFERT.
+</Info>
+
+### Suivi des transactions
+
+Deux mécanismes complémentaires sont disponibles :
+
+<AccordionGroup>
+  <Accordion title="IPN (Webhook) - mécanisme recommandé" icon="webhook">
+    Notification automatique envoyée à l'URL fournie lors de l'initiation.
+    
+    Transmission de l'état final de la transaction :
+    - **SUCCESS** : Transaction réussie
+    - **FAILED** : Transaction échouée
+  </Accordion>
+  
+  <Accordion title="Consultation du statut (usage limité)" icon="search">
+    Endpoint dédié pour récupérer l'état d'une transaction.
+    
+    <Warning>
+      À utiliser uniquement en cas de non-réception de l'IPN. L'interrogation répétée peut entraîner un blocage.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Public cible
+
+L'API EASYTRANSFERT BUSINESS s'adresse principalement à :
+
+<CardGroup cols={2}>
+  <Card title="Entreprises" icon="building">
+    Services financiers, plateformes digitales
+  </Card>
+  <Card title="Fintechs" icon="chart-line">
+    Agrégateurs Mobile Money, solutions de paiement
+  </Card>
+  <Card title="Partenaires techniques" icon="users">
+    Équipes de développement, intégrateurs systèmes
+  </Card>
+</CardGroup>
+
+## Avantages clés
+
+<AccordionGroup>
+  <Accordion title="Automatisation" icon="cog">
+    - Intégration simple via HTTP/JSON
+    - Suppression des traitements manuels
+    - Gestion programmatique des transactions Mobile Money
+  </Accordion>
+  
+  <Accordion title="Sécurité" icon="shield">
+    - Authentification par clé API
+    - Accès restreint aux partenaires autorisés
+    - Communication sécurisée via HTTPS obligatoire
+  </Accordion>
+  
+  <Accordion title="Traçabilité" icon="file-invoice">
+    - Identifiant unique pour chaque transaction
+    - Champs custom_data pour le rapprochement métier
+    - Historique et suivi via IPN et endpoint de statut
+  </Accordion>
+  
+  <Accordion title="Scalabilité" icon="chart-bar">
+    - Architecture adaptée aux volumes élevés
+    - Support multi-opérateurs sans changement d'intégration
+    - Compatible avec des systèmes distribués et micro-services
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  **Limitations fonctionnelles (v1)**
+  
+  La version v1 ne fournit pas :
+  - d'API de gestion des clients
+  - d'API de gestion des bénéficiaires
+  - d'API de consultation de solde ou de wallet business
+  - de mécanisme de signature cryptographique des IPN (hash non exploité)
+  
+  Ces fonctionnalités pourront être introduites dans des versions ultérieures.
+</Warning>

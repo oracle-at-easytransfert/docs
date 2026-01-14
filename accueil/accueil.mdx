@@ -1,6 +1,192 @@
 ---
 title: "Accueil"
-description: "Bienvenue sur la documentation des APIs marchands de EasyTransfert."
+description: "Bienvenue sur la documentation de l'API EASYTRANSFERT BUSINESS v1 - Guide développeur officiel"
 ---
 
-![Téléchargement](/images/téléchargement.png)
+![Easy Transfert](/images/téléchargement.png)
+
+# EASYTRANSFERT BUSINESS API - v1
+
+**Guide développeur officiel**
+
+Bienvenue sur la documentation complète de l'API EASYTRANSFERT BUSINESS v1. Cette API REST permet aux partenaires d'initier et de suivre des transactions Mobile Money à partir de leurs systèmes (applications web, mobiles ou back-office).
+
+## 🎯 Objectif de l'API
+
+L'API EASYTRANSFERT BUSINESS - v1 est conçue pour :
+
+<CardGroup cols={2}>
+  <Card title="Automatiser les opérations Cashin" icon="arrow-up" href="/documentation/introduction/presentation-api">
+    Encaissement d'argent sur les wallets Mobile Money
+  </Card>
+  <Card title="Automatiser les opérations Cashout" icon="arrow-down" href="/documentation/introduction/presentation-api">
+    Décaissement d'argent depuis les wallets Mobile Money
+  </Card>
+  <Card title="Notifications asynchrones" icon="bell" href="/documentation/demarrage-rapide/reception-ipn">
+    Réception de notifications de statut via IPN (Instant Payment Notification)
+  </Card>
+  <Card title="Suivi en temps réel" icon="chart-line" href="/documentation/transactions-transferts/creation-transaction">
+    Suivi complet des transactions avec identifiants uniques
+  </Card>
+</CardGroup>
+
+## 🚀 Démarrage rapide
+
+<Card title="Démarrage rapide" icon="rocket" href="/documentation/demarrage-rapide/vue-ensemble-flux" color="#1d60d5">
+  Effectuez votre première transaction fonctionnelle en moins de 10 minutes avec notre guide étape par étape.
+</Card>
+
+<Steps>
+  <Step title="Préparer l'environnement">
+    Configurez vos variables d'environnement (base_url, api_key, ipn_url)
+  </Step>
+  <Step title="Initier une transaction">
+    Envoyez une requête POST pour initier une transaction Cashin ou Cashout
+  </Step>
+  <Step title="Recevoir la notification IPN">
+    Réception automatique du statut final (SUCCESS ou FAILED) via webhook
+  </Step>
+  <Step title="Vérifier le statut (optionnel)">
+    Consultation ponctuelle uniquement en cas de besoin
+  </Step>
+</Steps>
+
+## 📋 Services couverts
+
+L'API v1 couvre exclusivement les services suivants :
+
+### Transferts d'argent Mobile Money
+
+Initiation de transactions Mobile Money via un point d'accès unique.
+
+**Support des opérations :**
+
+- **Cashin** : ajout d'argent sur le wallet Mobile Money du destinataire
+- **Cashout** : retrait d'argent depuis le wallet Mobile Money du destinataire
+
+**Support multi-opérateurs via des service_id distincts :**
+
+<CardGroup cols={4}>
+  <Card title="MTN" icon="mobile-alt" href="/documentation/services">
+    MTN Mobile Money
+  </Card>
+  <Card title="Orange" icon="mobile-alt" href="/documentation/services">
+    Orange Money
+  </Card>
+  <Card title="Moov" icon="mobile-alt" href="/documentation/services">
+    Moov Money
+  </Card>
+  <Card title="Flooz" icon="mobile-alt" href="/documentation/services">
+    Flooz
+  </Card>
+</CardGroup>
+
+<Info>
+  Chaque transaction est identifiée par un `transaction_id` unique généré par EASYTRANSFERT.
+</Info>
+
+## 👥 Public cible
+
+L'API EASYTRANSFERT BUSINESS s'adresse principalement à :
+
+<CardGroup cols={3}>
+  <Card title="Entreprises" icon="building">
+    Services financiers, plateformes digitales
+  </Card>
+  <Card title="Fintechs" icon="chart-line">
+    Agrégateurs Mobile Money, solutions de paiement
+  </Card>
+  <Card title="Partenaires techniques" icon="users">
+    Équipes de développement, intégrateurs systèmes
+  </Card>
+</CardGroup>
+
+## ✨ Avantages clés
+
+<AccordionGroup>
+  <Accordion title="⚙️ Automatisation" icon="cog">
+    - Intégration simple via HTTP/JSON
+    - Suppression des traitements manuels
+    - Gestion programmatique des transactions Mobile Money
+  </Accordion>
+  
+  <Accordion title="🔐 Sécurité" icon="shield">
+    - Authentification par clé API
+    - Accès restreint aux partenaires autorisés
+    - Communication sécurisée via HTTPS obligatoire
+  </Accordion>
+  
+  <Accordion title="🧾 Traçabilité" icon="file-invoice">
+    - Identifiant unique pour chaque transaction
+    - Champs custom_data pour le rapprochement métier
+    - Historique et suivi via IPN et endpoint de statut
+  </Accordion>
+  
+  <Accordion title="📈 Scalabilité" icon="chart-bar">
+    - Architecture adaptée aux volumes élevés
+    - Support multi-opérateurs sans changement d'intégration
+    - Compatible avec des systèmes distribués et micro-services
+  </Accordion>
+</AccordionGroup>
+
+## ⚠️ Limitations fonctionnelles (v1)
+
+<Warning>
+  La version v1 ne fournit pas :
+  - d'API de gestion des clients
+  - d'API de gestion des bénéficiaires
+  - d'API de consultation de solde ou de wallet business
+  - de mécanisme de signature cryptographique des IPN (hash non exploité)
+  
+  Ces fonctionnalités pourront être introduites dans des versions ultérieures.
+</Warning>
+
+## 📚 Navigation rapide
+
+<CardGroup cols={2}>
+  <Card title="Introduction" icon="book" href="/documentation/introduction/presentation-api">
+    Découvrez l'API, ses cas d'usage et sa politique de versionnement
+  </Card>
+  <Card title="Démarrage rapide" icon="rocket" href="/documentation/demarrage-rapide/vue-ensemble-flux">
+    Guide étape par étape pour votre première transaction
+  </Card>
+  <Card title="Authentification" icon="key" href="/documentation/authentification-securite/authentification">
+    Comprendre le mécanisme d'authentification par clé API
+  </Card>
+  <Card title="Transactions" icon="exchange-alt" href="/documentation/transactions-transferts/creation-transaction">
+    Créer et suivre vos transactions Mobile Money
+  </Card>
+  <Card title="Webhooks & IPN" icon="webhook" href="/documentation/demarrage-rapide/reception-ipn">
+    Configurer et recevoir les notifications de statut
+  </Card>
+  <Card title="Gestion des erreurs" icon="exclamation-triangle" href="/documentation/gestion-des-erreurs">
+    Comprendre et gérer les erreurs API
+  </Card>
+  <Card title="Référence API" icon="code" href="/api-reference">
+    Documentation complète des endpoints avec playground interactif
+  </Card>
+  <Card title="Dictionnaire" icon="book-open" href="/documentation/dictionnaire">
+    Glossaire des termes techniques utilisés
+  </Card>
+</CardGroup>
+
+## 🎓 Cas d'usage principaux
+
+<CardGroup cols={2}>
+  <Card title="Intégration dans une application métier" icon="laptop-code" href="/documentation/introduction/cas-usage">
+    Applications web, mobiles, back-offices, plateformes SaaS
+  </Card>
+  <Card title="Paiements B2B / B2C" icon="hand-holding-usd" href="/documentation/introduction/cas-usage">
+    Paiements de commissions, prestataires, remboursements, salaires
+  </Card>
+  <Card title="Centralisation des flux Mobile Money" icon="network-wired" href="/documentation/introduction/cas-usage">
+    Interface unique pour plusieurs opérateurs (MTN, Orange, Moov, Flooz)
+  </Card>
+  <Card title="Reporting et suivi temps réel" icon="chart-pie" href="/documentation/introduction/cas-usage">
+    Traçabilité complète avec transaction_id et custom_data
+  </Card>
+</CardGroup>
+
+<Tip>
+  **Nouveau sur l'API ?** Commencez par la section [Démarrage rapide](/documentation/demarrage-rapide/vue-ensemble-flux) pour effectuer votre première transaction en moins de 10 minutes.
+</Tip>

@@ -1,0 +1,109 @@
+---
+title: "Présentation"
+description: "Comprendre le mécanisme IPN (Instant Payment Notification) pour recevoir les résultats des transactions"
+icon: webhook
+---
+
+L'IPN (Instant Payment Notification) est le mécanisme principal pour recevoir les résultats définitifs des transactions, sans avoir besoin de faire constamment des requêtes pour vérifier le statut.
+
+## Objectifs de l'IPN
+
+<CardGroup cols={3}>
+  <Card title="Informer votre système" icon="bell" color="#1d60d5">
+    Informer votre système lorsqu'une transaction change de statut (SUCCESS ou FAILED).
+  </Card>
+  <Card title="Éviter les vérifications répétitives" icon="ban" color="#dc2626">
+    Éviter les vérifications répétitives via l'endpoint /status (ce qui pourrait provoquer un blocage).
+  </Card>
+  <Card title="Automatisation complète" icon="cog" color="#16a34a">
+    Permettre l'automatisation complète des traitements post-transaction (notifications, mise à jour de solde, reporting).
+  </Card>
+</CardGroup>
+
+## Comment ça fonctionne
+
+<Steps>
+  <Step title="Initier une transaction">
+    Vous initiez une transaction via POST {{base_url}}/airtime et fournissez votre ipn_url dans le body.
+  </Step>
+  <Step title="Réponse immédiate">
+    EASYTRANSFERT reçoit votre requête et renvoie une réponse immédiate (statut success ou pending).
+  </Step>
+  <Step title="Notification IPN">
+    Une fois la transaction confirmée ou échouée, EASYTRANSFERT envoie automatiquement un POST HTTP à votre ipn_url.
+  </Step>
+  <Step title="Traitement">
+    Votre système reçoit le payload JSON et peut mettre à jour vos enregistrements et envoyer des notifications à vos utilisateurs.
+  </Step>
+</Steps>
+
+## Exemple de workflow complet
+
+```
+Client demande un retrait 
+  → Votre application initie la transaction 
+  → EASYTRANSFERT traite la transaction 
+  → EASYTRANSFERT envoie IPN à votre ipn_url 
+  → Votre système confirme à l'utilisateur
+```
+
+## Points importants
+
+<AccordionGroup>
+  <Accordion title="IPN asynchrone" icon="clock">
+    L'IPN est asynchrone : la transaction peut être en attente initialement.
+  </Accordion>
+  
+  <Accordion title="Ne pas dépendre de /status" icon="exclamation-triangle">
+    Vous ne devez pas dépendre uniquement de l'endpoint /status pour confirmer la transaction.
+  </Accordion>
+  
+  <Accordion title="URL accessible publiquement" icon="globe">
+    Assurez-vous que votre ipn_url est accessible publiquement via HTTPS (HTTP possible en sandbox/test).
+  </Accordion>
+  
+  <Accordion title="Sécuriser l'endpoint" icon="shield">
+    Sécurisez votre endpoint : vous pouvez vérifier la provenance via IP ou utiliser un token de signature si fourni par EASYTRANSFERT.
+  </Accordion>
+  
+  <Accordion title="Traitement idempotent" icon="redo">
+    Traitez les notifications de manière idempotente : un même transaction_id peut arriver plusieurs fois pour assurer la livraison.
+  </Accordion>
+</AccordionGroup>
+
+## Champs principaux du payload IPN
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `transaction_id` | string | Identifiant unique de la transaction |
+| `state` | string | SUCCESS ou FAILED |
+| `amount` | number | Montant de la transaction en FCFA |
+| `reponse` | string | Message de succès (si SUCCESS) |
+| `error` | string | Message d'erreur (si FAILED) |
+| `custom_data` | string | Données personnalisées envoyées à l'initiation |
+| `service_id` | number | Identifiant du service utilisé |
+| `customer_name` | string | Nom du client EASYTRANSFERT |
+| `ipn_url` | string | URL de callback utilisée |
+| `created_at` | string | Date de création de la transaction |
+| `updated_at` | string | Date de dernière mise à jour |
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Répondre rapidement" icon="bolt" color="#16a34a">
+    Toujours répondre rapidement à EASYTRANSFERT avec HTTP 200 OK pour confirmer la réception de l'IPN.
+  </Card>
+  <Card title="Réessais automatiques" icon="redo">
+    En cas d'erreur ou timeout, EASYTRANSFERT réessaiera automatiquement plusieurs fois.
+  </Card>
+  <Card title="Journaliser" icon="file-alt">
+    Loggez toutes les IPN reçues pour audit et suivi.
+  </Card>
+  <Card title="Vérifier transaction_id" icon="fingerprint">
+    Vérifiez systématiquement transaction_id pour éviter les doublons.
+  </Card>
+</CardGroup>
+
+<Tip>
+  L'IPN est le mécanisme recommandé pour connaître le statut final des transactions. Privilégiez toujours ce mécanisme plutôt que l'interrogation répétée de l'endpoint /status.
+</Tip>

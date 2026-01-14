@@ -1,0 +1,41 @@
+---
+title: "Étape 4 - Vérifier le statut (optionnel)"
+description: "Consultation ponctuelle du statut d'une transaction"
+icon: search
+---
+
+<Warning>
+  À utiliser uniquement en cas de doute ou de non-réception d'IPN.
+</Warning>
+
+## Endpoint
+
+```
+POST {{base_url}}/status
+```
+
+## Requête
+
+```json
+{
+  "api_key": "{{api_key}}",
+  "transaction_id": "EFB.001158"
+}
+```
+
+## Avertissements importants
+
+<Warning>
+  **Ne pas interroger ce endpoint en boucle**
+  
+  - Risque de blocage automatique de votre clé API
+  - L'IPN reste la méthode recommandée pour le suivi
+  - Utiliser uniquement pour :
+    - Support technique
+    - Vérifications manuelles
+    - Cas de non-réception d'IPN
+</Warning>
+
+<Tip>
+  Privilégiez toujours le mécanisme IPN pour connaître le statut final des transactions. L'endpoint `/status` est un mécanisme de secours.
+</Tip>

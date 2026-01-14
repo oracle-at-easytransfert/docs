@@ -1,0 +1,70 @@
+---
+title: "Rate limiting"
+description: "Comprendre les limitations du nombre de requêtes et comment les respecter"
+icon: tachometer-alt
+---
+
+L'API EASYTRANSFERT BUSINESS v1 impose un contrôle du nombre de requêtes pour protéger les services et assurer la qualité du service pour tous les utilisateurs.
+
+## Principes
+
+<CardGroup cols={2}>
+  <Card title="Quota par clé API" icon="key">
+    Chaque clé API dispose d'un quota limité de requêtes par minute/heure. Ce quota peut varier selon le type de service ou l'environnement (Sandbox vs Production).
+  </Card>
+  <Card title="Endpoints sensibles" icon="exclamation-triangle" color="#dc2626">
+    Le endpoint /status est particulièrement sensible : les appels fréquents peuvent être considérés comme abusifs. Les confirmations finales des transactions doivent provenir du webhook IPN, et non d'interrogations répétées.
+  </Card>
+  <Card title="Feedback en cas de dépassement" icon="ban">
+    Si vous dépassez le rate limit, l'API renvoie un code HTTP 429 Too Many Requests. Le message de réponse indique le temps d'attente avant de pouvoir réessayer.
+  </Card>
+</CardGroup>
+
+## Conséquences d'un dépassement
+
+| Situation | Effet |
+|-----------|-------|
+| Appels répétés au endpoint /status | Blocage temporaire de la clé API |
+| Volume élevé d'appels simultanés | Retard dans le traitement des transactions, erreurs possibles |
+| Ignorer les webhooks IPN | Risque de surcharge côté serveur et rejet des requêtes |
+
+<Warning>
+  **Important :** la surveillance des transactions doit se faire via IPN autant que possible.
+</Warning>
+
+## Bonnes pratiques pour limiter les requêtes
+
+<CardGroup cols={2}>
+  <Card title="Privilégier le webhook IPN" icon="webhook" color="#1d60d5">
+    Configurez correctement l'URL IPN (ipn_url) pour recevoir les notifications de SUCCESS ou FAILED. L'IPN est la méthode principale pour suivre l'état des transactions en temps réel.
+  </Card>
+  <Card title="Limiter les appels au endpoint /status" icon="ban">
+    N'interrogez le statut que si nécessaire (ex : pour debug ou transaction critique). Évitez les boucles ou scripts qui font des requêtes répétées à haute fréquence.
+  </Card>
+  <Card title="Gérer les erreurs 429" icon="clock">
+    En cas de dépassement, implémentez une attente progressive avant de réessayer (retry-after indiqué dans la réponse HTTP).
+  </Card>
+  <Card title="Surveillance côté client" icon="chart-line">
+    Maintenez un compteur interne de requêtes par clé API pour éviter de dépasser les limites. Priorisez les transactions critiques ou importantes.
+  </Card>
+</CardGroup>
+
+## Exemple pratique
+
+<Steps>
+  <Step title="Initier des transactions">
+    Vous initiez 10 transactions par minute.
+  </Step>
+  <Step title="Recevoir les IPN">
+    Le webhook IPN vous notifie automatiquement des SUCCESS ou FAILED.
+  </Step>
+  <Step title="Utiliser /status avec parcimonie">
+    Vous n'interrogez /status qu'en cas de doute ou de problème technique.
+  </Step>
+</Steps>
+
+**Résultat :** respect du rate limit, pas de blocage, et suivi des transactions fiable.
+
+<Tip>
+  La meilleure pratique est de toujours utiliser l'IPN pour le suivi des transactions et de réserver l'endpoint /status uniquement pour des cas exceptionnels.
+</Tip>

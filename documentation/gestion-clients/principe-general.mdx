@@ -1,0 +1,68 @@
+---
+title: "Principe général"
+description: "Comprendre pourquoi l'API v1 ne gère pas les clients finaux"
+icon: users
+---
+
+L'API EASYTRANSFERT BUSINESS v1 est une API transactionnelle dont l'objectif principal est l'initiation, le traitement et le suivi des opérations financières (cashin / cashout).
+
+Dans cette version (v1), l'API ne fournit aucun mécanisme de gestion des clients finaux (appelés également customers ou end-users).
+
+## Points clés
+
+- L'API ne permet ni la création, ni la consultation, ni la mise à jour, ni la suppression de clients
+- Aucun endpoint dédié aux clients n'est exposé
+- Aucun identifiant client (customer_id) n'est utilisé ou requis dans les requêtes
+
+## Identification du partenaire
+
+Le partenaire (entreprise, fintech ou intégrateur) est identifié exclusivement par :
+
+- une clé API (api_key)
+- fournie par EASYTRANSFERT
+- transmise dans le corps des requêtes
+
+**Cette clé API :**
+
+- identifie de manière unique le compte partenaire
+- détermine les autorisations, les services disponibles et les plafonds
+- est commune à toutes les transactions initiées par le partenaire
+
+## Représentation des clients finaux
+
+Les clients finaux (utilisateurs mobile money) ne sont pas persistés dans le système EASYTRANSFERT.
+
+Ils sont représentés de façon contextuelle, uniquement au niveau des transactions, à travers :
+
+- le champ `destination` : numéro de téléphone du bénéficiaire ou du payeur
+- le champ `custom_data` : référence libre permettant au partenaire de faire le lien avec son système interne
+
+<Warning>
+  Ces champs ne créent aucun enregistrement client dans l'API.
+</Warning>
+
+## Portée de la responsabilité
+
+La gestion des clients finaux relève entièrement du système du partenaire, notamment :
+
+- création et stockage des profils clients
+- association client ↔ transaction
+- conformité réglementaire (KYC, données personnelles, archivage)
+
+**L'API EASYTRANSFERT se limite volontairement à :**
+
+- l'exécution des opérations financières
+- la remontée des statuts via IPN
+- la traçabilité des transactions
+
+## Implication pour l'intégration
+
+Lors de l'intégration :
+
+- le partenaire doit maintenir sa propre base clients
+- l'API EASYTRANSFERT est utilisée uniquement comme moteur de transaction
+- toute logique métier liée aux clients reste côté partenaire
+
+<Info>
+  Cette architecture simplifie l'intégration et permet au partenaire de garder le contrôle total sur la gestion de ses clients.
+</Info>

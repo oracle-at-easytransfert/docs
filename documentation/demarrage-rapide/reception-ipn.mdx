@@ -1,0 +1,65 @@
+---
+title: "Étape 3 - Réception de la notification IPN"
+description: "Comprendre et traiter les notifications IPN (webhooks)"
+icon: bell
+---
+
+## Principe
+
+La confirmation finale d'une transaction est envoyée asynchroniquement à votre `ipn_url`.
+
+<Info>
+  C'est la **source de vérité** sur l'état réel d'une transaction.
+</Info>
+
+## Exemple IPN – Succès
+
+```json
+{
+  "transaction_id": "EFB.144358",
+  "state": "SUCCESS",
+  "amount": 1000,
+  "destination": "0500156008",
+  "custom_data": "order_789",
+  "reponse": "operation succes"
+}
+```
+
+## Exemple IPN – Échec
+
+```json
+{
+  "transaction_id": "EFB.144359",
+  "state": "FAILED",
+  "error": "Solde insuffisant",
+  "custom_data": "order_789"
+}
+```
+
+## États possibles
+
+| État | Description |
+|------|-------------|
+| `SUCCESS` | Transaction réussie |
+| `FAILED` | Transaction échouée |
+
+## Recommandations
+
+<CardGroup cols={2}>
+  <Card title="Répondre HTTP 200" icon="check-circle">
+    Toujours répondre HTTP 200 OK à l'IPN pour confirmer la réception.
+  </Card>
+  <Card title="Vérifier l'unicité" icon="fingerprint">
+    Vérifier l'unicité du `transaction_id` pour éviter les doublons.
+  </Card>
+  <Card title="Utiliser custom_data" icon="link">
+    Utiliser `custom_data` pour faire le lien avec votre système interne.
+  </Card>
+  <Card title="Traiter idempotent" icon="redo">
+    Rendre le traitement idempotent pour gérer les IPN dupliquées.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Les IPN peuvent être envoyées plusieurs fois. Assurez-vous de traiter chaque transaction une seule fois en vérifiant le `transaction_id`.
+</Tip>

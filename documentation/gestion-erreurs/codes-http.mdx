@@ -1,0 +1,44 @@
+---
+title: "Codes HTTP standards"
+description: "Comprendre les codes HTTP retournés par l'API et leur signification"
+icon: code
+---
+
+L'API EASYTRANSFERT BUSINESS v1 utilise les codes HTTP classiques pour signaler l'état général d'une requête. Ces codes ne remplacent pas les erreurs métier, mais permettent d'identifier rapidement si la requête a été reçue et traitée correctement par le serveur.
+
+## Codes principaux et signification
+
+| Code | Nom | Description / Exemple |
+|------|-----|----------------------|
+| **200** | OK | La requête a été reçue et traitée avec succès. Exemple : initiation d'une transaction. La confirmation finale arrive via IPN. |
+| **400** | Bad Request | La requête est mal formée. Exemple : JSON invalide, amount manquant ou service_id incorrect. |
+| **401** | Unauthorized | Clé API absente ou invalide. Vérifier la variable {{api_key}} dans l'environnement Postman. |
+| **403** | Forbidden | Accès interdit. Exemple : tentative de retrait sur un service non autorisé. |
+| **404** | Not Found | Ressource introuvable. Exemple : transaction_id inexistant lors de l'interrogation du statut. |
+| **429** | Too Many Requests | Trop de requêtes envoyées en peu de temps (rate limiting). Respecter le Retry-After si fourni. |
+| **500** | Internal Server Error | Erreur côté serveur EASYTRANSFERT. La requête peut être retentée après un délai. |
+
+## Bonnes pratiques liées aux codes HTTP
+
+<CardGroup cols={2}>
+  <Card title="Ne pas confondre HTTP et erreurs métier" icon="exclamation-triangle" color="#dc2626">
+    HTTP 200 peut contenir un state: FAILED dans la réponse JSON si la transaction a échoué. Les champs state, reponse, et error doivent toujours être vérifiés après une réponse HTTP 200.
+  </Card>
+  <Card title="Gérer les erreurs réseau et serveur" icon="server">
+    En cas de 500, appliquer un retry avec backoff progressif. En cas de 429, attendre le temps indiqué par Retry-After.
+  </Card>
+  <Card title="Valider les entrées avant l'envoi" icon="check-circle" color="#16a34a">
+    amount doit être un entier positif. service_id doit correspondre à une variable valide. destination doit être un numéro de téléphone correct.
+  </Card>
+  <Card title="Journaliser les erreurs HTTP" icon="file-alt">
+    Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter le debug.
+  </Card>
+</CardGroup>
+
+<Info>
+  Les codes HTTP indiquent l'état de la requête HTTP, pas nécessairement le résultat de la transaction. Toujours vérifier le champ `state` dans la réponse JSON pour connaître le statut réel de la transaction.
+</Info>
+
+<Tip>
+  Implémentez une gestion d'erreurs robuste qui traite à la fois les codes HTTP et les erreurs métier dans la réponse JSON.
+</Tip>

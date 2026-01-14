@@ -1,0 +1,113 @@
+---
+title: "États possibles"
+description: "Comprendre les différents états d'une transaction et leur signification"
+icon: check-circle
+---
+
+Cette section décrit les différents états d'une transaction, comment interpréter les réponses de l'API, et les actions possibles en cas d'échec ou d'annulation.
+
+## États possibles d'une transaction
+
+Lorsqu'une transaction est initiée, elle peut se trouver dans l'un des états suivants :
+
+| État | Description |
+|------|-------------|
+| **PENDING** | Transaction reçue mais non encore traitée. La confirmation finale n'est pas encore disponible. |
+| **SUCCESS** | Transaction effectuée avec succès. Les fonds ont été transférés. |
+| **FAILED** | Transaction échouée. Les fonds n'ont pas été transférés. Un message d'erreur est fourni. |
+| **CANCELLED** | Transaction annulée par l'utilisateur ou par le système avant exécution. |
+
+<Info>
+  Le suivi via l'API (POST {{base_url}}/status) renverra toujours le state actuel. La confirmation finale est transmise via l'IPN webhook.
+</Info>
+
+## Annulation de transaction
+
+- Une transaction peut être annulée uniquement si elle est encore **PENDING**.
+- Une fois le statut **SUCCESS** ou **FAILED** atteint, l'annulation n'est plus possible.
+- L'annulation doit être demandée via l'API spécifique ou via le portail EASYTRANSFERT Business.
+
+<CardGroup cols={2}>
+  <Card title="Vérifier le state" icon="check">
+    Vérifier le state avant toute tentative d'annulation.
+  </Card>
+  <Card title="Enregistrer l'action" icon="file-alt">
+    Enregistrer l'action et la réponse pour la traçabilité.
+  </Card>
+</CardGroup>
+
+## Gestion des échecs
+
+Lorsque le state de la transaction est **FAILED** :
+
+- Le champ `error` de la réponse indique la cause de l'échec.
+- Les causes fréquentes :
+
+<AccordionGroup>
+  <Accordion title="Solde insuffisant" icon="exclamation-triangle">
+    Le compte partenaire n'a pas suffisamment de fonds pour effectuer la transaction.
+  </Accordion>
+  
+  <Accordion title="Numéro de destination invalide" icon="phone-slash">
+    Le numéro de téléphone fourni n'est pas valide ou mal formaté.
+  </Accordion>
+  
+  <Accordion title="Service non disponible" icon="times-circle">
+    Problème opérateur ou service temporairement indisponible.
+  </Accordion>
+  
+  <Accordion title="Limite ou plafond dépassé" icon="chart-line">
+    Le montant dépasse les limites autorisées pour le type de transaction.
+  </Accordion>
+</AccordionGroup>
+
+### Exemple de réponse échouée via suivi de statut
+
+```json
+{
+    "status": "FAILED",
+    "message": "Transaction échouée",
+    "data": {
+        "transaction_id": "EFB.001158",
+        "error": "Solde insuffisant",
+        "state": "FAILED",
+        "amount": 1000,
+        "destination": "0670123456",
+        "service_id": 11
+    }
+}
+```
+
+### Exemple de notification IPN en cas d'échec
+
+```json
+{
+    "transaction_id": "EFB.144359",
+    "amount": 2000,
+    "state": "FAILED",
+    "error": "Solde insuffisant",
+    "custom_data": "transaction_ref_123",
+    "service_id": 10
+}
+```
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Vérifier l'IPN" icon="webhook" color="#1d60d5">
+    Toujours vérifier l'IPN : c'est la source de vérité pour confirmer l'état final de la transaction.
+  </Card>
+  <Card title="Logger les erreurs" icon="file-alt">
+    Logger les erreurs pour faciliter le support et les audits.
+  </Card>
+  <Card title="Préparer des workflows" icon="cog">
+    Préparer des workflows de réessai ou remboursement en cas d'échec pour améliorer l'expérience utilisateur.
+  </Card>
+  <Card title="Éviter le polling" icon="ban">
+    Ne pas interroger le suivi de statut trop fréquemment pour éviter tout blocage par le système.
+  </Card>
+</CardGroup>
+
+<Tip>
+  La gestion des échecs est cruciale pour maintenir la confiance des utilisateurs. Assurez-vous d'avoir des mécanismes de réessai et de notification en place.
+</Tip>

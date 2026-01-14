@@ -1,0 +1,121 @@
+---
+title: "Configuration"
+description: "Comment configurer correctement votre URL IPN pour recevoir les notifications"
+icon: cog
+---
+
+Cette section explique comment configurer correctement votre URL IPN afin de recevoir les notifications de transactions.
+
+## Définir l'IPN lors de l'initiation d'une transaction
+
+Lors de l'appel à l'endpoint `POST {{base_url}}/airtime`, vous devez inclure le champ `ipn_url` dans le body JSON :
+
+```json
+{
+    "amount": 1000,
+    "api_key": "{{api_key}}",
+    "destination": "0670123456",
+    "service_id": "{{service_id_mtn_cashin}}",
+    "ipn_url": "{{ipn_url}}",
+    "custom_data": "ref_001"
+}
+```
+
+<Info>
+  - `ipn_url` : URL complète où EASYTRANSFERT enverra les notifications (doit être accessible publiquement).
+  - `custom_data` : facultatif, vous permet d'envoyer vos propres références pour identifier la transaction.
+</Info>
+
+<Warning>
+  **Note importante :**
+  - L'IPN est asynchrone, la transaction peut initialement être en attente (PENDING).
+  - La confirmation finale arrive uniquement via l'IPN.
+</Warning>
+
+## Exigences techniques de votre endpoint IPN
+
+Votre serveur doit respecter les points suivants pour recevoir et traiter les IPN :
+
+| Exigence | Détail |
+|----------|--------|
+| **Méthode HTTP** | POST |
+| **Format** | JSON |
+| **Champs requis** | transaction_id, state, amount, custom_data |
+| **Réponse** | HTTP 200 OK (pour confirmer la réception) |
+| **Sécurité** | HTTPS recommandé, validation possible avec un token ou signature |
+
+## Bonnes pratiques de traitement
+
+<CardGroup cols={2}>
+  <Card title="Idempotence" icon="redo">
+    Un même transaction_id peut arriver plusieurs fois, votre traitement doit supporter cela sans créer de doublons.
+  </Card>
+  <Card title="Réponse rapide" icon="bolt" color="#16a34a">
+    Envoyez immédiatement HTTP 200 OK à EASYTRANSFERT pour éviter les ré-envois.
+  </Card>
+  <Card title="Journalisation" icon="file-alt">
+    Conservez tous les payloads reçus pour audit et suivi.
+  </Card>
+  <Card title="Validation des données" icon="check-circle">
+    Vérifiez transaction_id et service_id pour vous assurer que la notification correspond à vos enregistrements.
+  </Card>
+  <Card title="Ne pas dépendre de /status" icon="ban">
+    Ne jamais dépendre uniquement du endpoint /status : l'IPN est le mécanisme fiable pour confirmer une transaction.
+  </Card>
+</CardGroup>
+
+## Exemple de payload IPN
+
+### Success
+
+```json
+{
+    "transaction_id": "EFB.144358",
+    "amount": 1000,
+    "benefice": 1000,
+    "commission": 0,
+    "destination": "0500156008",
+    "fee": 0,
+    "reponse": "operation succes",
+    "error": "",
+    "service_id": 14,
+    "customer_name": "easytransfert",
+    "state": "SUCCESS",
+    "custom_data": "custom_data",
+    "ipn_url": "",
+    "provider_id": null,
+    "sms_link": 0,
+    "created_at": "2022-10-18T02:38:44.000+00:00",
+    "updated_at": "2022-10-18T02:38:44.000+00:00",
+    "ipn_state": 0
+}
+```
+
+### Failed
+
+```json
+{
+    "transaction_id": "EFB.144359",
+    "amount": 2000,
+    "benefice": 2000,
+    "commission": 0,
+    "destination": "0670123456",
+    "fee": 0,
+    "reponse": "",
+    "error": "message de l'erreur (si transaction Echec)",
+    "service_id": 10,
+    "customer_name": "easytransfert",
+    "state": "FAILED",
+    "custom_data": "transaction_ref_123",
+    "ipn_url": "",
+    "provider_id": null,
+    "sms_link": 0,
+    "created_at": "2022-10-18T02:38:44.000+00:00",
+    "updated_at": "2022-10-18T02:38:44.000+00:00",
+    "ipn_state": 0
+}
+```
+
+<Tip>
+  La variable {{ipn_url}} dans votre environnement Postman permet de basculer facilement entre sandbox et production.
+</Tip>

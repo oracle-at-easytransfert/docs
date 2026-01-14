@@ -1,0 +1,106 @@
+---
+title: "Environnements"
+description: "Gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS v1"
+icon: server
+---
+
+Cette section décrit la gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS v1, en s'appuyant sur l'implémentation réelle fournie via la collection et l'environnement Postman.
+
+## Environnement actif
+
+À l'état actuel, l'API EASYTRANSFERT expose un seul environnement actif accessible via l'URL suivante :
+
+```
+http://proxy-airtime.easytransfert.app/api_v1/transaction
+```
+
+**Cet environnement est utilisé :**
+
+- pour les tests d'intégration
+- pour les transactions en conditions réelles
+- pour la validation fonctionnelle des flux Cashin / Cashout
+
+<Info>
+  La différenciation des usages (test ou production) repose sur la clé API (api_key) fournie par EASYTRANSFERT et sur les droits qui lui sont associés.
+</Info>
+
+## Environnement Sandbox (stand-by)
+
+Un environnement Sandbox est prévu dans la stratégie de l'API EASYTRANSFERT, mais il est actuellement en stand-by.
+
+**Cela signifie que :**
+
+- aucun endpoint sandbox distinct n'est exposé
+- aucune URL spécifique sandbox n'est fournie à ce stade
+- les tests sont effectués sur l'environnement actif à l'aide de clés dédiées
+
+<Warning>
+  Il est fortement déconseillé d'effectuer des tests non contrôlés avec une clé API de production.
+</Warning>
+
+**Lorsque l'environnement Sandbox sera activé :**
+
+- une URL dédiée sera communiquée
+- des clés API spécifiques sandbox seront fournies
+- les règles de plafonds et de simulation seront documentées
+
+## Gestion des environnements via les clés API
+
+La gestion des environnements repose sur le mécanisme suivant :
+
+- Chaque partenaire reçoit une ou plusieurs clés API
+- Les clés API sont configurées côté EASYTRANSFERT avec :
+  - des plafonds
+  - des services autorisés
+  - des restrictions éventuelles
+- Le comportement de l'API dépend directement de la clé utilisée
+
+**Ainsi :**
+
+- une clé peut être dédiée aux tests
+- une autre clé à la production
+- sans changement d'URL ni de structure de requête
+
+## Configuration recommandée
+
+### Dans Postman
+
+- Une collection unique
+- Un ou plusieurs environnements Postman
+- Variables clés :
+  - `base_url`
+  - `api_key`
+  - `ipn_url`
+  - `service_id_*`
+
+### Dans une application
+
+- Utiliser des fichiers de configuration (.env, variables système)
+- Ne jamais stocker la clé API en dur dans le code
+- Séparer clairement :
+  - environnement de développement
+  - environnement de production
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Tester avec clé dédiée" icon="flask">
+    Toujours tester avec une clé API dédiée aux tests
+  </Card>
+  <Card title="Ne pas mélanger" icon="ban">
+    Ne pas utiliser une clé de production pour des tests non maîtrisés
+  </Card>
+  <Card title="Journaliser" icon="file-alt">
+    Journaliser les appels API pour audit et débogage
+  </Card>
+  <Card title="Reprise en cas d'échec" icon="redo">
+    Prévoir des mécanismes de reprise en cas d'échec réseau
+  </Card>
+  <Card title="Privilégier IPN" icon="webhook">
+    Privilégier le suivi des transactions via IPN plutôt que le polling du statut
+  </Card>
+</CardGroup>
+
+<Tip>
+  La séparation claire entre environnement de test et production est essentielle pour éviter les erreurs coûteuses.
+</Tip>

@@ -1,0 +1,117 @@
+---
+title: "Bonnes pratiques"
+description: "Guide complet pour gérer efficacement les erreurs dans votre intégration"
+icon: check-double
+---
+
+La gestion des erreurs dans l'API EASYTRANSFERT BUSINESS v1 est cruciale pour garantir la fiabilité des transactions et éviter des doublons ou des échecs inattendus.
+
+## 1. Toujours vérifier le code HTTP
+
+<CardGroup cols={2}>
+  <Card title="200 OK" icon="check-circle" color="#16a34a">
+    Requête reçue et traitée par le serveur. ⚠️ Ne signifie pas forcément que la transaction a réussi — il faut aussi vérifier le status ou l'state dans la réponse JSON ou via l'IPN.
+  </Card>
+  <Card title="4xx / 5xx" icon="exclamation-triangle" color="#dc2626">
+    La requête n'a pas été traitée (erreurs de syntaxe, authentification, serveur). → Ne pas réessayer aveuglément ; analyser le code avant d'émettre un retry.
+  </Card>
+</CardGroup>
+
+## 2. Vérifier systématiquement le statut de la transaction
+
+<CardGroup cols={3}>
+  <Card title="Endpoint /status" icon="search">
+    Permet de connaître l'état actuel d'une transaction.
+  </Card>
+  <Card title="Champ state ou status" icon="info-circle">
+    SUCCESS ou FAILED dans le JSON.
+  </Card>
+  <Card title="IPN (webhook)" icon="webhook" color="#1d60d5">
+    Toujours considéré comme source finale et fiable pour la confirmation.
+  </Card>
+</CardGroup>
+
+## 3. Journaliser toutes les erreurs
+
+<Card title="Données à stocker" icon="file-alt">
+  Stocker : transaction_id, state, error, message, custom_data, timestamp. Permet d'auditer et de comprendre les échecs. Facilite la réconciliation avec vos comptes business.
+</Card>
+
+## 4. Réessayer intelligemment (Retry)
+
+<AccordionGroup>
+  <Accordion title="Erreurs temporaires" icon="redo">
+    Pour certaines erreurs temporaires (service indisponible, timeout) :
+    - Implémenter un backoff progressif (ex : 1s → 2s → 4s).
+    - Limiter le nombre de tentatives pour éviter le blocage (rate limit).
+  </Accordion>
+  
+  <Accordion title="Ne jamais réessayer automatiquement" icon="ban">
+    Ne jamais réessayer automatiquement pour :
+    - FAILED dû à Solde insuffisant.
+    - Montant invalide.
+    - Numéro de destination invalide.
+  </Accordion>
+</AccordionGroup>
+
+## 5. Protéger l'API Key
+
+<CardGroup cols={2}>
+  <Card title="HTTPS obligatoire" icon="lock" color="#16a34a">
+    Toujours utiliser HTTPS pour vos requêtes.
+  </Card>
+  <Card title="Ne pas exposer" icon="ban" color="#dc2626">
+    Ne pas exposer la clé dans le front-end. Stocker dans des variables sécurisées (Postman / environnement, serveur backend).
+  </Card>
+</CardGroup>
+
+## 6. Validation côté client
+
+Avant d'envoyer une transaction :
+
+<CardGroup cols={2}>
+  <Card title="Vérifier le montant" icon="chart-line">
+    Vérifier que le montant respecte les limites définies par EASYTRANSFERT.
+  </Card>
+  <Card title="Valider le numéro" icon="phone">
+    Valider le numéro de téléphone et le service_id.
+  </Card>
+  <Card title="Préparer custom_data" icon="link">
+    Préparer le custom_data pour relier la transaction à votre système interne.
+  </Card>
+</CardGroup>
+
+## 7. Gérer les IPN avec soin
+
+<CardGroup cols={2}>
+  <Card title="Traitement unique" icon="fingerprint">
+    Traiter chaque IPN exactement une seule fois pour éviter les doublons.
+  </Card>
+  <Card title="Confirmer la réception" icon="check-circle" color="#16a34a">
+    Confirmer la réception à EASYTRANSFERT avec HTTP 200 pour que le webhook ne soit pas renvoyé.
+  </Card>
+  <Card title="IPN = source de vérité" icon="webhook" color="#1d60d5">
+    Ne jamais considérer la réponse initiale HTTP comme finale — l'IPN est le véritable état de la transaction.
+  </Card>
+</CardGroup>
+
+## 8. Combinaison recommandée
+
+<Steps>
+  <Step title="Réponse initiale">
+    Vérifier syntaxe JSON + status / state.
+  </Step>
+  <Step title="IPN">
+    Confirmation finale.
+  </Step>
+  <Step title="Endpoint /status">
+    Seulement si nécessaire pour contrôle ou reprise après incident.
+  </Step>
+  <Step title="Journalisation + monitoring">
+    Suivre toutes les erreurs pour analyser et améliorer les flux.
+  </Step>
+</Steps>
+
+<Tip>
+  Une gestion d'erreurs robuste est essentielle pour maintenir la confiance des utilisateurs et garantir la fiabilité de votre intégration.
+</Tip>

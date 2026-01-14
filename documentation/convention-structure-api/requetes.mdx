@@ -1,0 +1,229 @@
+---
+title: "Requêtes"
+description: "Comment faire des requêtes à l'API EASYTRANSFERT BUSINESS"
+icon: code
+---
+
+La section Requêtes décrit comment faire des requêtes à l'API EASYTRANSFERT BUSINESS, en utilisant les endpoints `/airtime` et `/status`.
+
+## Méthodes HTTP
+
+| Endpoint | Méthode HTTP | Description |
+|----------|--------------|-------------|
+| `/airtime` | POST | Initier une transaction Cashin / Cashout |
+| `/status` | POST | Obtenir le statut d'une transaction (à utiliser avec parcimonie) |
+
+<Warning>
+  Tous les appels doivent utiliser HTTPS en production pour garantir la sécurité.
+</Warning>
+
+## Headers requis
+
+| Header | Valeur | Commentaire |
+|--------|--------|-------------|
+| `Content-Type` | `application/json` | Obligatoire pour envoyer les données au format JSON |
+| `Accept` | `application/json` | Recommandé pour recevoir la réponse en JSON |
+| `Authorization` | — | La clé API n'est pas passée ici, mais directement dans le body JSON ("api_key": "{{api_key}}") |
+
+<Info>
+  Remarque : Certaines API passent la clé dans les headers, mais EASYTRANSFERT la passe dans le JSON du body.
+</Info>
+
+## Body JSON pour /airtime (Initier une transaction)
+
+```json
+{
+    "amount": 1000,
+    "api_key": "{{api_key}}",
+    "destination": "0670123456",
+    "service_id": {{service_id_mtn_cashin}},
+    "ipn_url": "{{ipn_url}}",
+    "custom_data": "identifiant_personnel"
+}
+```
+
+### Explication des champs
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `amount` | Integer | Montant de la transaction en FCFA |
+| `api_key` | String | Clé API EASYTRANSFERT |
+| `destination` | String | Numéro du client (format local, ex: 0670123456) |
+| `service_id` | Integer | ID du service (Cashin ou Cashout, pour MTN, Orange, Moov, Flooz) |
+| `ipn_url` | String | URL pour recevoir la notification IPN (optionnelle, mais recommandée) |
+| `custom_data` | String | Données personnalisées pour identifier la transaction (optionnel) |
+
+### Exemples de services (service_id)
+
+| Opérateur | Cashin | Cashout |
+|-----------|--------|---------|
+| MTN | `{{service_id_mtn_cashin}}` = 10 | `{{service_id_mtn_cashout}}` = 11 |
+| Orange | `{{service_id_orange_cashin}}` = 12 | `{{service_id_orange_cashout}}` = 13 |
+| Moov | `{{service_id_moov_cashin}}` = 14 | `{{service_id_moov_cashout}}` = 15 |
+| Flooz | `{{service_id_flooz_cashin}}` = 16 | `{{service_id_flooz_cashout}}` = 17 |
+
+## Body JSON pour /status (Suivi de transaction)
+
+```json
+{
+    "api_key": "{{api_key}}",
+    "transaction_id": "{{transaction_id}}"
+}
+```
+
+### Explication des champs
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `api_key` | String | Clé API EASYTRANSFERT |
+| `transaction_id` | String | ID de la transaction que vous voulez suivre (ex: "EFB.001158") |
+
+<Warning>
+  À utiliser avec parcimonie. La confirmation finale arrive via IPN, donc inutile de faire des requêtes /status en boucle.
+</Warning>
+
+## Exemples complets
+
+### Transaction MTN Cashin (ajout d'argent)
+
+```
+POST {{base_url}}/airtime
+Content-Type: application/json
+```
+
+```json
+{
+    "amount": 1000,
+    "api_key": "{{api_key}}",
+    "destination": "0670123456",
+    "service_id": {{service_id_mtn_cashin}},
+    "ipn_url": "{{ipn_url}}",
+    "custom_data": "transaction_ref_001"
+}
+```
+
+### Transaction Moov Cashout (retrait)
+
+```
+POST {{base_url}}/airtime
+Content-Type: application/json
+```
+
+```json
+{
+    "amount": 2000,
+    "api_key": "{{api_key}}",
+    "destination": "0570123456",
+    "service_id": {{service_id_moov_cashout}},
+    "ipn_url": "{{ipn_url}}",
+    "custom_data": "withdrawal_789"
+}
+```
+
+### Obtenir le statut d'une transaction
+
+```
+POST {{base_url}}/status
+Content-Type: application/json
+```
+
+```json
+{
+    "api_key": "{{api_key}}",
+    "transaction_id": "{{transaction_id}}"
+}
+```
+
+## Exemples complets avec cURL
+
+### Transaction MTN Cashin (ajout d'argent)
+
+```bash
+curl -X POST "{{base_url}}/airtime" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 1000,
+    "api_key": "votre_cle_api",
+    "destination": "0670123456",
+    "service_id": 10,
+    "ipn_url": "https://votre-site.com/webhook/easytransfert",
+    "custom_data": "transaction_ref_001"
+  }'
+```
+
+### Transaction Orange Cashout (retrait)
+
+```bash
+curl -X POST "{{base_url}}/airtime" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 2000,
+    "api_key": "votre_cle_api",
+    "destination": "0501234567",
+    "service_id": 13,
+    "ipn_url": "https://votre-site.com/webhook/easytransfert",
+    "custom_data": "withdrawal_789"
+  }'
+```
+
+### Obtenir le statut d'une transaction
+
+```bash
+curl -X POST "{{base_url}}/status" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "api_key": "votre_cle_api",
+    "transaction_id": "EFB.001158"
+  }'
+```
+
+## Validation des paramètres
+
+<CardGroup cols={2}>
+  <Card title="Montant (amount)" icon="money-bill">
+    - Doit être un entier positif
+    - Exprimé en FCFA
+    - Respecter les plafonds (min: 500, max: 500 000)
+  </Card>
+  <Card title="Destination" icon="phone">
+    - Format local sans indicatif international
+    - Exemples : 0670123456 (MTN), 0501234567 (Orange)
+    - Doit correspondre à l'opérateur du service_id
+  </Card>
+  <Card title="Service ID" icon="cog">
+    - Doit correspondre à un service valide
+    - Vérifier la correspondance opérateur/type (Cashin/Cashout)
+  </Card>
+  <Card title="IPN URL" icon="webhook">
+    - Doit être accessible publiquement
+    - HTTPS recommandé en production
+    - Doit répondre rapidement avec HTTP 200
+  </Card>
+</CardGroup>
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Variables Postman" icon="cog">
+    Toujours utiliser les variables Postman (base_url, api_key, service_id_*) pour changer facilement d'environnement.
+  </Card>
+  <Card title="Ne pas hardcoder" icon="ban">
+    Ne jamais hardcoder la clé API dans le code ou les requêtes.
+  </Card>
+  <Card title="Privilégier IPN" icon="webhook" color="#1d60d5">
+    Privilégier l'IPN pour connaître l'état final de la transaction.
+  </Card>
+  <Card title="Limiter /status" icon="exclamation-triangle" color="#dc2626">
+    Limiter les appels à /status pour éviter d'être bloqué.
+  </Card>
+  <Card title="Tester d'abord" icon="flask" color="#16a34a">
+    Tester d'abord dans Sandbox, puis passer en Production.
+  </Card>
+  <Card title="Valider avant envoi" icon="check-circle">
+    Valider tous les paramètres (montant, numéro, service_id) avant d'envoyer la requête.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Utilisez les variables d'environnement Postman pour faciliter le basculement entre Sandbox et Production sans modifier votre code.
+</Tip>

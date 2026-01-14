@@ -1,0 +1,66 @@
+---
+title: "Versionnement"
+description: "Politique de versionnement et évolution de l'API EASYTRANSFERT BUSINESS"
+icon: code-branch
+---
+
+## Version actuelle : v1
+
+L'API EASYTRANSFERT BUSINESS est actuellement disponible en version v1.
+
+Cette version fournit un ensemble d'endpoints stables dédiés exclusivement aux transactions Mobile Money, incluant :
+
+- Initiation de transactions Cashin / Cashout
+- Suivi du statut des transactions
+- Notifications asynchrones via IPN (webhook)
+
+<Info>
+  La version v1 est accessible via l'URL de base :
+  
+  `/api_v1/transaction`
+</Info>
+
+## Politique de versioning
+
+EASYTRANSFERT applique un versionning par URL, permettant de faire évoluer l'API sans impacter les intégrations existantes.
+
+**Principes appliqués :**
+
+- Toute évolution majeure ou rupture de compatibilité donnera lieu à une nouvelle version (ex : v2)
+- Les améliorations mineures ou correctifs peuvent être apportés à la v1 tant qu'ils ne modifient pas :
+  - la structure des requêtes
+  - la structure des réponses
+  - le comportement fonctionnel existant
+
+## Rétrocompatibilité
+
+La version v1 garantit :
+
+- La stabilité des endpoints existants
+- La compatibilité des intégrations déjà en production
+- L'absence de changement bloquant sans changement de version
+
+<Info>
+  En cas d'évolution nécessitant une rupture de compatibilité :
+  - une nouvelle version sera publiée
+  - la v1 restera disponible pendant une période de transition
+</Info>
+
+## Évolution future de l'API
+
+Les évolutions potentielles de l'API pourront inclure :
+
+- Nouvelles versions (/api_v2, /api_v3, etc.)
+- Amélioration de la sécurité (authentification renforcée, signature IPN)
+- Ajout de nouveaux services Mobile Money
+- Optimisation des performances et de la fiabilité
+
+<Warning>
+  **Fonctionnalités non disponibles dans la v1**
+  
+  Les fonctionnalités suivantes ne sont pas disponibles dans la v1 et ne doivent pas être supposées :
+  - Gestion des clients
+  - Comptes business et consultation de solde
+  - Gestion des bénéficiaires
+  - Annulation ou remboursement de transactions
+</Warning>

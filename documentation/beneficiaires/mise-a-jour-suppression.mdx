@@ -1,0 +1,137 @@
+---
+title: "Mise à jour / Suppression"
+description: "Modifier ou supprimer un bénéficiaire existant"
+icon: user-edit
+---
+
+Cette section couvre les opérations permettant de modifier les informations d'un bénéficiaire existant ou de le supprimer du système. Ces actions nécessitent le `beneficiary_id` et la clé API.
+
+<Warning>
+  **Note importante :** La gestion des bénéficiaires peut ne pas être disponible dans la version v1 de l'API. Vérifiez la disponibilité de cette fonctionnalité avec le support EASYTRANSFERT.
+</Warning>
+
+## Mise à jour d'un bénéficiaire
+
+### Endpoint
+
+```
+PUT {{base_url}}/beneficiaries/{{beneficiary_id}}
+```
+
+### Headers
+
+| Nom | Valeur | Description |
+|-----|--------|-------------|
+| `Content-Type` | `application/json` | Format de la requête JSON |
+
+### Body JSON (exemple)
+
+```json
+{
+  "api_key": "{{api_key}}",
+  "name": "John Doe Updated",
+  "phone": "0670987654",
+  "service_id": "{{service_id_mtn_cashout}}",
+  "custom_data": "client_ref_001_updated"
+}
+```
+
+### Paramètres détaillés
+
+| Champ | Type | Obligatoire | Description |
+|-------|------|-------------|-------------|
+| `api_key` | string | Oui | Votre clé API EASYTRANSFERT |
+| `name` | string | Non | Nouveau nom complet du bénéficiaire |
+| `phone` | string | Non | Nouveau numéro de téléphone |
+| `service_id` | string | Non | Nouveau service associé |
+| `custom_data` | string | Non | Nouvelle donnée personnalisée |
+
+<Info>
+  **Remarque importante :** Seuls les champs présents dans le body seront mis à jour. Les autres restent inchangés.
+</Info>
+
+### Réponse (exemple succès)
+
+```json
+{
+  "status": "success",
+  "message": "Bénéficiaire mis à jour avec succès",
+  "data": {
+    "beneficiary_id": "BEN.123456",
+    "name": "John Doe Updated",
+    "phone": "0670987654",
+    "service_id": "11",
+    "custom_data": "client_ref_001_updated",
+    "updated_at": "2026-01-13T12:45:00.000+00:00"
+  }
+}
+```
+
+## Suppression d'un bénéficiaire
+
+### Endpoint
+
+```
+DELETE {{base_url}}/beneficiaries/{{beneficiary_id}}
+```
+
+### Headers
+
+| Nom | Valeur | Description |
+|-----|--------|-------------|
+| `Content-Type` | `application/json` | Format de la requête JSON |
+
+### Body JSON (exemple)
+
+```json
+{
+  "api_key": "{{api_key}}"
+}
+```
+
+### Paramètres détaillés
+
+| Champ | Type | Obligatoire | Description |
+|-------|------|-------------|-------------|
+| `api_key` | string | Oui | Votre clé API EASYTRANSFERT |
+
+<Info>
+  Le `beneficiary_id` est passé dans l'URL pour identifier quel bénéficiaire supprimer.
+</Info>
+
+### Réponse (exemple succès)
+
+```json
+{
+  "status": "success",
+  "message": "Bénéficiaire supprimé avec succès",
+  "data": {
+    "beneficiary_id": "BEN.123456"
+  }
+}
+```
+
+## Conseils pratiques
+
+<CardGroup cols={2}>
+  <Card title="Suppression irréversible" icon="exclamation-triangle" color="#dc2626">
+    La suppression est irréversible : assurez-vous que le bénéficiaire n'est pas lié à des transactions en cours.
+  </Card>
+  <Card title="Mise à jour partielle" icon="edit">
+    Pour la mise à jour, ne mettez dans le body que les champs à modifier.
+  </Card>
+  <Card title="Utiliser beneficiary_id" icon="fingerprint">
+    Toujours utiliser le beneficiary_id pour éviter toute confusion avec le numéro de téléphone.
+  </Card>
+  <Card title="Journaliser les actions" icon="file-alt">
+    Conservez un log interne de toutes les modifications ou suppressions pour la traçabilité.
+  </Card>
+</CardGroup>
+
+<Warning>
+  **Attention :** Avant de supprimer un bénéficiaire, vérifiez qu'il n'est pas utilisé dans des transactions en cours ou futures.
+</Warning>
+
+<Tip>
+  La mise à jour partielle permet de modifier uniquement les champs nécessaires sans avoir à renvoyer toutes les informations du bénéficiaire.
+</Tip>

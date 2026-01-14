@@ -1,0 +1,85 @@
+---
+title: "Headers requis"
+description: "Headers HTTP obligatoires et recommandés pour les requêtes API"
+icon: heading
+---
+
+L'API EASYTRANSFERT BUSINESS utilise la clé API pour l'authentification. Contrairement à certaines APIs REST, aucun token Bearer n'est nécessaire dans les headers. Cependant, certains headers sont obligatoires pour toutes les requêtes afin que le serveur comprenne et accepte le JSON envoyé.
+
+## Headers principaux
+
+| Header | Valeur | Description |
+|--------|--------|-------------|
+| `Content-Type` | `application/json` | Indique que le corps de la requête est en JSON |
+| `Accept` | `application/json` | Indique que l'on souhaite recevoir la réponse au format JSON |
+| `Authorization` | N/A | Non utilisé, la clé API est transmise dans le corps de la requête (api_key) |
+
+<Warning>
+  Dans les exemples Postman de la collection, seul Content-Type est défini. Le header Accept est optionnel mais recommandé.
+</Warning>
+
+## Exemple de headers dans Postman
+
+Dans Postman, pour un endpoint comme `POST {{base_url}}/airtime` :
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `Content-Type` | `application/json` | Obligatoire |
+| `Accept` | `application/json` | Optionnel, recommandé |
+
+## Exemple complet de requête avec headers et clé API
+
+**Endpoint :** Initier une transaction Cashout MTN
+
+```
+POST {{base_url}}/airtime
+```
+
+**Headers :**
+```
+Content-Type: application/json
+Accept: application/json
+```
+
+**Body (raw JSON) :**
+```json
+{
+  "api_key": "{{api_key}}",
+  "amount": 5000,
+  "destination": "0670123456",
+  "service_id": {{service_id_mtn_cashout}},
+  "ipn_url": "{{ipn_url}}",
+  "custom_data": "transaction_ref_123"
+}
+```
+
+**Explications :**
+
+- `api_key` → variable d'environnement Postman (type secret), identifie le partenaire
+- `service_id` → variable correspondant au type de service (Cashin/Cashout et opérateur)
+- `ipn_url` → URL du webhook pour recevoir la confirmation finale
+
+<Info>
+  Cette structure reflète fidèlement la collection Postman officielle EASYTRANSFERT.
+</Info>
+
+## Bonnes pratiques pour les headers
+
+1. **Toujours définir Content-Type: application/json** pour toutes les requêtes POST ou PUT.
+2. **Ne pas mettre la clé API dans le header Authorization**, la collection Postman n'envoie la clé que dans le body.
+3. **HTTPS obligatoire en production** pour sécuriser les headers et le corps de la requête.
+4. **Utiliser des variables d'environnement Postman** pour gérer facilement api_key, base_url et service_id.
+
+## Résumé technique
+
+| Élément | Détail |
+|---------|--------|
+| Authentification | API Key dans le body JSON |
+| Headers obligatoires | `Content-Type: application/json` |
+| Headers recommandés | `Accept: application/json` |
+| Authorization header | Non utilisé |
+| Correspondance Postman | Exactement comme défini dans la collection officielle |
+
+<Tip>
+  La clé API est transmise dans le corps de la requête, pas dans les headers. C'est une particularité de l'API EASYTRANSFERT.
+</Tip>

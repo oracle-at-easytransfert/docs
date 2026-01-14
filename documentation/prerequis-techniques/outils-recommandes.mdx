@@ -1,0 +1,159 @@
+---
+title: "Outils recommandés"
+description: "Outils pour tester, intégrer et exploiter efficacement l'API EASYTRANSFERT BUSINESS v1"
+icon: tools
+---
+
+Cette section présente les outils recommandés pour tester, intégrer et exploiter efficacement l'API EASYTRANSFERT BUSINESS v1. Les outils mentionnés ci-dessous couvrent l'ensemble du cycle d'intégration : tests, développement, débogage et mise en production.
+
+## Postman (outil principal recommandé)
+
+Postman est l'outil privilégié pour l'intégration et les tests de l'API EASYTRANSFERT.
+
+**Une collection Postman officielle est fournie et inclut :**
+
+- les endpoints d'initiation de transaction (Cashin / Cashout)
+- la consultation du statut des transactions
+- des exemples de notifications IPN
+- des scripts de test automatisés
+
+**Avantages :**
+
+- Utilisation de variables d'environnement (base_url, api_key, service_id_*)
+- Tests rapides sans écrire de code
+- Sauvegarde automatique du transaction_id
+- Partage simple entre équipes techniques
+
+**Configuration minimale requise :**
+
+- Importer la collection EASYTRANSFERT
+- Importer l'environnement associé
+- Renseigner la valeur de api_key
+- Vérifier l'URL IPN (ipn_url)
+
+<Tip>
+  Postman est fortement recommandé pour les phases de développement et de validation.
+</Tip>
+
+## cURL (tests rapides en ligne de commande)
+
+cURL permet d'effectuer des appels API directement depuis un terminal.
+
+**Il est utile pour :**
+
+- vérifier rapidement la disponibilité de l'API
+- tester un endpoint sans interface graphique
+- automatiser des tests simples
+
+**Le développeur doit savoir :**
+
+- construire une requête HTTP POST
+- transmettre un body JSON
+- interpréter la réponse retournée
+
+<Info>
+  cURL est particulièrement adapté pour les environnements serveurs ou les scripts d'automatisation.
+</Info>
+
+## Librairies HTTP (intégration applicative)
+
+L'API EASYTRANSFERT étant basée sur HTTP/JSON, elle est compatible avec toutes les librairies HTTP standards.
+
+**Exemples de librairies recommandées :**
+
+<AccordionGroup>
+  <Accordion title="JavaScript / Node.js" icon="js">
+    - Axios
+    - Fetch API
+  </Accordion>
+  
+  <Accordion title="Python" icon="python">
+    - Requests
+  </Accordion>
+  
+  <Accordion title="PHP" icon="php">
+    - cURL natif
+    - Guzzle
+  </Accordion>
+  
+  <Accordion title="Autres langages" icon="code">
+    Toute librairie supportant HTTP POST et JSON
+  </Accordion>
+</AccordionGroup>
+
+**Ces librairies permettent :**
+
+- l'envoi des requêtes de transaction
+- la gestion des réponses API
+- l'intégration des webhooks IPN
+
+## Gestion des variables et configurations
+
+Une bonne gestion des variables est essentielle pour une intégration propre.
+
+**Variables essentielles :**
+
+- `base_url`
+- `api_key`
+- `transaction_id`
+- `ipn_url`
+- `service_id_*`
+
+**Bonnes pratiques :**
+
+- Utiliser des variables d'environnement
+- Ne jamais exposer la clé API dans le code source
+- Séparer les configurations selon les environnements
+- Chiffrer ou protéger les secrets sensibles
+
+## Outils serveur pour IPN (Webhooks)
+
+Pour recevoir les notifications IPN, l'application doit exposer une URL publique.
+
+**Outils recommandés :**
+
+- Serveur web (Nginx, Apache)
+- Framework backend (Laravel, Django, Express, FastAPI, etc.)
+- Outils de test IPN :
+  - Ngrok (tunnel local)
+  - Postman (simulation IPN)
+
+**Le développeur doit être capable de :**
+
+- recevoir une requête POST
+- parser le JSON reçu
+- enregistrer et traiter le statut de la transaction
+- répondre rapidement avec un HTTP 200
+
+## Outils de journalisation et suivi
+
+Pour garantir la traçabilité des transactions, il est recommandé d'utiliser :
+
+- des logs applicatifs
+- une base de données pour stocker :
+  - transaction_id
+  - statut
+  - montants
+  - dates
+- des outils de monitoring si nécessaire
+
+**Ces éléments facilitent :**
+
+- le support technique
+- l'audit
+- la résolution d'incidents
+
+<CardGroup cols={2}>
+  <Card title="Postman" icon="rocket" color="#1d60d5">
+    Outil principal recommandé pour le développement et les tests
+  </Card>
+  <Card title="cURL" icon="terminal">
+    Tests rapides en ligne de commande
+  </Card>
+  <Card title="Librairies HTTP" icon="code">
+    Intégration dans votre application
+  </Card>
+  <Card title="Outils serveur" icon="server">
+    Pour recevoir les webhooks IPN
+  </Card>
+</CardGroup>

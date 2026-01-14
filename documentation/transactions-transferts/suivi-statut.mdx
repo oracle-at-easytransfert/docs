@@ -1,0 +1,101 @@
+---
+title: "Suivi de statut"
+description: "Comment suivre le statut d'une transaction via l'API"
+icon: search
+---
+
+Le suivi de statut permet de consulter l'état d'une transaction déjà initiée.
+
+<Warning>
+  **Important :** Le suivi en temps réel via l'API n'est pas obligatoire si un IPN (webhook) est configuré. L'IPN reste la source fiable pour la confirmation finale.
+</Warning>
+
+## Endpoint
+
+```
+POST {{base_url}}/status
+```
+
+## Headers
+
+```
+Content-Type: application/json
+```
+
+## Body JSON
+
+```json
+{
+    "api_key": "{{api_key}}",
+    "transaction_id": "{{transaction_id}}"
+}
+```
+
+## Paramètres
+
+| Paramètre | Type | Obligatoire | Description |
+|-----------|------|-------------|-------------|
+| `api_key` | string | Oui | Clé API EASYTRANSFERT pour authentification |
+| `transaction_id` | string | Oui | Identifiant unique de la transaction à vérifier (ex: EFB.001158) |
+
+## Réponse attendue
+
+### Réponse réussie
+
+```json
+{
+    "status": "SUCCESS",
+    "message": "Transaction réussie",
+    "data": {
+        "transaction_id": "EFB.001158",
+        "amount": 1000,
+        "state": "SUCCESS",
+        "destination": "0670123456",
+        "custom_data": "transaction_ref_123",
+        "service_id": 11
+    }
+}
+```
+
+### Réponse échouée
+
+```json
+{
+    "status": "FAILED",
+    "message": "Transaction échouée",
+    "data": {
+        "transaction_id": "EFB.001158",
+        "error": "Solde insuffisant",
+        "state": "FAILED"
+    }
+}
+```
+
+<Info>
+  Le champ `state` peut avoir plusieurs valeurs possibles :
+  - **PENDING** : Transaction en attente
+  - **SUCCESS** : Transaction réussie
+  - **FAILED** : Transaction échouée
+  - **CANCELLED** : Transaction annulée
+</Info>
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Utilisation ponctuelle" icon="clock">
+    Utiliser le suivi uniquement pour des vérifications ponctuelles. L'abus peut entraîner un blocage temporaire par le système.
+  </Card>
+  <Card title="Préférer l'IPN" icon="webhook">
+    Préférer l'IPN pour les confirmations finales des transactions.
+  </Card>
+  <Card title="Enregistrer transaction_id" icon="save">
+    Toujours enregistrer le transaction_id reçu lors de la création d'une transaction pour pouvoir faire le suivi.
+  </Card>
+  <Card title="Éviter le polling" icon="ban">
+    Ne pas interroger le statut en boucle. Utiliser uniquement en cas de non-réception d'IPN.
+  </Card>
+</CardGroup>
+
+<Tip>
+  L'endpoint `/status` est un mécanisme de secours. La méthode recommandée pour connaître le statut final d'une transaction est l'IPN (webhook).
+</Tip>

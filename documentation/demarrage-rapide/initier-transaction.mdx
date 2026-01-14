@@ -1,0 +1,62 @@
+---
+title: "Étape 2 - Initier une transaction"
+description: "Comment initier une transaction Cashin ou Cashout via l'API"
+icon: play-circle
+---
+
+## Endpoint
+
+```
+POST {{base_url}}/airtime
+```
+
+## Authentification
+
+<Info>
+  L'authentification se fait via la clé API transmise dans le corps de la requête. Il n'y a pas de header Authorization.
+</Info>
+
+## Paramètres de la requête
+
+| Champ | Type | Obligatoire | Description |
+|-------|------|-------------|-------------|
+| `amount` | int | Oui | Montant de la transaction (FCFA) |
+| `api_key` | string | Oui | Clé API EASYTRANSFERT |
+| `destination` | string | Oui | Numéro mobile du bénéficiaire |
+| `service_id` | int | Oui | Identifiant du service |
+| `ipn_url` | string | Non | URL de callback |
+| `custom_data` | string | Non | Référence interne |
+
+## Exemple – MTN Cashout
+
+```json
+{
+  "amount": 5000,
+  "api_key": "{{api_key}}",
+  "destination": "0670123456",
+  "service_id": 11,
+  "ipn_url": "{{ipn_url}}",
+  "custom_data": "order_789"
+}
+```
+
+## Réponse immédiate
+
+<Warning>
+  La réponse reçue ne confirme **pas** le succès final, elle indique seulement que la requête est valide.
+</Warning>
+
+**Exemple de réponse :**
+
+```json
+{
+  "status": "success",
+  "data": {
+    "transaction_id": "EFB.001158"
+  }
+}
+```
+
+<Tip>
+  Le `transaction_id` doit être sauvegardé côté application pour le suivi ultérieur.
+</Tip>

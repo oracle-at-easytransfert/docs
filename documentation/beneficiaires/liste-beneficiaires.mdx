@@ -1,0 +1,95 @@
+---
+title: "Liste des bénéficiaires"
+description: "Récupérer la liste de tous vos bénéficiaires"
+icon: list
+---
+
+Permet de récupérer la liste de tous les bénéficiaires associés à votre compte EASYTRANSFERT. Cette liste inclut les informations essentielles pour chaque bénéficiaire, comme l'ID, le nom, le numéro et le service associé.
+
+<Warning>
+  **Note importante :** La gestion des bénéficiaires peut ne pas être disponible dans la version v1 de l'API. Vérifiez la disponibilité de cette fonctionnalité avec le support EASYTRANSFERT.
+</Warning>
+
+## Endpoint
+
+```
+GET {{base_url}}/beneficiaries
+```
+
+## Headers
+
+| Nom | Valeur | Description |
+|-----|--------|-------------|
+| `Content-Type` | `application/json` | Format de la requête JSON |
+
+## Paramètres de requête
+
+| Champ | Type | Obligatoire | Description |
+|-------|------|-------------|-------------|
+| `api_key` | string | Oui | Votre clé API EASYTRANSFERT |
+
+<Info>
+  Dans Postman, vous pouvez passer api_key soit dans l'URL (?api_key={{api_key}}) soit dans le body si vous utilisez POST (mais pour GET, c'est recommandé en query string).
+</Info>
+
+## Exemple d'URL
+
+```
+{{base_url}}/beneficiaries?api_key={{api_key}}
+```
+
+## Réponse (exemple succès)
+
+```json
+{
+  "status": "success",
+  "message": "Liste des bénéficiaires récupérée",
+  "data": [
+    {
+      "beneficiary_id": "BEN.123456",
+      "name": "John Doe",
+      "phone": "0670123456",
+      "service_id": "11",
+      "custom_data": "client_ref_001",
+      "created_at": "2026-01-13T12:00:00.000+00:00"
+    },
+    {
+      "beneficiary_id": "BEN.123457",
+      "name": "Jane Doe",
+      "phone": "0501234567",
+      "service_id": "12",
+      "custom_data": "client_ref_002",
+      "created_at": "2026-01-13T12:05:00.000+00:00"
+    }
+  ]
+}
+```
+
+## Explications des champs
+
+| Champ | Description |
+|-------|-------------|
+| `beneficiary_id` | Identifiant unique du bénéficiaire. Utilisé pour les transactions, la mise à jour ou la suppression. |
+| `name` | Nom complet du bénéficiaire. |
+| `phone` | Numéro de téléphone du bénéficiaire. |
+| `service_id` | ID du service associé (ex: MTN Cashout = 11). |
+| `custom_data` | Données personnalisées pour tracer le bénéficiaire dans votre système interne. |
+| `created_at` | Date et heure de création du bénéficiaire. |
+
+## Conseils pratiques
+
+<CardGroup cols={2}>
+  <Card title="Filtrer côté application" icon="filter">
+    Filtrer par service_id ou custom_data côté application si vous avez beaucoup de bénéficiaires.
+  </Card>
+  <Card title="Utiliser beneficiary_id" icon="fingerprint">
+    Toujours utiliser beneficiary_id pour les transactions afin d'éviter les erreurs liées aux numéros de téléphone.
+  </Card>
+  <Card title="Pagination" icon="file-alt">
+    La liste renvoyée peut être paginée dans le futur; prévoyez de gérer la pagination si votre compte a beaucoup de bénéficiaires.
+  </Card>
+</CardGroup>
+
+<Tip>
+  La liste des bénéficiaires permet de gérer efficacement vos contacts récurrents pour les transactions.
+</Tip>

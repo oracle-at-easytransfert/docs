@@ -1,0 +1,137 @@
+---
+title: "Connaissances requises"
+description: "Connaissances techniques de base nécessaires pour intégrer l'API EASYTRANSFERT BUSINESS v1"
+icon: graduation-cap
+---
+
+L'intégration de l'API EASYTRANSFERT BUSINESS v1 nécessite des connaissances techniques de base en développement web et en communication avec des services REST. Les points suivants sont indispensables pour une intégration correcte et sécurisée.
+
+## API REST
+
+Le développeur doit comprendre les principes fondamentaux des API REST :
+
+- Interaction via des endpoints HTTP
+- Utilisation des méthodes HTTP (principalement POST dans cette API)
+- Communication stateless (chaque requête est indépendante)
+- Identification des ressources via des URLs structurées
+
+<Info>
+  Dans l'API EASYTRANSFERT :
+  - L'initiation des transactions se fait via `/airtime`
+  - La consultation du statut se fait via `/status`
+</Info>
+
+## Protocole HTTP / HTTPS
+
+Une bonne maîtrise du protocole HTTP est requise, notamment :
+
+- Construction de requêtes HTTP
+- Compréhension des headers standards
+- Interprétation des codes de réponse HTTP
+- Gestion des erreurs réseau
+
+<Warning>
+  Les échanges avec l'API EASYTRANSFERT doivent être effectués via HTTP sécurisé. L'usage de HTTPS est fortement recommandé en environnement de production.
+</Warning>
+
+## Format de données JSON
+
+Toutes les requêtes et réponses de l'API utilisent le format JSON :
+
+- Les paramètres sont transmis dans le corps (body) des requêtes
+- Les réponses sont retournées sous forme d'objets JSON
+- Les notifications IPN (webhooks) sont également envoyées en JSON
+
+**Le développeur doit savoir :**
+
+- sérialiser des objets en JSON
+- désérialiser et exploiter les réponses JSON
+- gérer des champs optionnels et conditionnels
+
+## Codes de statut HTTP
+
+La compréhension des codes de statut HTTP est nécessaire pour :
+
+- vérifier si une requête a été correctement reçue
+- distinguer une erreur technique d'une erreur métier
+- mettre en place une gestion d'erreurs robuste
+
+**Exemples courants :**
+
+| Code | Signification |
+|------|---------------|
+| 200 OK | Requête acceptée |
+| 400 Bad Request | Paramètres invalides |
+| 401 Unauthorized | Clé API absente ou invalide |
+| 500 Internal Server Error | Erreur interne du service |
+
+<Warning>
+  Une réponse HTTP 200 ne signifie pas nécessairement que la transaction est finalisée. Le statut final est communiqué via IPN.
+</Warning>
+
+## Webhooks / IPN (Indispensable)
+
+L'API EASYTRANSFERT fonctionne de manière asynchrone pour les transactions.
+
+**Le développeur doit savoir :**
+
+- exposer une URL publique capable de recevoir des requêtes HTTP POST
+- traiter des notifications IPN envoyées par EASYTRANSFERT
+- sécuriser et valider les données reçues
+- mettre à jour l'état interne des transactions
+
+**Les IPN permettent de recevoir :**
+
+- le statut final (SUCCESS ou FAILED)
+- les détails complets de la transaction
+- les données personnalisées (custom_data)
+
+## Gestion des variables et environnements
+
+Une connaissance de base de la gestion des environnements est recommandée :
+
+- utilisation de variables d'environnement (api_key, base_url, etc.)
+- séparation des environnements de test et de production
+- protection des données sensibles (clé API)
+
+<Info>
+  Dans Postman, cela correspond à :
+  - une collection d'API
+  - un environnement dédié avec des variables configurables
+</Info>
+
+## Notions de sécurité applicative
+
+Le développeur doit être sensibilisé aux bonnes pratiques de sécurité :
+
+- protection de la clé API
+- validation des données entrantes
+- limitation des appels répétitifs (rate limiting côté client)
+- journalisation des transactions pour audit et traçabilité
+
+## Synthèse
+
+<CardGroup cols={2}>
+  <Card title="API REST et HTTP" icon="network-wired">
+    Maîtriser les principes REST et le protocole HTTP/HTTPS
+  </Card>
+  <Card title="Format JSON" icon="code">
+    Savoir sérialiser et désérialiser des données JSON
+  </Card>
+  <Card title="Gestion des statuts" icon="check-circle">
+    Comprendre les codes HTTP et la gestion d'erreurs
+  </Card>
+  <Card title="Webhooks (IPN)" icon="webhook">
+    Exposer et traiter des endpoints webhook
+  </Card>
+  <Card title="Environnements" icon="cog">
+    Configurer et sécuriser les variables d'environnement
+  </Card>
+  <Card title="Sécurité" icon="shield">
+    Protéger les clés API et valider les données
+  </Card>
+</CardGroup>
+
+<Tip>
+  Pour une intégration réussie de l'API EASYTRANSFERT, le développeur doit maîtriser tous ces concepts fondamentaux.
+</Tip>

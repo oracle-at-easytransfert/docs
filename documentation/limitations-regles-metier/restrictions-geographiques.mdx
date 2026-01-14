@@ -1,0 +1,65 @@
+---
+title: "Restrictions géographiques"
+description: "Comprendre les limitations géographiques et les opérateurs supportés"
+icon: globe
+---
+
+L'API EASYTRANSFERT BUSINESS v1 impose des restrictions liées à la géographie et aux opérateurs supportés afin de garantir la conformité réglementaire et la bonne exécution des transactions.
+
+## Principes
+
+<CardGroup cols={2}>
+  <Card title="Numéros locaux uniquement" icon="phone">
+    Les transactions ne sont autorisées que vers des numéros locaux dans les pays où EASYTRANSFERT est actif. Exemple : un numéro MTN Côte d'Ivoire valide doit commencer par 05, 06 ou 07 selon l'opérateur.
+  </Card>
+  <Card title="Opérateurs supportés" icon="mobile-alt">
+    Seuls les opérateurs suivants sont pris en charge :
+    - MTN (Cashin / Cashout)
+    - Orange (Cashin / Cashout)
+    - Moov (Cashin / Cashout)
+    - Flooz (Cashin / Cashout)
+  </Card>
+  <Card title="Transactions internationales interdites" icon="ban" color="#dc2626">
+    Les transferts vers des pays ou des opérateurs non pris en charge ne sont pas autorisés et seront rejetés par l'API. Les transactions avec un indicatif international ou des numéros étrangers déclenchent une erreur métier.
+  </Card>
+</CardGroup>
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Valider le numéro de téléphone" icon="check-circle" color="#16a34a">
+    Vérifier que le numéro appartient à un opérateur supporté avant d'envoyer la transaction. Exemple : si vous utilisez MTN Cashout, le numéro doit être un MTN local valide.
+  </Card>
+  <Card title="Limiter les tests aux pays autorisés" icon="flask">
+    En environnement Sandbox, n'effectuez que des tests avec des numéros valides pour éviter les erreurs inutiles.
+  </Card>
+  <Card title="Informer l'utilisateur final" icon="info-circle">
+    Si un utilisateur tente de saisir un numéro non supporté, afficher un message clair.
+  </Card>
+</CardGroup>
+
+## Exemple pratique
+
+**Scénario :** Un utilisateur souhaite envoyer de l'argent vers un numéro Orange au Sénégal via l'API configurée pour la Côte d'Ivoire.
+
+**Résultat :** L'API retournera une erreur : "Numéro non supporté / pays non autorisé".
+
+**Solution :** Restreindre les transactions aux numéros valides du pays cible et à l'opérateur autorisé.
+
+## Points clés à retenir
+
+<CardGroup cols={3}>
+  <Card title="Vérifier opérateur et pays" icon="check-double">
+    Vérifier opérateur et pays avant toute transaction.
+  </Card>
+  <Card title="Numéros locaux uniquement" icon="phone">
+    N'envoyer des transactions qu'aux numéros locaux supportés.
+  </Card>
+  <Card title="Erreurs métier" icon="exclamation-triangle">
+    Les erreurs liées à la géographie sont considérées comme des erreurs métier (status = FAILED) et peuvent être suivies via IPN.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Implémentez une validation côté client pour vérifier le format et l'opérateur du numéro avant d'envoyer la transaction.
+</Tip>
