@@ -456,6 +456,115 @@
 					}
 				}
 			}
+		},
+		"/votre_url_webhook": {
+			"post": {
+				"description": "",
+				"requestBody": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"transaction_id": {
+										"type": "string",
+										"example": "EFB.144358"
+									},
+									"amount": {
+										"type": "number",
+										"example": 1000
+									},
+									"benefice": {
+										"type": "number",
+										"example": 1000
+									},
+									"commission": {
+										"type": "number",
+										"example": 0
+									},
+									"destination": {
+										"type": "string",
+										"example": "0500156008"
+									},
+									"fee": {
+										"type": "number",
+										"example": 0
+									},
+									"response": {
+										"type": "string",
+										"example": "operation success"
+									},
+									"error": {
+										"type": "string",
+										"example": "message de l'erreur (si transaction Echec)"
+									},
+									"service_id": {
+										"type": "number",
+										"example": 14
+									},
+									"customer_name": {
+										"type": "string",
+										"example": "easytransfert"
+									},
+									"state": {
+										"type": "string",
+										"example": "FAILED"
+									},
+									"custom_data": {
+										"type": "string",
+										"example": "custom_data"
+									},
+									"ipn_url": {
+										"type": "string",
+										"example": ""
+									},
+									"provider_id": {
+										"type": "null",
+										"example": null
+									},
+									"sms_link": {
+										"type": "number",
+										"example": 0
+									},
+									"created_at": {
+										"type": "string",
+										"example": "2022-10-18T02:38:44.000+00:00"
+									},
+									"updated_at": {
+										"type": "string",
+										"example": "2022-10-18T02:38:44.000+00:00"
+									},
+									"ipn_state": {
+										"type": "number",
+										"example": 0
+									},
+									"w_amount_after_transaction": {
+										"type": "string",
+										"example": ""
+									},
+									"p_last_wallet_amount": {
+										"type": "number",
+										"example": 11
+									},
+									"p_new_wallet_amount": {
+										"type": "null",
+										"example": null
+									},
+									"p_id": {
+										"type": "number",
+										"example": 1
+									},
+									"hash": {
+										"type": "string",
+										"example": ""
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
