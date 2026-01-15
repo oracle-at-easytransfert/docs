@@ -319,6 +319,143 @@
 					}
 				}
 			}
-		}
+		},
+		    "/status": {
+      "post": {
+        "description": "Obtenir le status d'une transaction (NB: si vous en abuser vous serez bloqué par le système)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "api_key": {
+                    "type": "string",
+                    "description": "Votre clé d'API",
+					"examples": [
+					  "xxxxxxxxxxxxxxxxxxx"
+					]
+                  },
+                  "transaction_ids": {
+                    "type": "string",
+                    "description": "Identifiant de la transaction (transaction_id)",
+                    "examples": [
+                      "EFB.001158"
+                    ]
+                  }
+                },
+                "required": [
+                  "transaction_ids",
+                  "api_key"
+                ]
+              }
+            }
+          }
+        },
+		"responses": {
+          "200": {
+            "description": "Transaction initiated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "string",
+                          "example": "EFB.001158"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "example": 3005
+                        },
+                        "benefice": {
+                          "type": "number",
+                          "example": 3005
+                        },
+                        "commission": {
+                          "type": "number",
+                          "example": 0
+                        },
+                        "destination": {
+                          "type": "string",
+                          "example": "0777321219"
+                        },
+                        "fee": {
+                          "type": "number",
+                          "example": 0
+                        },
+                        "error": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "service_id": {
+                          "type": "number",
+                          "example": 10
+                        },
+                        "customer_name": {
+                          "type": "string",
+                          "example": "easytransfert"
+                        },
+                        "state": {
+                          "type": "string",
+                          "example": "FAILED"
+                        },
+                        "custom_data": {
+                          "type": "string",
+                          "example": "custom_data"
+                        },
+                        "ipn_url": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "provider_id": {
+                          "type": "null",
+                          "example": null
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "example": "2022-09-27T07:07:47.000+00:00"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "example": "2022-09-27T07:07:47.000+00:00"
+                        },
+                        "p_last_wallet_amount": {
+                          "type": "number",
+                          "example": null
+                        },
+                        "p_new_wallet_amount": {
+                          "type": "null",
+                          "example": null
+                        },
+                        "p_id": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "hash": {
+                          "type": "string",
+                          "example": null
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "statut_code": {
+                      "type": "number",
+                      "example": 200
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 	}
 }
