@@ -1,11 +1,11 @@
 ---
-title: 'Obtenir le statut d\'une transaction'
-openapi: 'POST /status'
+title: "Récupérer le status d'une transaction"
 ---
 
 Cette page documente l'opération pour obtenir le statut d'une transaction.
 
 Description:
+
 - Endpoint: POST `/status` (base URL défini dans la collection Postman)
 - Utilisation: récupère le statut actuel d'une transaction via son ID.
 
@@ -13,12 +13,13 @@ Exemple de requête (JSON):
 
 ```json
 {
-  "api_key": "votre_cle_api",
+  "api_key": "xxxxxxxxxxxxxxxx",
   "transaction_id": "EFB.001158"
 }
 ```
 
 Notes:
+
 - `transaction_id` est retourné lors de l'initiation de la transaction.
 - ⚠️ **Attention:** À utiliser avec parcimonie. Un abus de ces requêtes peut entraîner un blocage par le système.
 - La confirmation finale des transactions arrive normalement via l'IPN (webhook), il n'est pas nécessaire d'interroger le statut en continu.
