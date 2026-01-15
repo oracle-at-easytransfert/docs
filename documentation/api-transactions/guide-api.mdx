@@ -1,0 +1,225 @@
+---
+title: "Guide API"
+description: "Référence complète pour utiliser l'API EASYTRANSFERT BUSINESS : endpoints, requêtes, transactions et réponses"
+icon: code
+---
+
+## URL de base et endpoints
+
+### Base URL
+
+```
+http://proxy-airtime.easytransfert.app/api_v1/transaction
+```
+
+### Endpoints disponibles
+
+| Endpoint | Méthode | Description |
+|----------|---------|-------------|
+| `/airtime` | POST | Initier une transaction Cashin ou Cashout |
+| `/status` | POST | Consulter le statut d'une transaction |
+
+<Info>
+  Utilisez la variable `{{base_url}}` dans Testeur d'API pour faciliter la configuration.
+</Info>
+
+## Structure des requêtes
+
+### Headers requis
+
+| Header | Valeur |
+|--------|--------|
+| `Content-Type` | `application/json` |
+| `Accept` | `application/json` (recommandé) |
+
+<Warning>
+  La clé API est passée dans le body JSON, pas dans les headers.
+</Warning>
+
+### Paramètres communs
+
+| Paramètre | Type | Obligatoire | Description |
+|-----------|------|-------------|-------------|
+| `api_key` | string | Oui | Clé API EASYTRANSFERT |
+| `amount` | int | Oui | Montant en FCFA (multiple de 100) |
+| `destination` | string | Oui | Numéro au format local sans indicatif (ex: 0103444777) |
+| `service_id` | int | Oui | Identifiant du service selon opérateur et type |
+| `ipn_url` | string | Oui | URL pour recevoir la notification IPN |
+| `custom_data` | string | Non | Données personnalisées pour traçabilité |
+| `om_otp` | string | Conditionnel | Code OTP pour Orange Money Cashout uniquement |
+
+## Types de transactions
+
+### Cashin (Ajout d'argent)
+
+**Principe :** Ajouter de l'argent sur le wallet Mobile Money du bénéficiaire depuis votre compte partenaire.
+
+**Prérequis :** Votre compte partenaire doit avoir suffisamment de fonds.
+
+**Service ID (exemples) :**
+- MTN CI : `24`
+- Orange CI : `26`
+- Moov CI : `12`
+- Wave CI : `16`
+
+### Cashout (Retrait d'argent)
+
+**Principe :** Retirer de l'argent depuis le wallet Mobile Money du client vers votre compte partenaire.
+
+**Prérequis :** Le wallet du client doit avoir suffisamment de fonds.
+
+**Service ID (exemples) :**
+- MTN CI : `25`
+- Orange CI : `27` (OTP requis)
+- Moov CI : `13`
+- Wave CI : `17`
+
+<Warning>
+  Orange Money Cashout nécessite le paramètre `om_otp`. Le client doit composer `#144*82#` (CI) ou `#144#391#` (SN) pour obtenir le code.
+</Warning>
+
+## Exemple de requête
+
+```json
+{
+    "amount": 1000,
+    "api_key": "{{api_key}}",
+    "destination": "0670123456",
+    "service_id": 24,
+    "ipn_url": "{{ipn_url}}",
+    "custom_data": "ref_123"
+}
+```
+
+## Structure des réponses
+
+### Format standard
+
+```json
+{
+    "status": "success|error",
+    "message": "Message descriptif",
+    "data": { ... }
+}
+```
+
+### Réponse /airtime (succès)
+
+```json
+{
+    "status": "success",
+    "message": "Transaction initiée avec succès",
+    "data": {
+        "transaction_id": "EFB.144358",
+        "amount": 1000,
+        "destination": "0500156008",
+        "state": "PENDING",
+        "custom_data": "ref_123"
+    }
+}
+```
+
+<Warning>
+  La réponse immédiate indique que la requête a été acceptée, mais ne confirme pas le succès final. La confirmation arrive via IPN.
+</Warning>
+
+### Réponse /status
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `transaction_id` | string | Identifiant unique |
+| `state` | string | SUCCESS, FAILED, PENDING, CANCELLED |
+| `reponse` | string | Message de confirmation (si succès) |
+| `error` | string | Message d'erreur (si échec) |
+| `amount` | int | Montant de la transaction |
+| `custom_data` | string | Données personnalisées |
+
+## Codes HTTP
+
+| Code | Signification |
+|------|---------------|
+| **200** | Requête traitée correctement |
+| **400** | Paramètres manquants ou invalides |
+| **401** | Clé API invalide ou manquante |
+| **403** | Accès refusé, limite dépassée |
+| **404** | Transaction ID inexistant |
+| **429** | Trop de requêtes (rate limiting) |
+| **500** | Erreur serveur |
+
+## Suivi de statut
+
+### Endpoint /status
+
+Utilisez cet endpoint uniquement pour des vérifications ponctuelles. La méthode recommandée pour connaître le statut final est l'IPN.
+
+**Requête :**
+```json
+{
+    "api_key": "{{api_key}}",
+    "transaction_id": "EFB.001158"
+}
+```
+
+<Warning>
+  Limitez l'utilisation de `/status`. L'abus peut entraîner un blocage temporaire. Privilégiez l'IPN pour les confirmations finales.
+</Warning>
+
+## Validation et contraintes
+
+### Montant (amount)
+- Doit être un entier positif
+- **Multiple de 100** (ex: 500, 1000, 1500)
+- Respecter les plafonds (min: 500, max: 500 000)
+
+### Destination
+- Format local **sans indicatif international**
+- Doit correspondre à l'opérateur du service_id
+- Format recommandé : 10 chiffres pour la Côte d'Ivoire
+
+### IPN URL
+- **Obligatoire** pour recevoir la confirmation finale
+- Doit être accessible publiquement
+- HTTPS recommandé en production
+- Doit répondre rapidement avec HTTP 200
+
+## Limitations techniques
+
+### Idempotence
+
+<Warning>
+  Aucun mécanisme d'idempotence n'est documenté contractuellement. KAYBIC AFRICA peut suspendre l'accès en cas d'usage abusif.
+</Warning>
+
+**Recommandations :**
+- Utiliser `custom_data` avec un identifiant unique
+- Vérifier l'état d'une transaction avant de la réémettre
+- Implémenter un mécanisme de verrouillage côté client
+
+### Caractères spéciaux
+
+<Warning>
+  Aucune mention contractuelle sur la gestion des caractères spéciaux dans `custom_data`.
+</Warning>
+
+**Recommandation :** Utiliser des caractères alphanumériques et tirets/underscores. Encoder en UTF-8.
+
+### Limites de taille
+
+<Warning>
+  Aucune information contractuelle sur les limites de taille des champs.
+</Warning>
+
+Pour connaître les limites exactes, testez avec une clé API de test ou contactez le support.
+
+## Bonnes pratiques
+
+- **Variables Testeur d'API** : Utiliser `base_url`, `api_key`, `service_id_*` pour faciliter la configuration
+- **Privilégier IPN** : L'IPN est la source de vérité pour le statut final
+- **Limiter /status** : Utiliser uniquement en cas de non-réception d'IPN
+- **Valider avant envoi** : Vérifier montant, numéro, service_id avant l'envoi
+- **Éviter les doublons** : Implémenter une logique pour éviter les transactions en double
+- **Ne pas hardcoder** : Ne jamais stocker la clé API en dur dans le code
+
+<Tip>
+  Consultez la page [Services](/documentation/services) pour la liste complète des service_id par opérateur et pays.
+</Tip>

@@ -1,10 +1,10 @@
 ---
 title: "Environnements"
-description: "Gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS v1"
+description: "Gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS"
 icon: server
 ---
 
-Cette section décrit la gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS v1, en s'appuyant sur l'implémentation réelle fournie via la collection et l'environnement Testeur d'API.
+Cette section décrit la gestion des environnements pour l'intégration de l'API EASYTRANSFERT BUSINESS, en s'appuyant sur l'implémentation réelle fournie via la collection et l'environnement Testeur d'API.
 
 ## Environnement actif
 
@@ -24,25 +24,13 @@ http://proxy-airtime.easytransfert.app/api_v1/transaction
   La différenciation des usages (test ou production) repose sur la clé API (api_key) fournie par EASYTRANSFERT et sur les droits qui lui sont associés.
 </Info>
 
-## Environnement Sandbox (stand-by)
+## Tests et production
 
-Un environnement Sandbox est prévu dans la stratégie de l'API EASYTRANSFERT, mais il est actuellement en stand-by.
-
-**Cela signifie que :**
-
-- aucun endpoint sandbox distinct n'est exposé
-- aucune URL spécifique sandbox n'est fournie à ce stade
-- les tests sont effectués sur l'environnement actif à l'aide de clés dédiées
+Les tests et les transactions en production utilisent le même environnement. La différenciation se fait uniquement via les clés API.
 
 <Warning>
   Il est fortement déconseillé d'effectuer des tests non contrôlés avec une clé API de production.
 </Warning>
-
-**Lorsque l'environnement Sandbox sera activé :**
-
-- une URL dédiée sera communiquée
-- des clés API spécifiques sandbox seront fournies
-- les règles de plafonds et de simulation seront documentées
 
 ## Gestion des environnements via les clés API
 
@@ -77,9 +65,9 @@ La gestion des environnements repose sur le mécanisme suivant :
 
 - Utiliser des fichiers de configuration (.env, variables système)
 - Ne jamais stocker la clé API en dur dans le code
-- Séparer clairement :
-  - environnement de développement
-  - environnement de production
+- Séparer clairement les clés API :
+  - clé API pour les tests
+  - clé API pour la production
 
 ## Bonnes pratiques
 
@@ -102,5 +90,5 @@ La gestion des environnements repose sur le mécanisme suivant :
 </CardGroup>
 
 <Tip>
-  La séparation claire entre environnement de test et production est essentielle pour éviter les erreurs coûteuses.
+  La séparation claire entre les clés API de test et de production est essentielle pour éviter les erreurs coûteuses.
 </Tip>

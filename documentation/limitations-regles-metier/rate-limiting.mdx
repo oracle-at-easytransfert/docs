@@ -4,66 +4,48 @@ description: "Comprendre les limitations du nombre de requêtes et comment les r
 icon: tachometer-alt
 ---
 
-L'API EASYTRANSFERT BUSINESS v1 impose un contrôle du nombre de requêtes pour protéger les services et assurer la qualité du service pour tous les utilisateurs.
+L'API EASYTRANSFERT BUSINESS impose un contrôle du nombre de requêtes pour protéger les services et assurer la qualité du service pour tous les utilisateurs.
 
-## Principes
+## Limite de taux
 
-<CardGroup cols={2}>
-  <Card title="Quota par clé API" icon="key">
-    Chaque clé API dispose d'un quota limité de requêtes par minute/heure. Ce quota peut varier selon le type de service ou l'environnement (Sandbox vs Production).
-  </Card>
-  <Card title="Endpoints sensibles" icon="exclamation-triangle" color="#dc2626">
-    Le endpoint /status est particulièrement sensible : les appels fréquents peuvent être considérés comme abusifs. Les confirmations finales des transactions doivent provenir du webhook IPN, et non d'interrogations répétées.
-  </Card>
-  <Card title="Feedback en cas de dépassement" icon="ban">
-    Si vous dépassez le rate limit, l'API renvoie un code HTTP 429 Too Many Requests. Le message de réponse indique le temps d'attente avant de pouvoir réessayer.
-  </Card>
-</CardGroup>
+| Aspect | Description |
+|--------|-------------|
+| **Rate limit** | **15 minutes par appel** : Un délai minimum de 15 minutes est requis entre chaque appel API |
+| **Quota par clé API** | Chaque clé API doit respecter cette limite. Cette restriction s'applique à tous les endpoints |
+| **Endpoints sensibles** | Le endpoint `/status` est particulièrement sensible : les appels fréquents peuvent être considérés comme abusifs. Les confirmations finales doivent provenir du webhook IPN |
+| **Feedback en cas de dépassement** | Si vous dépassez le rate limit, l'API renvoie un code HTTP **429 Too Many Requests**. Le message indique le temps d'attente avant de pouvoir réessayer |
 
 ## Conséquences d'un dépassement
 
 | Situation | Effet |
 |-----------|-------|
-| Appels répétés au endpoint /status | Blocage temporaire de la clé API |
+| Appels répétés au endpoint `/status` | Blocage temporaire de la clé API |
 | Volume élevé d'appels simultanés | Retard dans le traitement des transactions, erreurs possibles |
 | Ignorer les webhooks IPN | Risque de surcharge côté serveur et rejet des requêtes |
+| Dépassement répété | Suspension temporaire ou permanente de l'accès à l'API |
 
 <Warning>
-  **Important :** la surveillance des transactions doit se faire via IPN autant que possible.
+  **Important :** La surveillance des transactions doit se faire via IPN autant que possible. L'endpoint `/status` doit être utilisé uniquement en cas de non-réception d'IPN.
 </Warning>
-
-## Bonnes pratiques pour limiter les requêtes
-
-<CardGroup cols={2}>
-  <Card title="Privilégier le webhook IPN" icon="webhook" color="#1d60d5">
-    Configurez correctement l'URL IPN (ipn_url) pour recevoir les notifications de SUCCESS ou FAILED. L'IPN est la méthode principale pour suivre l'état des transactions en temps réel.
-  </Card>
-  <Card title="Limiter les appels au endpoint /status" icon="ban">
-    N'interrogez le statut que si nécessaire (ex : pour debug ou transaction critique). Évitez les boucles ou scripts qui font des requêtes répétées à haute fréquence.
-  </Card>
-  <Card title="Gérer les erreurs 429" icon="clock">
-    En cas de dépassement, implémentez une attente progressive avant de réessayer (retry-after indiqué dans la réponse HTTP).
-  </Card>
-  <Card title="Surveillance côté client" icon="chart-line">
-    Maintenez un compteur interne de requêtes par clé API pour éviter de dépasser les limites. Priorisez les transactions critiques ou importantes.
-  </Card>
-</CardGroup>
 
 ## Exemple pratique
 
 <Steps>
-  <Step title="Initier des transactions">
-    Vous initiez 10 transactions par minute.
+  <Step title="Initier une transaction">
+    Vous initiez une transaction via l'endpoint `/airtime`.
+  </Step>
+  <Step title="Attendre 15 minutes">
+    Vous attendez **15 minutes minimum** avant de faire un nouvel appel API.
   </Step>
   <Step title="Recevoir les IPN">
-    Le webhook IPN vous notifie automatiquement des SUCCESS ou FAILED.
+    Le webhook IPN vous notifie automatiquement des SUCCESS ou FAILED sans compter dans le rate limit.
   </Step>
   <Step title="Utiliser /status avec parcimonie">
-    Vous n'interrogez /status qu'en cas de doute ou de problème technique.
+    Vous n'interrogez `/status` qu'en cas de doute ou de problème technique, en respectant le délai de 15 minutes.
   </Step>
 </Steps>
 
-**Résultat :** respect du rate limit, pas de blocage, et suivi des transactions fiable.
+**Résultat :** respect du rate limit de 15 minutes par appel, pas de blocage, et suivi des transactions fiable.
 
 <Tip>
   La meilleure pratique est de toujours utiliser l'IPN pour le suivi des transactions et de réserver l'endpoint /status uniquement pour des cas exceptionnels.

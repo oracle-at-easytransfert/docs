@@ -1,0 +1,91 @@
+---
+title: "Comptes Business"
+description: "Gestion du compte business, solde, rapprochement et facturation"
+icon: wallet
+---
+
+Gestion du compte business partenaire : suivi du solde, rapprochement comptable et facturation.
+
+## Prévision de solde
+
+| Aspect | Description |
+|--------|-------------|
+| **Dashboard** | Dashboard "Dash Easytransfert partenaire" disponible pour suivre le solde |
+| **Endpoints API** | **GET STATUS** : état d'une transaction • **GET BALANCE** : solde du compte business |
+
+<Info>
+  Pour les détails techniques des endpoints, consultez la documentation API de référence ou contactez le support.
+</Info>
+
+## Rapprochement comptable
+
+<Warning>
+  Les formats d'export pour le rapprochement comptable ne sont pas précisés dans la documentation contractuelle.
+</Warning>
+
+Le dashboard "Dash Easytransfert partenaire" permet le suivi des transactions. Pour les formats d'export spécifiques, contactez le support KAYBIC AFRICA.
+
+## Reporting financier
+
+| Aspect | Description |
+|--------|-------------|
+| **Dashboard** | Dashboard "Dash Easytransfert partenaire" disponible |
+| **Fonctionnalités** | Permet le suivi des transactions |
+
+<Tip>
+  Utilisez le champ `custom_data` et conservez les `transaction_id` pour faciliter le rapprochement avec vos systèmes comptables internes.
+</Tip>
+
+## Gestion de trésorerie
+
+### Rechargement du compte
+
+Le rechargement se fait par **virement bancaire** vers le compte désigné par KAYBIC AFRICA. Une **preuve de virement** (capture de confirmation) est requise.
+
+<Steps>
+  <Step title="Effectuer le virement">
+    Effectuer le virement bancaire vers le compte désigné par KAYBIC AFRICA.
+  </Step>
+  <Step title="Capturer la confirmation">
+    Capturer la confirmation de virement (screenshot ou document PDF).
+  </Step>
+  <Step title="Envoyer la preuve">
+    Envoyer la preuve de virement au support KAYBIC AFRICA via les canaux dédiés (email, groupe WhatsApp).
+  </Step>
+  <Step title="Validation">
+    Attendre la validation et le crédit du compte business.
+  </Step>
+</Steps>
+
+<Warning>
+  Sans preuve de virement, le rechargement ne peut pas être validé. Assurez-vous de conserver et transmettre la confirmation.
+</Warning>
+
+## Facturation
+
+Les modalités de facturation sont décrites dans la documentation de référence. Pour les détails complets (périodicité, format, modalités de paiement), consultez votre contrat ou contactez le support commercial.
+
+## Plafonds de compte
+
+Il n'existe pas de plafond spécifique au niveau du compte business, en dehors des plafonds par transaction définis pour chaque opérateur et type d'opération. Consultez votre contrat ou contactez le support pour connaître les plafonds applicables.
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Surveiller le solde" icon="eye" color="#1d60d5">
+    Surveiller régulièrement le solde du compte business via le dashboard ou l'endpoint GET BALANCE pour éviter les rejets de transactions.
+  </Card>
+  <Card title="Anticiper les rechargements" icon="calendar-alt" color="#f59e0b">
+    Anticiper les rechargements en fonction de votre volume de transactions prévu pour éviter les interruptions de service.
+  </Card>
+  <Card title="Conserver les preuves" icon="archive" color="#16a34a">
+    Conserver toutes les preuves de virement pour le rapprochement comptable et en cas de litige.
+  </Card>
+  <Card title="Utiliser custom_data" icon="link" color="#1d60d5">
+    Utiliser le champ custom_data pour faciliter le rapprochement entre vos transactions et votre comptabilité interne.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Configurez des alertes automatiques lorsque le solde approche d'un seuil minimum pour éviter les interruptions de service dues à un solde insuffisant.
+</Tip>

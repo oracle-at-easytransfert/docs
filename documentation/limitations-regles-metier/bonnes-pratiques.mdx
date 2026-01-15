@@ -6,64 +6,37 @@ icon: check-double
 
 Cette section résume les règles métier transversales et les pratiques recommandées pour garantir la fiabilité des transactions.
 
-## Principes
+## Principes généraux
 
-<CardGroup cols={2}>
-  <Card title="Automatisation intelligente" icon="cog" color="#1d60d5">
-    Préférez l'automatisation via API tout en respectant le rate limit et les restrictions géographiques.
-  </Card>
-  <Card title="Sécurité" icon="shield" color="#16a34a">
-    Ne partagez jamais vos clés API. Utilisez HTTPS pour toutes les requêtes.
-  </Card>
-  <Card title="Gestion des erreurs" icon="exclamation-triangle" color="#dc2626">
-    Implémentez un suivi systématique des transactions FAILED et des codes HTTP (429, 400, 500).
-  </Card>
-  <Card title="Surveillance et reporting" icon="chart-line">
-    Centralisez les logs des transactions et des IPN pour audit et suivi. Conservez les informations de transaction_id, custom_data, et state.
-  </Card>
-</CardGroup>
+| Principe | Description |
+|----------|-------------|
+| **Automatisation intelligente** | Préférez l'automatisation via API tout en respectant le rate limit (15 minutes par appel) |
+| **Sécurité** | Ne partagez jamais vos clés API. Utilisez HTTPS pour toutes les requêtes. Stockez les clés de manière sécurisée |
+| **Gestion des erreurs** | Implémentez un suivi systématique des transactions FAILED et des codes HTTP (429, 400, 500) |
+| **Surveillance et reporting** | Centralisez les logs des transactions et des IPN pour audit et suivi. Conservez les informations de `transaction_id`, `custom_data`, et `state` |
 
 ## Bonnes pratiques concrètes
 
 ### 1. Webhook IPN obligatoire
 
-<Card title="IPN = source de vérité" icon="webhook" color="#1d60d5">
-  Ne comptez pas uniquement sur les réponses immédiates de l'API. L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
-</Card>
+**IPN = source de vérité** : Ne comptez pas uniquement sur les réponses immédiates de l'API. L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
 
 ### 2. Validation côté client
 
-<CardGroup cols={2}>
-  <Card title="Numéro valide" icon="phone">
-    Numéro du bénéficiaire valide
-  </Card>
-  <Card title="Montant dans les limites" icon="chart-line">
-    Montant dans les limites
-  </Card>
-  <Card title="Service ID correct" icon="cog">
-    Service ID correct
-  </Card>
-  <Card title="Devise = FCFA" icon="money-bill">
-    Devise = FCFA
-  </Card>
-</CardGroup>
+Avant d'envoyer une transaction, vérifiez :
+- **Numéro valide** : Numéro du bénéficiaire valide et conforme à l'opérateur
+- **Montant dans les limites** : Montant respectant les plafonds (min: 500, max: 500 000 FCFA) et multiple de 100
+- **Service ID correct** : `service_id` correspondant à l'opérateur et au type d'opération (Cashin/Cashout)
+- **Devise = FCFA** : Toutes les transactions doivent être en FCFA
 
 ### 3. Gestion des limites et plafonds
 
-<CardGroup cols={2}>
-  <Card title="Fractionner les transactions" icon="cut">
-    Implémentez une logique interne pour fractionner les transactions si nécessaire.
-  </Card>
-  <Card title="Respecter les restrictions" icon="hand-raised">
-    Respectez les restrictions géographiques et les limites par type de transaction.
-  </Card>
-</CardGroup>
+- **Fractionner les transactions** : Implémentez une logique interne pour fractionner les transactions si nécessaire
+- **Respecter les restrictions** : Respectez les restrictions géographiques et les limites par type de transaction
 
 ### 4. Retry & backoff
 
-<Card title="Attente progressive" icon="clock">
-  Pour les erreurs temporaires (429 Too Many Requests, 500 Internal Server Error), utilisez une attente progressive avant de réessayer.
-</Card>
+Pour les erreurs temporaires (429 Too Many Requests, 500 Internal Server Error), utilisez une attente progressive avant de réessayer. Ne jamais réessayer automatiquement pour les erreurs métier (solde insuffisant, montant invalide, etc.).
 
 ## Résumé pratique
 
@@ -81,7 +54,7 @@ Cette section résume les règles métier transversales et les pratiques recomma
   </Accordion>
   
   <Accordion title="Respecter les limites" icon="hand-raised">
-    Respecter le rate limit et les restrictions géographiques.
+    Respecter le rate limit (15 minutes par appel) et les règles métier applicables.
   </Accordion>
   
   <Accordion title="Conserver un historique" icon="file-alt">

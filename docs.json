@@ -23,8 +23,7 @@
             "group": "Introduction",
             "pages": [
               "documentation/introduction/presentation-api",
-              "documentation/introduction/cas-usage",
-              "documentation/introduction/versionnement"
+              "documentation/introduction/cas-usage"
             ]
           },
           {
@@ -34,7 +33,8 @@
               "documentation/demarrage-rapide/preparation-environnement",
               "documentation/demarrage-rapide/initier-transaction",
               "documentation/demarrage-rapide/reception-ipn",
-              "documentation/demarrage-rapide/verifier-statut"
+              "documentation/demarrage-rapide/verifier-statut",
+              "documentation/demarrage-rapide/checklist-pre-production"
             ]
           },
           {
@@ -42,6 +42,7 @@
             "pages": [
               "documentation/prerequis-techniques/connaissances-requises",
               "documentation/prerequis-techniques/environnements",
+              "documentation/prerequis-techniques/monitoring-secrets",
               "documentation/prerequis-techniques/outils-recommandes"
             ]
           },
@@ -54,29 +55,9 @@
             ]
           },
           {
-            "group": "Convention et structure API",
+            "group": "API et Transactions",
             "pages": [
-              "documentation/convention-structure-api/url-base",
-              "documentation/convention-structure-api/requetes",
-              "documentation/convention-structure-api/reponses"
-            ]
-          },
-          {
-            "group": "Transactions & Transferts",
-            "pages": [
-              "documentation/transactions-transferts/cashin",
-              "documentation/transactions-transferts/cashout",
-              "documentation/transactions-transferts/suivi-statut",
-              "documentation/transactions-transferts/etats-possibles"
-            ]
-          },
-          {
-            "group": "Webhooks & Notifications",
-            "pages": [
-              "documentation/webhooks-notifications/presentation",
-              "documentation/webhooks-notifications/configuration",
-              "documentation/webhooks-notifications/securisation",
-              "documentation/webhooks-notifications/evenements-supportes"
+              "documentation/api-transactions/guide-api"
             ]
           },
           {
@@ -92,9 +73,6 @@
             "group": "Limitations & Règles métier",
             "pages": [
               "documentation/limitations-regles-metier/rate-limiting",
-              "documentation/limitations-regles-metier/plafonds",
-              "documentation/limitations-regles-metier/restrictions-geographiques",
-              "documentation/limitations-regles-metier/restrictions-transactions",
               "documentation/limitations-regles-metier/bonnes-pratiques"
             ]
           },
@@ -102,7 +80,11 @@
             "group": "Annexes",
             "pages": [
               "documentation/annexes/glossaire-variables-testeur-api",
-              "documentation/annexes/support-contact",
+              "documentation/annexes/support-disponibilite",
+              "documentation/annexes/tarification-conditions-financieres",
+              "documentation/annexes/kyc-conformite",
+              "documentation/annexes/comptes-business",
+              "documentation/annexes/gestion-plaintes",
               "documentation/dictionnaire",
               "documentation/services"
             ]
@@ -120,10 +102,6 @@
             "pages": [
               "api-reference/endpoint/transaction"
             ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": []
           }
         ]
       }

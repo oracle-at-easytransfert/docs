@@ -4,13 +4,13 @@ description: "Référence complète des variables d'environnement Testeur d'API 
 icon: list-alt
 ---
 
-Ce glossaire détaille toutes les variables d'environnement Testeur d'API utilisées avec l'API EASYTRANSFERT BUSINESS v1.
+Ce glossaire détaille toutes les variables d'environnement Testeur d'API utilisées avec l'API EASYTRANSFERT BUSINESS.
 
 ## Variables principales
 
 | Variable | Valeur par défaut | Type | Description détaillée | Notes importantes |
 |----------|-------------------|------|----------------------|-------------------|
-| `base_url` | `http://proxy-airtime.easytransfert.app/api_v1/transaction` | string | URL de base de l'API EASYTRANSFERT Business pour toutes les requêtes de transactions et de statut. | Toute requête doit être préfixée par cette URL. En sandbox, cette URL reste la même que prod. |
+| `base_url` | `http://proxy-airtime.easytransfert.app/api_v1/transaction` | string | URL de base de l'API EASYTRANSFERT Business pour toutes les requêtes de transactions et de statut. | Toute requête doit être préfixée par cette URL. |
 | `api_key` | `votre_cle_api_ici` | secret | Clé API fournie par EASYTRANSFERT pour authentifier vos requêtes. | À ne jamais exposer dans le code public. Pour production, générer une clé sécurisée via le portail EASYTRANSFERT. |
 | `transaction_id` | `EFB.001158` (vide par défaut) | string | Identifiant unique d'une transaction généré par EASYTRANSFERT après la création d'une transaction. | Cette valeur est automatiquement mise à jour après l'appel "Initier Transaction" via les scripts Testeur d'API. |
 | `ipn_url` | `http://votre-site.com/webhook/easytransfert` | string | URL de callback (webhook) où EASYTRANSFERT enverra les notifications de statut des transactions (IPN). | Doit être une URL accessible publiquement et sécurisée (HTTPS recommandé). L'IPN envoie l'état final "SUCCESS" ou "FAILED". |
@@ -80,5 +80,5 @@ Toutes ces variables peuvent être utilisées dans les requêtes en utilisant la
 </CardGroup>
 
 <Tip>
-  Utilisez les variables Testeur d'API pour faciliter le basculement entre les environnements Sandbox et Production sans modifier le code de vos requêtes.
+  Utilisez les variables Testeur d'API pour faciliter le changement de clé API sans modifier le code de vos requêtes.
 </Tip>

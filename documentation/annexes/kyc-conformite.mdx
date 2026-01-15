@@ -1,0 +1,80 @@
+---
+title: "KYC et conformité"
+description: "Obligations KYC et traçabilité réglementaire"
+icon: user-shield
+---
+
+Les obligations KYC (Know Your Customer) et de conformité réglementaire s'appliquent aux parties contractantes.
+
+## Obligations KYC
+
+### Procédures de vigilance
+
+<CardGroup cols={2}>
+  <Card title="Procédures de vigilance" icon="clipboard-check" color="#1d60d5">
+    Mise en œuvre de procédures de vigilance à l'égard des clients pour garantir la conformité réglementaire.
+  </Card>
+  <Card title="Listes de surveillance" icon="search" color="#dc2626">
+    Vérification des clients sur les listes de surveillance officielles pour détecter les risques de blanchiment ou de financement du terrorisme.
+  </Card>
+</CardGroup>
+
+### Documents requis
+
+Les parties doivent obtenir et conserver :
+- **Pièce d'identité valide** : document officiel permettant d'identifier le client
+- **Justificatif de domicile** : document prouvant l'adresse du client
+
+<Warning>
+  Ces documents doivent être conservés conformément aux obligations réglementaires et être mis à disposition en cas de contrôle par les autorités compétentes.
+</Warning>
+
+## Traçabilité réglementaire
+
+### Conservation des dossiers
+
+<CardGroup cols={2}>
+  <Card title="Durée de conservation" icon="archive" color="#1d60d5">
+    Conservation des dossiers de transactions pendant **dix (10) ans** à compter de la date de la transaction.
+  </Card>
+  <Card title="Mise à disposition" icon="file-export" color="#16a34a">
+    Mise à disposition en cas de contrôle par les autorités compétentes (banques centrales, autorités de supervision).
+  </Card>
+</CardGroup>
+
+### Contenu des dossiers
+
+Les dossiers doivent contenir : `transaction_id`, `custom_data`, montant (FCFA), date/heure, statut (SUCCESS/FAILED), informations bénéficiaire, service utilisé, documents KYC.
+
+<Warning>
+  La conservation des dossiers de transactions pendant 10 ans est une obligation contractuelle et réglementaire. Le non-respect peut entraîner des sanctions.
+</Warning>
+
+## Gestion multi-tenant
+
+<Info>
+  Le contrat ne décrit pas de mécanisme multi-tenant. Aucune disposition ne permet de gérer plusieurs entités juridiques sous une seule intégration.
+</Info>
+
+**Recommandation :** Utiliser des clés API distinctes pour chaque entité et conserver les dossiers de transactions séparément.
+
+## Bonnes pratiques
+
+<CardGroup cols={2}>
+  <Card title="Centraliser les logs" icon="database" color="#1d60d5">
+    Mettre en place un système centralisé de logs et de stockage pour faciliter la conservation et la recherche des transactions.
+  </Card>
+  <Card title="Automatiser la conservation" icon="cog" color="#16a34a">
+    Automatiser la conservation des dossiers avec des sauvegardes régulières et un système de rétention configuré pour 10 ans minimum.
+  </Card>
+  <Card title="Sécuriser les données" icon="lock" color="#16a34a">
+    Sécuriser les données KYC et les dossiers de transactions conformément aux obligations de protection des données personnelles.
+  </Card>
+  <Card title="Préparer les audits" icon="file-check" color="#1d60d5">
+    Préparer un processus d'audit interne pour faciliter la mise à disposition des dossiers en cas de contrôle.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Utilisez le champ `custom_data` pour associer vos références internes aux transactions et faciliter le rapprochement et la traçabilité.
+</Tip>
