@@ -1,11 +1,12 @@
 ---
-title: 'Réponses Webhook (IPN)'
-openapi: 'POST /votre_url_webhook'
+title: "Réponses Webhook (IPN)"
+openapi: "POST /votre_url_webhook"
 ---
 
 Cette page documente les notifications IPN (Instant Payment Notification) que vous recevrez sur votre webhook.
 
 Description:
+
 - Type: Webhook (callback POST)
 - Utilisation: EASYTRANSFERT envoie automatiquement les mises à jour de statut de transaction à l'URL IPN que vous avez configurée.
 
@@ -85,4 +86,4 @@ Description:
 - Les webhooks arrivent généralement dans les secondes suivant le traitement de la transaction.
 - Utilisez le champ `custom_data` pour réconcilier les transactions avec vos données internes.
 
-Vous trouverez comment configurer votre webhook dans la [documentation des webhooks](/guides/webhooks/introduction)
+Il n'existe pas de méthode spécifique pour configurer les webhooks, l'IPN est transféré directement dans [la requête pendant l'initialisation de la transaction](/api-reference/endpoint/transaction).
