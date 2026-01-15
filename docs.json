@@ -76,7 +76,7 @@
             "group": "Transactions",
             "pages": [
               "api-reference/endpoint/transaction",
-              "api-reference/endpoint/transactions-status",
+              "api-reference/endpoint/transaction-status",
               "api-reference/endpoint/webhook-response",
               "api-reference/endpoint/balance"
             ]
