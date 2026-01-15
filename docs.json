@@ -57,7 +57,8 @@
           {
             "group": "API et Transactions",
             "pages": [
-              "documentation/api-transactions/guide-api"
+              "documentation/api-transactions/structure-api",
+              "documentation/api-transactions/transactions"
             ]
           },
           {

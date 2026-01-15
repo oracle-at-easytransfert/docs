@@ -4,7 +4,7 @@ description: "Guide complet pour gérer efficacement les erreurs dans votre int�
 icon: check-double
 ---
 
-La gestion des erreurs dans l'API EASYTRANSFERT BUSINESS est cruciale pour garantir la fiabilité des transactions et éviter des doublons ou des échecs inattendus.
+La gestion des erreurs dans l'API EASYTRANSFERT BUSINESS est cruciale pour garantir la fiabilité des transactions et éviter des échecs inattendus.
 
 ## 1. Toujours vérifier le code HTTP
 
@@ -85,7 +85,7 @@ Avant d'envoyer une transaction :
 
 <CardGroup cols={2}>
   <Card title="Traitement unique" icon="fingerprint">
-    Traiter chaque IPN exactement une seule fois pour éviter les doublons.
+    Traiter chaque IPN exactement une seule fois.
   </Card>
   <Card title="Confirmer la réception" icon="check-circle" color="#16a34a">
     Confirmer la réception à EASYTRANSFERT avec HTTP 200 pour que le webhook ne soit pas renvoyé.
