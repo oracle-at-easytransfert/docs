@@ -18,6 +18,9 @@ Cette section définit les limites financières pour chaque type de transaction 
   <Card title="Unité de transaction" icon="money-bill">
     Toutes les transactions doivent être exprimées en FCFA (Franc CFA).
   </Card>
+  <Card title="Multiple de 100" icon="calculator" color="#dc2626">
+    **Important :** Le montant doit être un **multiple de 100**. Les montants comme 123, 456, 789 seront rejetés.
+  </Card>
 </CardGroup>
 
 ## Tableau des plafonds
@@ -41,7 +44,10 @@ Cette section définit les limites financières pour chaque type de transaction 
 
 <CardGroup cols={2}>
   <Card title="Valider le montant avant envoi" icon="check-circle" color="#16a34a">
-    Toujours vérifier que le montant respecte les limites du service choisi (service_id).
+    Toujours vérifier que le montant :
+    - Respecte les limites du service choisi (service_id)
+    - Est un **multiple de 100** (ex: 500, 1000, 1500)
+    - Est dans la plage autorisée (min: 500, max: 500 000)
   </Card>
   <Card title="Gérer les erreurs côté client" icon="exclamation-triangle" color="#dc2626">
     Si la transaction est rejetée pour dépassement de plafond, afficher un message clair à l'utilisateur.

@@ -21,9 +21,13 @@ Lors de l'appel à l'endpoint `POST {{base_url}}/airtime`, vous devez inclure le
 }
 ```
 
+<Warning>
+  **Important :** Le champ `ipn_url` est **obligatoire** dans la requête. Sans IPN, vous ne recevrez pas la confirmation finale de la transaction.
+</Warning>
+
 <Info>
-  - `ipn_url` : URL complète où EASYTRANSFERT enverra les notifications (doit être accessible publiquement).
-  - `custom_data` : facultatif, vous permet d'envoyer vos propres références pour identifier la transaction.
+  - `ipn_url` : URL complète où EASYTRANSFERT enverra les notifications (doit être accessible publiquement). **Obligatoire**.
+  - `custom_data` : facultatif, vous permet d'envoyer vos propres références pour identifier la transaction. Cette valeur sera retournée dans l'IPN.
 </Info>
 
 <Warning>
@@ -40,7 +44,7 @@ Votre serveur doit respecter les points suivants pour recevoir et traiter les IP
 |----------|--------|
 | **Méthode HTTP** | POST |
 | **Format** | JSON |
-| **Champs requis** | transaction_id, state, amount, custom_data |
+| **Champs reçus** | transaction_id, state, amount, benefice, commission, destination, fee, reponse, error, service_id, customer_name, custom_data, created_at, updated_at, ipn_state |
 | **Réponse** | HTTP 200 OK (pour confirmer la réception) |
 | **Sécurité** | HTTPS recommandé, validation possible avec un token ou signature |
 
@@ -116,6 +120,29 @@ Votre serveur doit respecter les points suivants pour recevoir et traiter les IP
 }
 ```
 
+## Description des champs IPN
+
+| Champ | Type | Description | Présent si |
+|-------|------|-------------|------------|
+| `transaction_id` | string | Identifiant unique de la transaction | Toujours |
+| `state` | string | État de la transaction : SUCCESS ou FAILED | Toujours |
+| `amount` | number | Montant de la transaction en FCFA | Toujours |
+| `benefice` | number | Bénéfice de la transaction | Toujours |
+| `commission` | number | Commission appliquée | Toujours |
+| `destination` | string | Numéro du bénéficiaire | Toujours |
+| `fee` | number | Frais de transaction | Toujours |
+| `reponse` | string | Message de succès | Si SUCCESS |
+| `error` | string | Message d'erreur détaillé | Si FAILED |
+| `service_id` | number | Identifiant du service utilisé | Toujours |
+| `customer_name` | string | Nom du client/partenaire | Toujours |
+| `custom_data` | string | Données personnalisées envoyées à l'initiation | Si fourni |
+| `ipn_url` | string | URL de callback utilisée | Toujours |
+| `provider_id` | number/null | Identifiant du fournisseur | Toujours |
+| `sms_link` | number | Indicateur de lien SMS | Toujours |
+| `created_at` | string | Date de création au format ISO 8601 | Toujours |
+| `updated_at` | string | Date de mise à jour au format ISO 8601 | Toujours |
+| `ipn_state` | number | État de l'IPN (0 = envoyé) | Toujours |
+
 <Tip>
-  La variable {{ipn_url}} dans votre environnement Postman permet de basculer facilement entre sandbox et production.
+  La variable {{ipn_url}} dans votre environnement Testeur d'API permet de basculer facilement entre sandbox et production.
 </Tip>

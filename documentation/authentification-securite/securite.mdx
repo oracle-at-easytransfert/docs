@@ -15,7 +15,7 @@ Toutes les requêtes doivent impérativement être envoyées via HTTPS.
   - La clé API n'est pas interceptée sur le réseau.
   - Les données sensibles des transactions (montant, destination, etc.) restent confidentielles.
 
-**Exemple de base URL sécurisée dans Postman :**
+**Exemple de base URL sécurisée dans Testeur d'API :**
 
 ```
 https://proxy-airtime.easytransfert.app/api_v1/transaction
@@ -26,14 +26,14 @@ https://proxy-airtime.easytransfert.app/api_v1/transaction
 </Card>
 
 <Info>
-  Dans la collection Postman, vous pouvez définir base_url comme variable d'environnement et la passer facilement de sandbox (test) à production.
+  Dans la collection Testeur d'API, vous pouvez définir base_url comme variable d'environnement et la passer facilement de sandbox (test) à production.
 </Info>
 
 ## Protection des clés API
 
 La clé API est sensible et doit être stockée en secret, jamais exposée côté frontend ou dans des logs accessibles publiquement.
 
-### Dans Postman
+### Dans Testeur d'API
 
 <CardGroup cols={2}>
   <Card title="Variable de type secret" icon="lock">
@@ -44,7 +44,7 @@ La clé API est sensible et doit être stockée en secret, jamais exposée côt�
   </Card>
 </CardGroup>
 
-**Exemple dans l'environnement Postman :**
+**Exemple dans l'environnement Testeur d'API :**
 
 ```json
 {
@@ -60,7 +60,7 @@ La clé API est sensible et doit être stockée en secret, jamais exposée côt�
 | Bonnes pratiques | Description |
 |------------------|-------------|
 | HTTPS obligatoire | Toutes les requêtes doivent passer par HTTPS, même en sandbox |
-| Stockage sécurisé | Variables d'environnement Postman ou gestionnaire de secrets côté serveur |
+| Stockage sécurisé | Variables d'environnement Testeur d'API ou gestionnaire de secrets côté serveur |
 | Rotation des clés | Renouveler la clé API régulièrement pour limiter l'impact d'une éventuelle compromission |
 | Ne pas exposer la clé côté frontend | Toutes les transactions doivent passer par un serveur intermédiaire pour sécuriser la clé |
 | Limiter les IP si possible | Si votre infrastructure le permet, restreindre les requêtes API à vos serveurs uniquement |
@@ -95,13 +95,13 @@ Accept: application/json
 ```
 
 <Info>
-  Dans Postman, utilisez les variables base_url, api_key, service_id_mtn_cashin et ipn_url pour faciliter la gestion des environnements.
+  Dans Testeur d'API, utilisez les variables base_url, api_key, service_id_mtn_cashin et ipn_url pour faciliter la gestion des environnements.
 </Info>
 
 **Sécurité :**
 
 - HTTPS pour le transport
-- Clé API dans Postman comme variable secret
+- Clé API dans Testeur d'API comme variable secret
 - Réception des notifications IPN via URL sécurisée (ipn_url)
 
 <Warning>
@@ -126,5 +126,5 @@ Accept: application/json
 </CardGroup>
 
 <Tip>
-  Respecter la structure Postman pour la clé et les headers garantit une intégration sécurisée.
+  Respecter la structure Testeur d'API pour la clé et les headers garantit une intégration sécurisée.
 </Tip>

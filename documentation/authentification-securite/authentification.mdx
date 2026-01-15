@@ -55,7 +55,7 @@ Content-Type: application/json
 
 - La clé API est fournie par EASYTRANSFERT
 - Elle doit être conservée de manière sécurisée
-- Dans Postman, elle est stockée comme variable d'environnement de type secret
+- Dans Testeur d'API, elle est stockée comme variable d'environnement de type secret
 - En production, elle doit être stockée dans :
   - variables d'environnement serveur
   - gestionnaires de secrets (Vault, Secret Manager, etc.)
@@ -96,4 +96,4 @@ Il n'existe aucun cycle de vie ni expiration automatique comme pour un Bearer To
 
 - Il n'existe aucun mécanisme de renouvellement automatique
 - Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
-- Les applications doivent alors mettre à jour la variable `api_key` dans l'environnement Postman ou la configuration serveur
+- Les applications doivent alors mettre à jour la variable `api_key` dans l'environnement Testeur d'API ou la configuration serveur

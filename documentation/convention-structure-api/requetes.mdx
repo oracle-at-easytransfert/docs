@@ -46,11 +46,12 @@ La section Requêtes décrit comment faire des requêtes à l'API EASYTRANSFERT 
 
 | Champ | Type | Description |
 |-------|------|-------------|
-| `amount` | Integer | Montant de la transaction en FCFA |
+| `amount` | Integer | Montant de la transaction en FCFA. **Doit être un multiple de 100** (ex: 500, 1000, 1500) |
 | `api_key` | String | Clé API EASYTRANSFERT |
-| `destination` | String | Numéro du client (format local, ex: 0670123456) |
+| `destination` | String | Numéro du client au format local **sans indicatif international** (ex: 0103444777, pas +2250103444777) |
 | `service_id` | Integer | ID du service (Cashin ou Cashout, pour MTN, Orange, Moov, Flooz) |
-| `ipn_url` | String | URL pour recevoir la notification IPN (optionnelle, mais recommandée) |
+| `ipn_url` | String | URL pour recevoir la notification IPN. **Obligatoire** pour recevoir la confirmation finale |
+| `om_otp` | String | **Conditionnel** : Uniquement pour Orange Money Cashout (service_id 23, 27, 29). Code d'autorisation obtenu via `#144*82#` (CI) ou `#144#391#` (SN) |
 | `custom_data` | String | Données personnalisées pour identifier la transaction (optionnel) |
 
 ### Exemples de services (service_id)
@@ -151,7 +152,7 @@ curl -X POST "{{base_url}}/airtime" \
   }'
 ```
 
-### Transaction Orange Cashout (retrait)
+### Transaction Orange Cashout (retrait) avec OTP
 
 ```bash
 curl -X POST "{{base_url}}/airtime" \
@@ -159,12 +160,17 @@ curl -X POST "{{base_url}}/airtime" \
   -d '{
     "amount": 2000,
     "api_key": "votre_cle_api",
-    "destination": "0501234567",
-    "service_id": 13,
+    "destination": "0701234567",
+    "service_id": 27,
     "ipn_url": "https://votre-site.com/webhook/easytransfert",
-    "custom_data": "withdrawal_789"
+    "custom_data": "withdrawal_789",
+    "om_otp": "1234"
   }'
 ```
+
+<Info>
+  Pour Orange Money Cashout, le paramètre `om_otp` est **obligatoire**. Le client doit obtenir le code d'autorisation en composant `#144*82#` (Côte d'Ivoire) ou `#144#391#` (Sénégal) sur son téléphone.
+</Info>
 
 ### Obtenir le statut d'une transaction
 
@@ -182,30 +188,38 @@ curl -X POST "{{base_url}}/status" \
 <CardGroup cols={2}>
   <Card title="Montant (amount)" icon="money-bill">
     - Doit être un entier positif
+    - **Doit être un multiple de 100** (ex: 500, 1000, 1500)
     - Exprimé en FCFA
     - Respecter les plafonds (min: 500, max: 500 000)
   </Card>
   <Card title="Destination" icon="phone">
-    - Format local sans indicatif international
-    - Exemples : 0670123456 (MTN), 0501234567 (Orange)
+    - Format local **sans indicatif international** (pas de +225)
+    - Exemples : 0103444777 (Orange CI), 0701234567 (Orange CI)
     - Doit correspondre à l'opérateur du service_id
+    - Format recommandé : 10 chiffres pour la Côte d'Ivoire
   </Card>
   <Card title="Service ID" icon="cog">
     - Doit correspondre à un service valide
     - Vérifier la correspondance opérateur/type (Cashin/Cashout)
   </Card>
-  <Card title="IPN URL" icon="webhook">
+  <Card title="IPN URL" icon="webhook" color="#1d60d5">
+    - **Obligatoire** pour recevoir la confirmation finale
     - Doit être accessible publiquement
     - HTTPS recommandé en production
     - Doit répondre rapidement avec HTTP 200
+  </Card>
+  <Card title="Orange Money OTP" icon="key" color="#dc2626">
+    - Pour Orange Money Cashout (service_id 23, 27, 29)
+    - Le client doit obtenir l'OTP via `#144*82#` (CI) ou `#144#391#` (SN)
+    - Transmettre le code dans `om_otp` en chaîne de caractères
   </Card>
 </CardGroup>
 
 ## Bonnes pratiques
 
 <CardGroup cols={2}>
-  <Card title="Variables Postman" icon="cog">
-    Toujours utiliser les variables Postman (base_url, api_key, service_id_*) pour changer facilement d'environnement.
+  <Card title="Variables Testeur d'API" icon="cog">
+    Toujours utiliser les variables Testeur d'API (base_url, api_key, service_id_*) pour changer facilement d'environnement.
   </Card>
   <Card title="Ne pas hardcoder" icon="ban">
     Ne jamais hardcoder la clé API dans le code ou les requêtes.
@@ -225,5 +239,5 @@ curl -X POST "{{base_url}}/status" \
 </CardGroup>
 
 <Tip>
-  Utilisez les variables d'environnement Postman pour faciliter le basculement entre Sandbox et Production sans modifier votre code.
+  Utilisez les variables d'environnement Testeur d'API pour faciliter le basculement entre Sandbox et Production sans modifier votre code.
 </Tip>

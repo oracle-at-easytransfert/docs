@@ -17,11 +17,23 @@ La confirmation finale d'une transaction est envoyée asynchroniquement à votre
 ```json
 {
   "transaction_id": "EFB.144358",
-  "state": "SUCCESS",
   "amount": 1000,
+  "benefice": 1000,
+  "commission": 0,
   "destination": "0500156008",
+  "fee": 0,
+  "reponse": "operation succes",
+  "error": "",
+  "service_id": 14,
+  "customer_name": "easytransfert",
+  "state": "SUCCESS",
   "custom_data": "order_789",
-  "reponse": "operation succes"
+  "ipn_url": "",
+  "provider_id": null,
+  "sms_link": 0,
+  "created_at": "2022-10-18T02:38:44.000+00:00",
+  "updated_at": "2022-10-18T02:38:44.000+00:00",
+  "ipn_state": 0
 }
 ```
 
@@ -30,11 +42,48 @@ La confirmation finale d'une transaction est envoyée asynchroniquement à votre
 ```json
 {
   "transaction_id": "EFB.144359",
-  "state": "FAILED",
+  "amount": 2000,
+  "benefice": 2000,
+  "commission": 0,
+  "destination": "0670123456",
+  "fee": 0,
+  "reponse": "",
   "error": "Solde insuffisant",
-  "custom_data": "order_789"
+  "service_id": 10,
+  "customer_name": "easytransfert",
+  "state": "FAILED",
+  "custom_data": "order_789",
+  "ipn_url": "",
+  "provider_id": null,
+  "sms_link": 0,
+  "created_at": "2022-10-18T02:38:44.000+00:00",
+  "updated_at": "2022-10-18T02:38:44.000+00:00",
+  "ipn_state": 0
 }
 ```
+
+## Champs du payload IPN
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| `transaction_id` | string | Identifiant unique de la transaction |
+| `state` | string | État de la transaction : SUCCESS ou FAILED |
+| `amount` | number | Montant de la transaction en FCFA |
+| `benefice` | number | Bénéfice de la transaction |
+| `commission` | number | Commission appliquée |
+| `destination` | string | Numéro du bénéficiaire |
+| `fee` | number | Frais de transaction |
+| `reponse` | string | Message de succès (si SUCCESS) |
+| `error` | string | Message d'erreur (si FAILED) |
+| `service_id` | number | Identifiant du service utilisé |
+| `customer_name` | string | Nom du client/partenaire |
+| `custom_data` | string | Données personnalisées envoyées à l'initiation |
+| `ipn_url` | string | URL de callback utilisée |
+| `provider_id` | number/null | Identifiant du fournisseur |
+| `sms_link` | number | Indicateur de lien SMS |
+| `created_at` | string | Date de création (ISO 8601) |
+| `updated_at` | string | Date de mise à jour (ISO 8601) |
+| `ipn_state` | number | État de l'IPN |
 
 ## États possibles
 

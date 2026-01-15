@@ -22,7 +22,6 @@
           {
             "group": "Introduction",
             "pages": [
-              "documentation/introduction/index",
               "documentation/introduction/presentation-api",
               "documentation/introduction/cas-usage",
               "documentation/introduction/versionnement"
@@ -31,7 +30,6 @@
           {
             "group": "Démarrage rapide",
             "pages": [
-              "documentation/demarrage-rapide/index",
               "documentation/demarrage-rapide/vue-ensemble-flux",
               "documentation/demarrage-rapide/preparation-environnement",
               "documentation/demarrage-rapide/initier-transaction",
@@ -42,7 +40,6 @@
           {
             "group": "Prérequis techniques",
             "pages": [
-              "documentation/prerequis-techniques/index",
               "documentation/prerequis-techniques/connaissances-requises",
               "documentation/prerequis-techniques/environnements",
               "documentation/prerequis-techniques/outils-recommandes"
@@ -51,7 +48,6 @@
           {
             "group": "Authentification & Sécurité",
             "pages": [
-              "documentation/authentification-securite/index",
               "documentation/authentification-securite/authentification",
               "documentation/authentification-securite/headers-requis",
               "documentation/authentification-securite/securite"
@@ -60,49 +56,23 @@
           {
             "group": "Convention et structure API",
             "pages": [
-              "documentation/convention-structure-api/index",
               "documentation/convention-structure-api/url-base",
               "documentation/convention-structure-api/requetes",
               "documentation/convention-structure-api/reponses"
             ]
           },
           {
-            "group": "Gestion des clients",
-            "pages": [
-              "documentation/gestion-clients/index",
-              "documentation/gestion-clients/principe-general"
-            ]
-          },
-          {
-            "group": "Comptes Business",
-            "pages": [
-              "documentation/comptes-business/index",
-              "documentation/comptes-business/portee-reelle"
-            ]
-          },
-          {
             "group": "Transactions & Transferts",
             "pages": [
-              "documentation/transactions-transferts/index",
-              "documentation/transactions-transferts/creation-transaction",
+              "documentation/transactions-transferts/cashin",
+              "documentation/transactions-transferts/cashout",
               "documentation/transactions-transferts/suivi-statut",
               "documentation/transactions-transferts/etats-possibles"
             ]
           },
           {
-            "group": "Bénéficiaires",
-            "pages": [
-              "documentation/beneficiaires/index",
-              "documentation/beneficiaires/ajout-beneficiaire",
-              "documentation/beneficiaires/liste-beneficiaires",
-              "documentation/beneficiaires/detail-beneficiaire",
-              "documentation/beneficiaires/mise-a-jour-suppression"
-            ]
-          },
-          {
             "group": "Webhooks & Notifications",
             "pages": [
-              "documentation/webhooks-notifications/index",
               "documentation/webhooks-notifications/presentation",
               "documentation/webhooks-notifications/configuration",
               "documentation/webhooks-notifications/securisation",
@@ -112,7 +82,6 @@
           {
             "group": "Gestion des erreurs",
             "pages": [
-              "documentation/gestion-erreurs/index",
               "documentation/gestion-des-erreurs",
               "documentation/gestion-erreurs/codes-http",
               "documentation/gestion-erreurs/erreurs-metier",
@@ -122,7 +91,6 @@
           {
             "group": "Limitations & Règles métier",
             "pages": [
-              "documentation/limitations-regles-metier/index",
               "documentation/limitations-regles-metier/rate-limiting",
               "documentation/limitations-regles-metier/plafonds",
               "documentation/limitations-regles-metier/restrictions-geographiques",
@@ -133,8 +101,7 @@
           {
             "group": "Annexes",
             "pages": [
-              "documentation/annexes/index",
-              "documentation/annexes/glossaire-variables-postman",
+              "documentation/annexes/glossaire-variables-testeur-api",
               "documentation/annexes/support-contact",
               "documentation/dictionnaire",
               "documentation/services"

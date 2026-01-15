@@ -6,11 +6,11 @@ icon: tools
 
 Cette section présente les outils recommandés pour tester, intégrer et exploiter efficacement l'API EASYTRANSFERT BUSINESS v1. Les outils mentionnés ci-dessous couvrent l'ensemble du cycle d'intégration : tests, développement, débogage et mise en production.
 
-## Postman (outil principal recommandé)
+## Testeur d'API (outil principal recommandé)
 
-Postman est l'outil privilégié pour l'intégration et les tests de l'API EASYTRANSFERT.
+Testeur d'API est l'outil privilégié pour l'intégration et les tests de l'API EASYTRANSFERT.
 
-**Une collection Postman officielle est fournie et inclut :**
+**Une collection Testeur d'API officielle est fournie et inclut :**
 
 - les endpoints d'initiation de transaction (Cashin / Cashout)
 - la consultation du statut des transactions
@@ -32,7 +32,7 @@ Postman est l'outil privilégié pour l'intégration et les tests de l'API EASYT
 - Vérifier l'URL IPN (ipn_url)
 
 <Tip>
-  Postman est fortement recommandé pour les phases de développement et de validation.
+  Testeur d'API est fortement recommandé pour les phases de développement et de validation.
 </Tip>
 
 ## cURL (tests rapides en ligne de commande)
@@ -116,7 +116,7 @@ Pour recevoir les notifications IPN, l'application doit exposer une URL publique
 - Framework backend (Laravel, Django, Express, FastAPI, etc.)
 - Outils de test IPN :
   - Ngrok (tunnel local)
-  - Postman (simulation IPN)
+  - Testeur d'API (simulation IPN)
 
 **Le développeur doit être capable de :**
 
@@ -144,7 +144,7 @@ Pour garantir la traçabilité des transactions, il est recommandé d'utiliser :
 - la résolution d'incidents
 
 <CardGroup cols={2}>
-  <Card title="Postman" icon="rocket" color="#1d60d5">
+  <Card title="Testeur d'API" icon="rocket" color="#1d60d5">
     Outil principal recommandé pour le développement et les tests
   </Card>
   <Card title="cURL" icon="terminal">

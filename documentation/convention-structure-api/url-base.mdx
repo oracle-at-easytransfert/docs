@@ -23,9 +23,9 @@ L'URL de production sera généralement communiquée après activation du compte
 | Initier une transaction (Cashin / Cashout) | `{{base_url}}/airtime` |
 | Obtenir le statut d'une transaction | `{{base_url}}/status` |
 
-## Variables Postman / Environment
+## Variables Testeur d'API / Environment
 
-Pour faciliter l'intégration dans Postman, il est recommandé d'utiliser des variables d'environnement :
+Pour faciliter l'intégration dans Testeur d'API, il est recommandé d'utiliser des variables d'environnement :
 
 | Variable | Valeur exemple | Description |
 |----------|----------------|-------------|
@@ -41,7 +41,7 @@ Pour faciliter l'intégration dans Postman, il est recommandé d'utiliser des va
 ## Bonnes pratiques
 
 1. **Toujours utiliser la variable {{base_url}}** dans vos requêtes pour pouvoir changer facilement l'environnement (sandbox vs prod).
-2. **Ne jamais hardcoder l'URL complète** dans vos scripts, utilisez Postman Environment.
+2. **Ne jamais hardcoder l'URL complète** dans vos scripts, utilisez Testeur d'API Environment.
 3. **Vérifier que l'URL utilise HTTPS** en production pour garantir la sécurité des transactions.
 
 ## Exemple d'utilisation

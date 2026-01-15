@@ -12,10 +12,10 @@ Avant toute requête, il est nécessaire de configurer les variables d'environne
 |----------|-------------|
 | `base_url` | URL de base de l'API |
 | `api_key` | Clé API fournie par EASYTRANSFERT |
-| `ipn_url` | URL de votre webhook pour recevoir les notifications |
+| `ipn_url` | URL de votre webhook pour recevoir les notifications. **Obligatoire** pour recevoir la confirmation finale |
 | `service_id_*` | Identifiants des services (Cashin / Cashout) |
 
-## Exemple (Environment Postman)
+## Exemple (Environment Testeur d'API)
 
 ```json
 {
@@ -29,8 +29,8 @@ Avant toute requête, il est nécessaire de configurer les variables d'environne
 
 <Tip>
   **Sécurité :**
-  - La variable `api_key` doit être définie comme secret dans Postman
-  - L'`ipn_url` doit être accessible publiquement en HTTPS
+  - La variable `api_key` doit être définie comme secret dans Testeur d'API
+  - L'`ipn_url` est **obligatoire** et doit être accessible publiquement en HTTPS
   - Les `service_id` doivent être validés par EASYTRANSFERT
 </Tip>
 

@@ -15,12 +15,12 @@ L'API EASYTRANSFERT BUSINESS utilise la clé API pour l'authentification. Contra
 | `Authorization` | N/A | Non utilisé, la clé API est transmise dans le corps de la requête (api_key) |
 
 <Warning>
-  Dans les exemples Postman de la collection, seul Content-Type est défini. Le header Accept est optionnel mais recommandé.
+  Dans les exemples Testeur d'API de la collection, seul Content-Type est défini. Le header Accept est optionnel mais recommandé.
 </Warning>
 
-## Exemple de headers dans Postman
+## Exemple de headers dans Testeur d'API
 
-Dans Postman, pour un endpoint comme `POST {{base_url}}/airtime` :
+Dans Testeur d'API, pour un endpoint comme `POST {{base_url}}/airtime` :
 
 | Key | Value | Description |
 |-----|-------|-------------|
@@ -55,20 +55,20 @@ Accept: application/json
 
 **Explications :**
 
-- `api_key` → variable d'environnement Postman (type secret), identifie le partenaire
+- `api_key` → variable d'environnement Testeur d'API (type secret), identifie le partenaire
 - `service_id` → variable correspondant au type de service (Cashin/Cashout et opérateur)
 - `ipn_url` → URL du webhook pour recevoir la confirmation finale
 
 <Info>
-  Cette structure reflète fidèlement la collection Postman officielle EASYTRANSFERT.
+  Cette structure reflète fidèlement la collection Testeur d'API officielle EASYTRANSFERT.
 </Info>
 
 ## Bonnes pratiques pour les headers
 
 1. **Toujours définir Content-Type: application/json** pour toutes les requêtes POST ou PUT.
-2. **Ne pas mettre la clé API dans le header Authorization**, la collection Postman n'envoie la clé que dans le body.
+2. **Ne pas mettre la clé API dans le header Authorization**, la collection Testeur d'API n'envoie la clé que dans le body.
 3. **HTTPS obligatoire en production** pour sécuriser les headers et le corps de la requête.
-4. **Utiliser des variables d'environnement Postman** pour gérer facilement api_key, base_url et service_id.
+4. **Utiliser des variables d'environnement Testeur d'API** pour gérer facilement api_key, base_url et service_id.
 
 ## Résumé technique
 
@@ -78,7 +78,7 @@ Accept: application/json
 | Headers obligatoires | `Content-Type: application/json` |
 | Headers recommandés | `Accept: application/json` |
 | Authorization header | Non utilisé |
-| Correspondance Postman | Exactement comme défini dans la collection officielle |
+| Correspondance Testeur d'API | Exactement comme défini dans la collection officielle |
 
 <Tip>
   La clé API est transmise dans le corps de la requête, pas dans les headers. C'est une particularité de l'API EASYTRANSFERT.
