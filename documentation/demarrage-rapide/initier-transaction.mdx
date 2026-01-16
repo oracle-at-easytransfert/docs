@@ -1,7 +1,7 @@
 ---
 title: "Étape 2 - Initier une transaction"
 description: "Comment initier une transaction Cashin ou Cashout via l'API"
-icon: play-circle
+icon: "play-circle"
 ---
 
 ## Endpoint
@@ -18,25 +18,25 @@ POST {{base_url}}/airtime
 
 ## Paramètres de la requête
 
-| Champ | Type | Obligatoire | Description |
-|-------|------|-------------|-------------|
-| `amount` | int | Oui | Montant de la transaction en FCFA. **Doit être un multiple de 100** (ex: 500, 1000, 1500). |
-| `api_key` | string | Oui | Clé API EASYTRANSFERT pour authentification |
-| `destination` | string | Oui | Numéro mobile du bénéficiaire **sans indicatif international** (ex: 0103444777, pas +2250103444777) |
-| `service_id` | int | Oui | Identifiant du service (Cashin ou Cashout selon l'opérateur) |
-| `ipn_url` | string | **Oui** | URL de callback pour recevoir les notifications IPN |
-| `custom_data` | string | Non | Référence interne qui sera retournée dans l'IPN |
-| `om_otp` | string | Conditionnel | **Uniquement pour Orange Money Cashout** (service_id 23, 27, 29). Code d'autorisation obtenu par le client via `#144*82#` (CI) ou `#144#391#` (SN). |
+| Champ         | Type   | Obligatoire  | Description                                                                                                                                         |
+| ------------- | ------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `amount`      | int    | Oui          | Montant de la transaction en FCFA. **Doit être un multiple de 100** (ex: 500, 1000, 1500).                                                          |
+| `api_key`     | string | Oui          | Clé API EASYTRANSFERT pour authentification                                                                                                         |
+| `destination` | string | Oui          | Numéro mobile du bénéficiaire **sans indicatif international** (ex: 0103444777, pas +2250103444777)                                                 |
+| `service_id`  | int    | Oui          | [Identifiant du service](/documentation/annexes/glossaire-variables-testeur-api) (Cashin ou Cashout selon l'opérateur)                              |
+| `ipn_url`     | string | **Oui**      | URL de callback pour recevoir les notifications IPN                                                                                                 |
+| `custom_data` | string | Non          | Référence interne qui sera retournée dans l'IPN                                                                                                     |
+| `om_otp`      | string | Conditionnel | **Uniquement pour Orange Money Cashout** (service_id 23, 27, 29). Code d'autorisation obtenu par le client via `#144*82#` (CI) ou `#144#391#` (SN). |
 
 ## Exemple – MTN Cashout
 
 ```json
 {
   "amount": 5000,
-  "api_key": "{{api_key}}",
+  "api_key": "xxxxxxxxxxxxxxx",
   "destination": "0103444777",
   "service_id": 25,
-  "ipn_url": "{{ipn_url}}",
+  "ipn_url": "https://votre_webhook.url",
   "custom_data": "order_789"
 }
 ```
@@ -48,10 +48,10 @@ Pour les transactions Orange Money Cashout, le paramètre `om_otp` est requis :
 ```json
 {
   "amount": 5000,
-  "api_key": "{{api_key}}",
+  "api_key": "xxxxxxxxxxxxxxx",
   "destination": "0701234567",
   "service_id": 27,
-  "ipn_url": "{{ipn_url}}",
+  "ipn_url": "https://votre_webhook.url",
   "custom_data": "order_789",
   "om_otp": "1234"
 }
@@ -59,6 +59,7 @@ Pour les transactions Orange Money Cashout, le paramètre `om_otp` est requis :
 
 <Info>
   **Comment obtenir l'OTP Orange Money :**
+
   - **Côte d'Ivoire** : Le client compose `#144*82#` sur son téléphone
   - **Sénégal** : Le client compose `#144#391#` sur son téléphone
   - Le code reçu doit être transmis dans `om_otp` en chaîne de caractères
@@ -74,9 +75,13 @@ Pour les transactions Orange Money Cashout, le paramètre `om_otp` est requis :
 
 ```json
 {
-  "status": "success",
   "data": {
-    "transaction_id": "EFB.001158"
+    "transaction_id": "EFB.001158",
+	"amount": 12250,
+  	"state": "PENDING1",
+	....
   }
 }
 ```
+
+La reponse complète peut être consulter dans [la section Api Reference](/api-reference/endpoint/transaction)

@@ -1,30 +1,26 @@
 ---
 title: "Vue d'ensemble du flux réel"
 description: "Comprendre le cycle de vie d'une transaction EASYTRANSFERT en 4 étapes clés"
-icon: route
+icon: "route"
 ---
 
-Cette section permet à un développeur d'effectuer sa première transaction fonctionnelle en moins de 10 minutes, en s'appuyant directement sur la collection Testeur d'API officielle EASYTRANSFERT.
+Cette section permet aux développeurs d'e comprendre les étapes du fonctionnement  en moins des APIs, en s'appuyant directement sur la collection [Testeur d'API officielle EASYTRANSFERT](/api-reference/endpoint/transaction).
 
 ## Le cycle de vie d'une transaction
 
-Le cycle de vie d'une transaction EASYTRANSFERT se fait en 4 étapes clés :
+Le cycle de vie d'une transaction EASYTRANSFERT se fait en 3 étapes clés :
 
 <Steps>
-  <Step title="Préparation de l'environnement">
-    Configuration des variables d'environnement (base_url, api_key, ipn_url, service_id)
-  </Step>
-  <Step title="Initiation d'une transaction">
+  <Step title="Initiation d'une transaction" stepNumber={1}>
     Envoi d'une requête POST pour initier une transaction Cashin ou Cashout
   </Step>
-  <Step title="Réception de la notification IPN">
+  <Step title="Réception de la notification IPN" stepNumber={2}>
     Réception automatique du statut final (SUCCESS ou FAILED) via webhook
   </Step>
-  <Step title="Consultation ponctuelle du statut (optionnel)">
+  <Step title="Consultation ponctuelle du statut (optionnel)" stepNumber={3}>
     Vérification manuelle du statut uniquement en cas de besoin
   </Step>
 </Steps>
-
 
 ## Flux visuel
 

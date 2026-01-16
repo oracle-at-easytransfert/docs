@@ -15,10 +15,10 @@ L'API EASYTRANSFERT BUSINESS est une API REST qui permet aux marchands d'initier
   <Card title="Notifications" icon="bell" color="#3c60ef">
     Réception des statuts via IPN
   </Card>
-    <Card title="Notifications" icon="bell" color="#3c60ef">
+  <Card title="Notifications" icon="bell" color="#3c60ef">
     Réception des statuts via IPN
   </Card>
-    <Card title="Notifications" icon="bell" color="#3c60ef">
+  <Card title="Notifications" icon="bell" color="#3c60ef">
     Réception des statuts via IPN
   </Card>
 </CardGroup>
@@ -31,17 +31,10 @@ L'API couvre exclusivement les services suivants :
 
 Initiation de transactions Mobile Money via un point d'accès unique.
 
-**Support des opérations :**
+**Type des transactions :**
 
-- **Cashin** : ajout d'argent sur le wallet Mobile Money du destinataire
-- **Cashout** : retrait d'argent depuis le wallet Mobile Money du destinataire
-
-**Support multi-opérateurs via des service_id distincts :**
-
-- MTN
-- Orange
-- Moov
-- Flooz
+- **Cashin** : déplacer de l'argent du wallet du marchand vers le wallet mobile money du client
+- **Cashout** : déplacer de l'argent du wallet mobile money du client vers le wallet du marchand
 
 <Info>
   Chaque transaction est identifiée par un `transaction_id` unique généré par EASYTRANSFERT.
@@ -53,7 +46,7 @@ Deux mécanismes complémentaires sont disponibles :
 
 <AccordionGroup>
   <Accordion title="IPN (Webhook) - mécanisme recommandé" icon="webhook">
-    Notification automatique envoyée à l'URL fournie lors de l'initiation.
+    Notification automatique envoyée à l'URL fournie lors de l'initiation de la transaction.
 
     Transmission de l'état final de la transaction :
 
@@ -67,32 +60,22 @@ Deux mécanismes complémentaires sont disponibles :
       À utiliser uniquement en cas de non-réception de l'IPN. L'interrogation répétée peut entraîner un blocage.
     </Warning>
   </Accordion>
+  <Accordion title="Consultation du solde">
+    Endpoint permettant de consulter le solde du marchand.
+
+    <Note>
+      Il faut noté que le solde est aussi disponible depuis le dashboard du marchand
+    </Note>
+  </Accordion>
 </AccordionGroup>
 
-## Public cible
-
-L'API EASYTRANSFERT BUSINESS s'adresse principalement à :
-
 <CardGroup cols={2}>
-  <Card title="Entreprises" icon="building">
-    Services financiers, plateformes digitales
-  </Card>
-  <Card title="Fintechs" icon="chart-line">
-    Agrégateurs Mobile Money, solutions de paiement
-  </Card>
-  <Card title="Partenaires techniques" icon="users">
-    Équipes de développement, intégrateurs systèmes
-  </Card>
+  
 </CardGroup>
 
 ## Avantages clés
 
 <AccordionGroup>
-  <Accordion title="Automatisation" icon="cog">
-    - Intégration simple via HTTP/JSON
-    - Suppression des traitements manuels
-    - Gestion programmatique des transactions Mobile Money
-  </Accordion>
   <Accordion title="Sécurité" icon="shield">
     - Authentification par clé API
     - Accès restreint aux partenaires autorisés

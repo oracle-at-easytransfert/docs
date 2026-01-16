@@ -39,8 +39,7 @@
           {
             "group": "INTRODUCTION",
             "pages": [
-              "documentation/introduction/presentation-api",
-              "documentation/introduction/cas-usage"
+              "documentation/introduction/presentation-api"
             ]
           },
           {
