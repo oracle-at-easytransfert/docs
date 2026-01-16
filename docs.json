@@ -35,16 +35,16 @@
       },
       {
         "tab": "Documentation",
-        "dropdowns": [
+        "groups": [
           {
-            "dropdown": "INTRODUCTION",
+            "group": "INTRODUCTION",
             "pages": [
               "documentation/introduction/presentation-api",
               "documentation/introduction/cas-usage"
             ]
           },
           {
-            "dropdown": "DÉMARRAGE RAPIDE",
+            "group": "DÉMARRAGE RAPIDE",
             "pages": [
               "documentation/demarrage-rapide/vue-ensemble-flux",
               "documentation/demarrage-rapide/preparation-environnement",
@@ -55,7 +55,7 @@
             ]
           },
           {
-            "dropdown": "PRÉREQUIS TECHNIQUES",
+            "group": "PRÉREQUIS TECHNIQUES",
             "pages": [
               "documentation/prerequis-techniques/connaissances-requises",
               "documentation/prerequis-techniques/environnements",
@@ -64,7 +64,7 @@
             ]
           },
           {
-            "dropdown": "AUTHENTIFICATION & SÉCURITÉ",
+            "group": "AUTHENTIFICATION & SÉCURITÉ",
             "pages": [
               "documentation/authentification-securite/authentification",
               "documentation/authentification-securite/headers-requis",
@@ -72,14 +72,14 @@
             ]
           },
           {
-            "dropdown": "API ET TRANSACTIONS",
+            "group": "API ET TRANSACTIONS",
             "pages": [
               "documentation/api-transactions/structure-api",
               "documentation/api-transactions/transactions"
             ]
           },
           {
-            "dropdown": "GESTION DES ERREURS",
+            "group": "GESTION DES ERREURS",
             "pages": [
               "documentation/gestion-des-erreurs",
               "documentation/gestion-erreurs/codes-http",
@@ -88,14 +88,14 @@
             ]
           },
           {
-            "dropdown": "LIMITATIONS & RÈGLES MÉTIER",
+            "group": "LIMITATIONS & RÈGLES MÉTIER",
             "pages": [
               "documentation/limitations-regles-metier/rate-limiting",
               "documentation/limitations-regles-metier/bonnes-pratiques"
             ]
           },
           {
-            "dropdown": "ANNEXES",
+            "group": "ANNEXES",
             "pages": [
               "documentation/annexes/glossaire-variables-testeur-api",
               "documentation/annexes/support-disponibilite",
@@ -110,9 +110,6 @@
       },
       {
         "tab": "API reference",
-        "openapi": [
-          "api-reference/openapi.json"
-        ],
         "groups": [
           {
             "group": "TRANSACTION",
