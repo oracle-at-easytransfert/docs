@@ -1,7 +1,7 @@
 ---
 title: "Authentification"
 description: "Mécanisme d'authentification par clé API de l'API EASYTRANSFERT"
-icon: key
+icon: "key"
 ---
 
 L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par clé API (`api_key`).
@@ -9,7 +9,7 @@ L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par
 ## Principe général
 
 - L'authentification se fait exclusivement via une clé API statique
-- La clé API est transmise dans le corps (body) des requêtes, au format JSON
+- La clé API est transmise dans le corps (body) des requêtes, au format string
 - Aucun token dynamique n'est utilisé
 - Aucun header Authorization n'est requis
 - Il n'y a ni expiration, ni renouvellement automatique de la clé API
@@ -20,7 +20,7 @@ L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par
 
 ## Transmission de la clé API
 
-La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFERT, sous la forme du champ :
+La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFERT, sous la forme ci-dessous :
 
 ```json
 "api_key": "votre_cle_api"
@@ -30,35 +30,13 @@ La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFER
   Ce champ est obligatoire. Toute requête sans clé API valide sera rejetée.
 </Warning>
 
-## Exemple complet de requête authentifiée
-
-**Endpoint :** `POST {{base_url}}/airtime`
-
-**Headers :**
-```
-Content-Type: application/json
-```
-
-**Body :**
-```json
-{
-  "api_key": "votre_cle_api",
-  "amount": 1000,
-  "destination": "0670123456",
-  "service_id": 10,
-  "ipn_url": "http://votre-site.com/webhook/easytransfert",
-  "custom_data": "reference_interne_123"
-}
-```
-
 ## Gestion de la clé API
 
 - La clé API est fournie par EASYTRANSFERT
 - Elle doit être conservée de manière sécurisée
-- Dans Testeur d'API, elle est stockée comme variable d'environnement de type secret
 - En production, elle doit être stockée dans :
-  - variables d'environnement serveur
-  - gestionnaires de secrets (Vault, Secret Manager, etc.)
+  - les variables d'environnement
+  - ou encore un gestionnaire de secrets (Vault, Secret Manager, etc.)
 
 ## Bonnes pratiques de sécurité
 
@@ -66,15 +44,7 @@ Content-Type: application/json
 - Utiliser uniquement des appels serveur à serveur
 - Restreindre l'accès à l'API aux adresses IP autorisées si possible
 
-## Points importants à retenir
-
-| Élément | Détail |
-|---------|--------|
-| Type d'authentification | Clé API statique |
-| Emplacement de la clé | Body JSON |
-| Renouvellement | Manuel (si nécessaire) |
-
 ## Renouvellement
 
 - Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
-- Les applications doivent alors mettre à jour la variable `api_key` dans l'environnement Testeur d'API ou la configuration serveur
+- Les applications doivent alors mettre à jour la variable `api_key` dans leur environnement

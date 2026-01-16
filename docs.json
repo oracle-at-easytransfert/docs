@@ -54,36 +54,17 @@
             ]
           },
           {
-            "group": "PRÉREQUIS TECHNIQUES",
-            "pages": [
-              "documentation/prerequis-techniques/connaissances-requises",
-              "documentation/prerequis-techniques/environnements",
-              "documentation/prerequis-techniques/monitoring-secrets",
-              "documentation/prerequis-techniques/outils-recommandes"
-            ]
-          },
-          {
             "group": "AUTHENTIFICATION & SÉCURITÉ",
             "pages": [
               "documentation/authentification-securite/authentification",
-              "documentation/authentification-securite/headers-requis",
               "documentation/authentification-securite/securite"
-            ]
-          },
-          {
-            "group": "API ET TRANSACTIONS",
-            "pages": [
-              "documentation/api-transactions/structure-api",
-              "documentation/api-transactions/transactions"
             ]
           },
           {
             "group": "GESTION DES ERREURS",
             "pages": [
               "documentation/gestion-des-erreurs",
-              "documentation/gestion-erreurs/codes-http",
-              "documentation/gestion-erreurs/erreurs-metier",
-              "documentation/gestion-erreurs/bonnes-pratiques"
+              "documentation/gestion-erreurs/codes-http"
             ]
           },
           {

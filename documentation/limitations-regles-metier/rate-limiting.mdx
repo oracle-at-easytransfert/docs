@@ -1,28 +1,28 @@
 ---
 title: "Rate limiting"
 description: "Comprendre les limitations du nombre de requêtes et comment les respecter"
-icon: tachometer-alt
+icon: "tachometer-alt"
 ---
 
 L'API EASYTRANSFERT BUSINESS impose un contrôle du nombre de requêtes pour protéger les services et assurer la qualité du service pour tous les utilisateurs.
 
 ## Limite de taux
 
-| Aspect | Description |
-|--------|-------------|
-| **Rate limit** | **15 minutes par appel** : Un délai minimum de 15 minutes est requis entre chaque appel API |
-| **Quota par clé API** | Chaque clé API doit respecter cette limite. Cette restriction s'applique à tous les endpoints |
-| **Endpoints sensibles** | Le endpoint `/status` est particulièrement sensible : les appels fréquents peuvent être considérés comme abusifs. Les confirmations finales doivent provenir du webhook IPN |
-| **Feedback en cas de dépassement** | Si vous dépassez le rate limit, l'API renvoie un code HTTP **429 Too Many Requests**. Le message indique le temps d'attente avant de pouvoir réessayer |
+| Aspect                             | Description                                                                                                                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rate limit**                     | **15 minutes par appel** : Un délai minimum de 15 minutes est requis entre chaque appel API (quand il s'agit du même numéro et du même montant)                             |
+| **Quota par clé API**              | Chaque clé API doit respecter cette limite. Cette restriction s'applique à tous les endpoints                                                                               |
+| **Endpoints sensibles**            | Le endpoint `/status` est particulièrement sensible : les appels fréquents peuvent être considérés comme abusifs. Les confirmations finales doivent provenir du webhook IPN |
+| **Feedback en cas de dépassement** | Si vous dépassez le rate limit, l'API renvoie un code HTTP **429 Too Many Requests**. Le message indique le temps d'attente avant de pouvoir réessayer                      |
 
 ## Conséquences d'un dépassement
 
-| Situation | Effet |
-|-----------|-------|
-| Appels répétés au endpoint `/status` | Blocage temporaire de la clé API |
-| Volume élevé d'appels simultanés | Retard dans le traitement des transactions, erreurs possibles |
-| Ignorer les webhooks IPN | Risque de surcharge côté serveur et rejet des requêtes |
-| Dépassement répété | Suspension temporaire ou permanente de l'accès à l'API |
+| Situation                            | Effet                                                         |
+| ------------------------------------ | ------------------------------------------------------------- |
+| Appels répétés au endpoint `/status` | Blocage temporaire de la clé API                              |
+| Volume élevé d'appels simultanés     | Retard dans le traitement des transactions, erreurs possibles |
+| Ignorer les webhooks IPN             | Risque de surcharge côté serveur et rejet des requêtes        |
+| Dépassement répété                   | Suspension temporaire ou permanente de l'accès à l'API        |
 
 <Warning>
   **Important :** La surveillance des transactions doit se faire via IPN autant que possible. L'endpoint `/status` doit être utilisé uniquement en cas de non-réception d'IPN.

@@ -1,7 +1,7 @@
 ---
 title: "Sécurité"
 description: "Bonnes pratiques de sécurité pour l'API EASYTRANSFERT BUSINESS"
-icon: shield
+icon: "shield"
 ---
 
 La sécurité de l'API EASYTRANSFERT BUSINESS repose sur plusieurs principes clés : protection des clés API, transmission sécurisée des données et bonnes pratiques pour éviter toute exposition accidentelle.
@@ -15,24 +15,9 @@ Toutes les requêtes doivent impérativement être envoyées via HTTPS.
   - La clé API n'est pas interceptée sur le réseau.
   - Les données sensibles des transactions (montant, destination, etc.) restent confidentielles.
 
-**Exemple de base URL sécurisée dans Testeur d'API :**
-
-```
-https://proxy-airtime.easytransfert.app/api_v1/transaction
-```
-
-<Card title="HTTPS en production" icon="lock" color="#16a34a">
-  En production, utilisez toujours HTTPS pour garantir la sécurité des données.
-</Card>
-
-
 ## Protection des clés API
 
 La clé API est sensible et doit être stockée en secret, jamais exposée côté frontend ou dans des logs accessibles publiquement.
-
-### Dans Testeur d'API
-
-Définir `api_key` comme variable d'environnement de type secret. Ne pas inclure la clé directement dans les scripts côté client ou dans les repositories publics.
 
 ## Restriction d'accès par adresse IP
 
@@ -43,7 +28,7 @@ Définir `api_key` comme variable d'environnement de type secret. Ne pas inclure
     La restriction d'accès par adresse IP est possible. Fournissez la liste des IP à autoriser via les groupes dédiés (WhatsApp).
   </Card>
   <Card title="Demande" icon="list" color="#1d60d5">
-    Contactez le support avec la liste complète des adresses IP et l'identification de votre compte.
+    Contactez le support via Whatsapp ou sur le mail du support avec la liste complète des adresses IP et l'identification de votre compte.
   </Card>
 </CardGroup>
 
@@ -65,17 +50,20 @@ Définir `api_key` comme variable d'environnement de type secret. Ne pas inclure
 
 ## Audit et monitoring de sécurité
 
-**Monitoring recommandé :** Volume de transactions anormal, erreurs répétées, tentatives d'accès suspectes, utilisation de clés API.
+**Monitoring recommandé :**
+
+-  Volume de transactions anormal
+- Erreurs répétées
+- Tentatives d'accès suspectes
+- Utilisation de clés API.
 
 ## Bonnes pratiques recommandées
 
-| Bonnes pratiques | Description |
-|------------------|-------------|
-| HTTPS | Toutes les requêtes doivent passer par HTTPS |
-| Stockage sécurisé | Variables d'environnement Testeur d'API ou gestionnaire de secrets côté serveur |
-| Rotation des clés | Renouveler la clé API régulièrement pour limiter l'impact d'une éventuelle compromission |
-| Ne pas exposer la clé côté frontend | Toutes les transactions doivent passer par un serveur intermédiaire pour sécuriser la clé |
-| Whitelist IP | Demander l'activation de la whitelist IP pour restreindre l'accès à vos serveurs uniquement |
-| Ne jamais loguer la clé | Logs côté serveur ou console ne doivent jamais afficher la clé API |
-
-
+| Bonnes pratiques                    | Description                                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| HTTPS                               | Toutes les requêtes doivent passer par HTTPS                                                |
+| Stockage sécurisé                   | Variables d'environnement Testeur d'API ou gestionnaire de secrets côté serveur             |
+| Rotation des clés                   | Renouveler la clé API régulièrement pour limiter l'impact d'une éventuelle compromission    |
+| Ne pas exposer la clé côté frontend | Toutes les transactions doivent passer par un serveur intermédiaire pour sécuriser la clé   |
+| Whitelist IP                        | Demander l'activation de la whitelist IP pour restreindre l'accès à vos serveurs uniquement |
+| Ne jamais loguer la clé             | Logs côté serveur ou console ne doivent jamais afficher la clé API                          |

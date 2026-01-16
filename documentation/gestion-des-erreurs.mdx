@@ -1,7 +1,7 @@
 ---
 title: "Gestion des erreurs"
 description: "Vue d'ensemble de la gestion des erreurs dans l'API EASYTRANSFERT BUSINESS"
-icon: exclamation-triangle
+icon: "exclamation-triangle"
 ---
 
 Cette section vous présente les formats d'erreur retournés par notre API ainsi que quelques exemples. Pour plus de détails, consultez les pages détaillées ci-dessous.
@@ -9,13 +9,10 @@ Cette section vous présente les formats d'erreur retournés par notre API ainsi
 ## Navigation rapide
 
 <CardGroup cols={3}>
-  <Card title="Codes HTTP" icon="code" href="/documentation/gestion-erreurs/codes-http">
-    Comprendre les codes HTTP retournés par l'API
+  <Card title="Codes HTTP" icon="code" color="#1d60d5" href="/documentation/gestion-erreurs/codes-http">
+    Comprendre les codes HTTP retournés par l'API EASYTRANSFERT
   </Card>
-  <Card title="Erreurs métier" icon="exclamation-circle" href="/documentation/gestion-erreurs/erreurs-metier">
-    Comprendre les erreurs métier et comment les gérer
-  </Card>
-  <Card title="Bonnes pratiques" icon="check-double" href="/documentation/gestion-erreurs/bonnes-pratiques">
+  <Card title="Bonnes pratiques" icon="check-double" color="#1d60d5" href="/documentation/gestion-erreurs/bonnes-pratiques">
     Guide complet pour gérer efficacement les erreurs
   </Card>
 </CardGroup>
@@ -24,10 +21,10 @@ Cette section vous présente les formats d'erreur retournés par notre API ainsi
 
 L'API EASYTRANSFERT retourne des erreurs dans un format standardisé :
 
-| Nom du champ | Description |
-|--------------|-------------|
-| `transaction_id` | Il s'agit de l'identifiant unique de la requête qui a été effectuée |
-| `error` | Message d'erreur donnant la raison pour laquelle la transaction a échouée |
+| Nom du champ     | Description                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| `transaction_id` | Il s'agit de l'identifiant unique de la requête qui a été effectuée       |
+| `error`          | Message d'erreur donnant la raison pour laquelle la transaction a échouée |
 
 ### Exemple d'erreur
 
@@ -40,11 +37,11 @@ L'API EASYTRANSFERT retourne des erreurs dans un format standardisé :
 
 ## États possibles
 
-| status | description |
-|--------|-------------|
-| **SUCCESSFUL** | La transaction s'est bien passée |
-| **PENDING** | La transaction est en attente de validation |
-| **FAILED** | La transaction a échouée |
+| status         | description                                 |
+| -------------- | ------------------------------------------- |
+| **SUCCESSFUL** | La transaction s'est bien passée            |
+| **PENDING**    | La transaction est en attente de validation |
+| **FAILED**     | La transaction a échouée                    |
 
 <Info>
   Les codes d'erreur spécifiques sont documentés dans les sections détaillées ci-dessous.
@@ -55,9 +52,6 @@ L'API EASYTRANSFERT retourne des erreurs dans un format standardisé :
 <CardGroup cols={2}>
   <Card title="Erreurs HTTP" icon="code">
     Codes HTTP standards (200, 400, 401, 403, 404, 429, 500) qui indiquent l'état de la requête HTTP.
-  </Card>
-  <Card title="Erreurs métier" icon="exclamation-circle">
-    Erreurs liées au traitement logique des transactions (solde insuffisant, service indisponible, etc.).
   </Card>
 </CardGroup>
 
