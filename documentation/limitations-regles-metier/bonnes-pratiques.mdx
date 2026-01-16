@@ -19,7 +19,7 @@ Cette section résume les règles métier transversales et les pratiques recomma
 
 ### 1. Webhook IPN
 
-Ne comptez pas uniquement sur les réponses immédiates de l'API. L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
+L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
 
 ### 2. Validation côté client
 
@@ -34,29 +34,6 @@ Avant d'envoyer une transaction, vérifiez :
 - **Fractionner les transactions** : Implémentez une logique interne pour fractionner les transactions si nécessaire
 - **Respecter les restrictions** : Respectez les restrictions géographiques et les limites par type de transaction
 
-## Résumé pratique
-
-<AccordionGroup>
-  <Accordion title="Suivre les webhooks IPN" icon="webhook">
-    Suivre les webhooks IPN pour toutes les transactions.
-  </Accordion>
-  
-  <Accordion title="Vérifier avant envoi" icon="check-circle">
-    Vérifier montants, devises, numéro bénéficiaire, service ID avant envoi.
-  </Accordion>
-  
-  <Accordion title="Fractionner si nécessaire" icon="cut">
-    Fractionner les transactions trop grandes.
-  </Accordion>
-  
-  <Accordion title="Respecter les limites" icon="hand-raised">
-    Respecter le rate limit (15 minutes par appel) et les règles métier applicables.
-  </Accordion>
-  
-  <Accordion title="Conserver un historique" icon="file-alt">
-    Conserver un historique centralisé pour audit et support.
-  </Accordion>
-</AccordionGroup>
 
 <Tip>
   En suivant ces bonnes pratiques, vous garantissez une intégration robuste et fiable avec l'API EASYTRANSFERT BUSINESS.

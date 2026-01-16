@@ -27,13 +27,7 @@ Avant toute requête, il est nécessaire de configurer les variables d'environne
 
 ## Bonnes pratiques
 
-<Tip>
-  **Sécurité :**
-  - La variable `api_key` doit être définie comme secret dans Testeur d'API
-  - L'`ipn_url` doit être accessible publiquement en HTTPS
-  - Les `service_id` doivent être validés par EASYTRANSFERT
-</Tip>
-
-<Warning>
-  Ne jamais exposer la clé API dans le code source ou les logs. Toujours utiliser des variables d'environnement sécurisées.
-</Warning>
+- La variable `api_key` doit être définie comme secret dans Testeur d'API
+- L'`ipn_url` doit être accessible publiquement en HTTPS
+- Les `service_id` doivent être validés par EASYTRANSFERT
+- Ne jamais exposer la clé API dans le code source ou les logs

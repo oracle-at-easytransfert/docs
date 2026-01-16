@@ -51,40 +51,7 @@ La gestion des environnements repose sur le mécanisme suivant :
 
 ## Configuration recommandée
 
-### Dans Testeur d'API
-
-- Une collection unique
-- Un ou plusieurs environnements Testeur d'API
-- Variables clés :
-  - `base_url`
-  - `api_key`
-  - `ipn_url`
-  - `service_id_*`
-
-### Dans une application
-
 - Utiliser des fichiers de configuration (.env, variables système)
 - Ne jamais stocker la clé API en dur dans le code
-- Séparer clairement les clés API :
-  - clé API pour les tests
-  - clé API pour la production
+- Séparer clairement les clés API : clé API pour les tests / clé API pour la production
 
-## Bonnes pratiques
-
-<CardGroup cols={2}>
-  <Card title="Tester avec clé dédiée" icon="flask">
-    Toujours tester avec une clé API dédiée aux tests
-  </Card>
-  <Card title="Ne pas mélanger" icon="ban">
-    Ne pas utiliser une clé de production pour des tests non maîtrisés
-  </Card>
-  <Card title="Journaliser" icon="file-alt">
-    Journaliser les appels API pour audit et débogage
-  </Card>
-  <Card title="Reprise en cas d'échec" icon="redo">
-    Prévoir des mécanismes de reprise en cas d'échec réseau
-  </Card>
-  <Card title="Privilégier IPN" icon="webhook">
-    Privilégier le suivi des transactions via IPN plutôt que le polling du statut
-  </Card>
-</CardGroup>

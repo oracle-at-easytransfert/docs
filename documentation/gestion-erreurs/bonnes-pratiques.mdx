@@ -56,17 +56,9 @@ La gestion des erreurs dans l'API EASYTRANSFERT BUSINESS est cruciale pour garan
 
 ## 5. Gérer les IPN avec soin
 
-<CardGroup cols={2}>
-  <Card title="Traitement unique" icon="fingerprint">
-    Traiter chaque IPN exactement une seule fois.
-  </Card>
-  <Card title="Confirmer la réception" icon="check-circle" color="#16a34a">
-    Confirmer la réception à EASYTRANSFERT avec HTTP 200 pour que le webhook ne soit pas renvoyé.
-  </Card>
-  <Card title="IPN" icon="webhook" color="#1d60d5">
-    Ne jamais considérer la réponse initiale HTTP comme finale — l'IPN est le véritable état de la transaction.
-  </Card>
-</CardGroup>
+- Traiter chaque IPN exactement une seule fois
+- Confirmer la réception à EASYTRANSFERT avec HTTP 200 pour que le webhook ne soit pas renvoyé
+- Ne jamais considérer la réponse initiale HTTP comme finale — l'IPN est le véritable état de la transaction
 
 ## 6. Combinaison recommandée
 

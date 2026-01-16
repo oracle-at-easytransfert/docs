@@ -90,21 +90,8 @@ La confirmation finale d'une transaction est envoyée asynchroniquement à votre
 
 ## Recommandations
 
-<CardGroup cols={2}>
-  <Card title="Répondre HTTP 200" icon="check-circle">
-    Toujours répondre HTTP 200 OK à l'IPN pour confirmer la réception.
-  </Card>
-  <Card title="Vérifier l'unicité" icon="fingerprint">
-    Vérifier l'unicité du `transaction_id`.
-  </Card>
-  <Card title="Utiliser custom_data" icon="link">
-    Utiliser `custom_data` pour faire le lien avec votre système interne.
-  </Card>
-  <Card title="Traiter idempotent" icon="redo">
-    Rendre le traitement idempotent pour gérer les IPN dupliquées.
-  </Card>
-</CardGroup>
+## Recommandations
 
-<Tip>
-  Les IPN peuvent être envoyées plusieurs fois. Assurez-vous de traiter chaque transaction une seule fois en vérifiant le `transaction_id`.
-</Tip>
+- Toujours répondre HTTP 200 OK à l'IPN pour confirmer la réception
+- Vérifier l'unicité du `transaction_id` pour éviter les traitements en double
+- Utiliser `custom_data` pour faire le lien avec votre système interne
