@@ -66,22 +66,7 @@ aside [class*="logo"]:not(:first-child) {
 }
 
 /* Masquer toutes les mentions EASYTRANSFERT en texte dans la navigation */
-/* On utilise une approche plus large pour cibler tous les éléments possibles */
-nav *:not([class*="logo"]):not([class*="logo"] *) {
-  /* On ne masque pas tout, mais on va cibler spécifiquement */
-}
-
-/* Masquer les éléments qui contiennent "EASYTRANSFERT" ou "Easy Transfert" dans la navbar/sidebar */
-[class*="sidebar"] a,
-[class*="sidebar"] span,
-[class*="sidebar"] div,
-[class*="navbar"] a,
-[class*="navbar"] span,
-[class*="navbar"] div,
-nav a,
-nav span {
-  /* On va utiliser JavaScript pour masquer ceux qui contiennent le texte */
-}
+/* Le masquage est géré par le JavaScript hide-duplicate-easytransfert.js */
 
 /* Configuration du premier logo avec texte EASYTRANSFERT à droite */
 .nav-logo:first-child,
