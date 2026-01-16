@@ -54,34 +54,7 @@ La gestion des erreurs dans l'API EASYTRANSFERT BUSINESS est cruciale pour garan
   </Accordion>
 </AccordionGroup>
 
-## 5. Protéger l'API Key
-
-<CardGroup cols={2}>
-  <Card title="HTTPS obligatoire" icon="lock" color="#16a34a">
-    Toujours utiliser HTTPS pour vos requêtes.
-  </Card>
-  <Card title="Ne pas exposer" icon="ban" color="#dc2626">
-    Ne pas exposer la clé dans le front-end. Stocker dans des variables sécurisées (Testeur d'API / environnement, serveur backend).
-  </Card>
-</CardGroup>
-
-## 6. Validation côté client
-
-Avant d'envoyer une transaction :
-
-<CardGroup cols={2}>
-  <Card title="Vérifier le montant" icon="chart-line">
-    Vérifier que le montant respecte les limites définies par EASYTRANSFERT.
-  </Card>
-  <Card title="Valider le numéro" icon="phone">
-    Valider le numéro de téléphone et le service_id.
-  </Card>
-  <Card title="Préparer custom_data" icon="link">
-    Préparer le custom_data pour relier la transaction à votre système interne.
-  </Card>
-</CardGroup>
-
-## 7. Gérer les IPN avec soin
+## 5. Gérer les IPN avec soin
 
 <CardGroup cols={2}>
   <Card title="Traitement unique" icon="fingerprint">
@@ -90,12 +63,12 @@ Avant d'envoyer une transaction :
   <Card title="Confirmer la réception" icon="check-circle" color="#16a34a">
     Confirmer la réception à EASYTRANSFERT avec HTTP 200 pour que le webhook ne soit pas renvoyé.
   </Card>
-  <Card title="IPN = source de vérité" icon="webhook" color="#1d60d5">
+  <Card title="IPN" icon="webhook" color="#1d60d5">
     Ne jamais considérer la réponse initiale HTTP comme finale — l'IPN est le véritable état de la transaction.
   </Card>
 </CardGroup>
 
-## 8. Combinaison recommandée
+## 6. Combinaison recommandée
 
 <Steps>
   <Step title="Réponse initiale">

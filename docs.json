@@ -4,8 +4,25 @@
   "name": "Easy Transfert",
   "colors": {
     "primary": "#1d60d5",
-    "light": "#1d60d5",
-    "dark": "#1d60d5"
+    "light": "#3b82f6",
+    "dark": "#0f4c9e"
+  },
+  "appearance": {
+    "default": "system",
+    "strict": false,
+    "background": {
+      "decoration": "gradient"
+    }
+  },
+  "fonts": {
+    "heading": {
+      "family": "Inter",
+      "weight": 600
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
   },
   "favicon": "/images/téléchargement.png",
   "navigation": {
@@ -20,14 +37,14 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "INTRODUCTION",
             "pages": [
               "documentation/introduction/presentation-api",
               "documentation/introduction/cas-usage"
             ]
           },
           {
-            "group": "Démarrage rapide",
+            "group": "DÉMARRAGE RAPIDE",
             "pages": [
               "documentation/demarrage-rapide/vue-ensemble-flux",
               "documentation/demarrage-rapide/preparation-environnement",
@@ -38,7 +55,7 @@
             ]
           },
           {
-            "group": "Prérequis techniques",
+            "group": "PRÉREQUIS TECHNIQUES",
             "pages": [
               "documentation/prerequis-techniques/connaissances-requises",
               "documentation/prerequis-techniques/environnements",
@@ -47,7 +64,7 @@
             ]
           },
           {
-            "group": "Authentification & Sécurité",
+            "group": "AUTHENTIFICATION & SÉCURITÉ",
             "pages": [
               "documentation/authentification-securite/authentification",
               "documentation/authentification-securite/headers-requis",
@@ -55,14 +72,14 @@
             ]
           },
           {
-            "group": "API et Transactions",
+            "group": "API ET TRANSACTIONS",
             "pages": [
               "documentation/api-transactions/structure-api",
               "documentation/api-transactions/transactions"
             ]
           },
           {
-            "group": "Gestion des erreurs",
+            "group": "GESTION DES ERREURS",
             "pages": [
               "documentation/gestion-des-erreurs",
               "documentation/gestion-erreurs/codes-http",
@@ -71,14 +88,14 @@
             ]
           },
           {
-            "group": "Limitations & Règles métier",
+            "group": "LIMITATIONS & RÈGLES MÉTIER",
             "pages": [
               "documentation/limitations-regles-metier/rate-limiting",
               "documentation/limitations-regles-metier/bonnes-pratiques"
             ]
           },
           {
-            "group": "Annexes",
+            "group": "ANNEXES",
             "pages": [
               "documentation/annexes/glossaire-variables-testeur-api",
               "documentation/annexes/support-disponibilite",
@@ -99,7 +116,7 @@
         ],
         "groups": [
           {
-            "group": "Transaction",
+            "group": "TRANSACTION",
             "pages": [
               "api-reference/endpoint/transaction"
             ]

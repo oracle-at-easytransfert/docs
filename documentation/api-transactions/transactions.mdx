@@ -67,11 +67,7 @@ Utilisez cet endpoint uniquement pour des vérifications ponctuelles. La méthod
 
 ## Bonnes pratiques
 
-- **Privilégier IPN** : L'IPN est la source de vérité pour le statut final
 - **Limiter /status** : Utiliser uniquement en cas de non-réception d'IPN
 - **Vérifier le service_id** : Assurez-vous d'utiliser le bon service_id selon l'opérateur et le pays
-- **Valider le montant** : Vérifiez que le montant est un multiple de 100 avant l'envoi
 - **Format du numéro** : Le numéro destination doit être au format local sans indicatif international
 - **OTP Orange Money** : Pour Orange Money Cashout, demandez l'OTP au client avant d'initier la transaction
-- **IPN obligatoire** : Configurez toujours une ipn_url pour recevoir la confirmation finale
-- **custom_data utile** : Utilisez custom_data pour tracer vos transactions dans votre système

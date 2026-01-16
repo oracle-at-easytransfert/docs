@@ -79,21 +79,9 @@ Content-Type: application/json
 |---------|--------|
 | Type d'authentification | Clé API statique |
 | Emplacement de la clé | Body JSON |
-| Header Authorization | Non utilisé |
-| Token / Bearer | Non utilisé |
-| Expiration | Aucune |
 | Renouvellement | Manuel (si nécessaire) |
-
-## Cycle de vie du token
-
-<Warning>
-  L'API n'utilise pas de token. La clé API reste valide indéfiniment jusqu'à révocation par EASYTRANSFERT.
-</Warning>
-
-Il n'existe aucun cycle de vie ni expiration automatique comme pour un Bearer Token classique.
 
 ## Renouvellement
 
-- Il n'existe aucun mécanisme de renouvellement automatique
 - Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
 - Les applications doivent alors mettre à jour la variable `api_key` dans l'environnement Testeur d'API ou la configuration serveur

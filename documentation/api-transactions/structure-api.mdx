@@ -21,17 +21,6 @@ http://proxy-airtime.easytransfert.app/api_v1/transaction
 
 ## Structure des requêtes
 
-### Headers requis
-
-| Header | Valeur |
-|--------|--------|
-| `Content-Type` | `application/json` |
-| `Accept` | `application/json` (recommandé) |
-
-<Warning>
-  La clé API est passée dans le body JSON, pas dans les headers.
-</Warning>
-
 ### Paramètres communs
 
 | Paramètre | Type | Obligatoire | Description |
@@ -87,18 +76,6 @@ http://proxy-airtime.easytransfert.app/api_v1/transaction
 | `amount` | int | Montant de la transaction |
 | `custom_data` | string | Données personnalisées |
 
-## Codes HTTP
-
-| Code | Signification |
-|------|---------------|
-| **200** | Requête traitée correctement |
-| **400** | Paramètres manquants ou invalides |
-| **401** | Clé API invalide ou manquante |
-| **403** | Accès refusé, limite dépassée |
-| **404** | Transaction ID inexistant |
-| **429** | Trop de requêtes (rate limiting) |
-| **500** | Erreur serveur |
-
 ## Validation et contraintes
 
 ### Montant (amount)
@@ -112,7 +89,6 @@ http://proxy-airtime.easytransfert.app/api_v1/transaction
 - Format recommandé : 10 chiffres pour la Côte d'Ivoire
 
 ### IPN URL
-- **Obligatoire** pour recevoir la confirmation finale
 - Doit être accessible publiquement
 - HTTPS recommandé en production
 - Doit répondre rapidement avec HTTP 200
@@ -129,6 +105,4 @@ Pour connaître les limites exactes, testez avec une clé API de test ou contact
 
 ## Bonnes pratiques
 
-- **Variables Testeur d'API** : Utiliser `base_url`, `api_key`, `service_id_*` pour faciliter la configuration
-- **Ne pas hardcoder** : Ne jamais stocker la clé API en dur dans le code
 - **Valider avant envoi** : Vérifier montant, numéro, service_id avant l'envoi

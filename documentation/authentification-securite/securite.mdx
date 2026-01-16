@@ -86,17 +86,13 @@ La clé API est sensible et doit être stockée en secret, jamais exposée côt�
 
 ## Audit et monitoring de sécurité
 
-<Warning>
-  Aucun mécanisme d'audit ou de logs d'accès des clés API n'est fourni par KAYBIC AFRICA. Aucun système de détection d'activités suspectes n'est fourni. Il est recommandé de mettre en place votre propre système de monitoring et d'audit côté client.
-</Warning>
-
 **Monitoring recommandé :** Volume de transactions anormal, erreurs répétées, tentatives d'accès suspectes, utilisation de clés API.
 
 ## Bonnes pratiques recommandées
 
 | Bonnes pratiques | Description |
 |------------------|-------------|
-| HTTPS obligatoire | Toutes les requêtes doivent passer par HTTPS |
+| HTTPS | Toutes les requêtes doivent passer par HTTPS |
 | Stockage sécurisé | Variables d'environnement Testeur d'API ou gestionnaire de secrets côté serveur |
 | Rotation des clés | Renouveler la clé API régulièrement pour limiter l'impact d'une éventuelle compromission |
 | Ne pas exposer la clé côté frontend | Toutes les transactions doivent passer par un serveur intermédiaire pour sécuriser la clé |
@@ -148,7 +144,7 @@ Accept: application/json
 ## Points clés à retenir
 
 <CardGroup cols={2}>
-  <Card title="HTTPS obligatoire" icon="lock" color="#16a34a">
+  <Card title="HTTPS" icon="lock" color="#16a34a">
     Toutes les requêtes doivent utiliser HTTPS en production
   </Card>
   <Card title="Clé API = seule méthode" icon="key" color="#1d60d5">

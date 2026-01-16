@@ -17,9 +17,9 @@ Cette section résume les règles métier transversales et les pratiques recomma
 
 ## Bonnes pratiques concrètes
 
-### 1. Webhook IPN obligatoire
+### 1. Webhook IPN
 
-**IPN = source de vérité** : Ne comptez pas uniquement sur les réponses immédiates de l'API. L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
+Ne comptez pas uniquement sur les réponses immédiates de l'API. L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
 
 ### 2. Validation côté client
 
@@ -33,10 +33,6 @@ Avant d'envoyer une transaction, vérifiez :
 
 - **Fractionner les transactions** : Implémentez une logique interne pour fractionner les transactions si nécessaire
 - **Respecter les restrictions** : Respectez les restrictions géographiques et les limites par type de transaction
-
-### 4. Retry & backoff
-
-Pour les erreurs temporaires (429 Too Many Requests, 500 Internal Server Error), utilisez une attente progressive avant de réessayer. Ne jamais réessayer automatiquement pour les erreurs métier (solde insuffisant, montant invalide, etc.).
 
 ## Résumé pratique
 

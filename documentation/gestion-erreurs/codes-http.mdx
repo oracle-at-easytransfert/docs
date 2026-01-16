@@ -28,11 +28,7 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
     En cas de 500, appliquer un retry avec backoff progressif. En cas de 429, attendre le temps indiqué par Retry-After.
   </Card>
   <Card title="Valider les entrées avant l'envoi" icon="check-circle" color="#16a34a">
-    - `amount` : entier positif, **multiple de 100**, dans les limites autorisées
-    - `service_id` : doit correspondre à un service valide
-    - `destination` : numéro au format local sans indicatif (ex: 0103444777)
-    - `ipn_url` : URL valide et accessible publiquement
-    - `om_otp` : requis pour Orange Money Cashout (service_id 23, 27, 29)
+    Vérifier les paramètres requis avant l'envoi de la requête.
   </Card>
   <Card title="Journaliser les erreurs HTTP" icon="file-alt">
     Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter le debug.
