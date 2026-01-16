@@ -134,21 +134,21 @@ nav [class*="logo"]:first-child svg {
 }
 
 /* ============================================
-   AUGMENTATION DE LA TAILLE DU TEXTE GLOBALE
+   TAILLE DU TEXTE GLOBALE
    ============================================ */
 
 /* Body et texte de base */
 body,
 html {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
 }
 
 /* Titres principaux */
 h1,
 .mdx h1,
 [class*="heading"] h1 {
-  font-size: 2.5rem !important;
+  font-size: 2rem !important;
   line-height: 1.2 !important;
   font-weight: 700 !important;
 }
@@ -156,7 +156,7 @@ h1,
 h2,
 .mdx h2,
 [class*="heading"] h2 {
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
   line-height: 1.3 !important;
   font-weight: 600 !important;
 }
@@ -164,7 +164,7 @@ h2,
 h3,
 .mdx h3,
 [class*="heading"] h3 {
-  font-size: 1.5rem !important;
+  font-size: 1.25rem !important;
   line-height: 1.4 !important;
   font-weight: 600 !important;
 }
@@ -172,20 +172,20 @@ h3,
 h4,
 .mdx h4,
 [class*="heading"] h4 {
-  font-size: 1.25rem !important;
+  font-size: 1.1rem !important;
   line-height: 1.5 !important;
   font-weight: 600 !important;
 }
 
 h5,
 .mdx h5 {
-  font-size: 1.1rem !important;
+  font-size: 1rem !important;
   line-height: 1.5 !important;
 }
 
 h6,
 .mdx h6 {
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
   line-height: 1.5 !important;
 }
 
@@ -193,8 +193,8 @@ h6,
 p,
 .mdx p,
 [class*="paragraph"] {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
   margin-bottom: 1rem;
 }
 
@@ -203,34 +203,34 @@ li,
 ul li,
 ol li,
 .mdx li {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
   margin-bottom: 0.5rem;
 }
 
 ul,
 ol {
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 /* Tableaux */
 table,
 .mdx table {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 table th,
 table td,
 .mdx table th,
 .mdx table td {
-  font-size: 15px !important;
+  font-size: 13px !important;
   padding: 0.75rem !important;
 }
 
 /* Code inline */
 code,
 .mdx code:not(pre code) {
-  font-size: 14px !important;
+  font-size: 13px !important;
   padding: 0.2em 0.4em;
 }
 
@@ -239,57 +239,57 @@ pre,
 pre code,
 .mdx pre,
 .mdx pre code {
-  font-size: 14px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
 }
 
 /* Textes dans les composants Mintlify */
 [class*="Card"] p,
 [class*="Card"] li {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
 }
 
 [class*="Accordion"] p,
 [class*="Accordion"] li {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
 }
 
 /* Navigation et sidebar */
 nav,
 [class*="sidebar"],
 [class*="navigation"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 nav a,
 [class*="sidebar"] a {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 /* Footer */
 footer,
 [class*="footer"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 footer p,
 footer li {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 /* Barre de recherche */
 [class*="search"],
 input[type="search"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 /* Boutons */
 button,
 [class*="button"],
 a[class*="button"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 /* Alerts, Info, Warning, Tip */
@@ -297,21 +297,21 @@ a[class*="button"] {
 [class*="Warning"],
 [class*="Tip"],
 [class*="Alert"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 [class*="Info"] p,
 [class*="Warning"] p,
 [class*="Tip"] p,
 [class*="Alert"] p {
-  font-size: 15px !important;
-  line-height: 1.6 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
 }
 
 /* API Reference */
 [class*="api"],
 [class*="endpoint"] {
-  font-size: 15px !important;
+  font-size: 13px !important;
 }
 
 /* Tous les éléments de texte génériques */
