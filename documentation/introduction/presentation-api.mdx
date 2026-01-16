@@ -1,19 +1,19 @@
 ---
 title: "Présentation de l'API"
 description: "Découvrez l'API EASYTRANSFERT BUSINESS et ses fonctionnalités principales"
-icon: info-circle
+icon: "info-circle"
 ---
 
 ## Objectif de l'API EASYTRANSFERT BUSINESS
 
-L'API EASYTRANSFERT BUSINESS est une API REST qui permet aux partenaires d'initier et de suivre des transactions Mobile Money à partir de leurs systèmes (applications web, mobiles ou back-office).
+L'API EASYTRANSFERT BUSINESS est une API REST qui permet aux marchands d'initier et de suivre leurs transactions.
 
 <CardGroup cols={2}>
-  <Card title="Automatisation" icon="robot">
-    Automatiser les opérations de Cashin (encaissement) et Cashout (décaissement)
+  <Card title="Transactions" icon="exchange" color="#3c60ef">
+    Cash-in/Cash-out
   </Card>
-  <Card title="Notifications" icon="bell">
-    Recevoir des notifications asynchrones de statut via IPN (Instant Payment Notification)
+  <Card title="Notifications" icon="bell" color="#3c60ef">
+    Réception des statuts via IPN
   </Card>
 </CardGroup>
 
@@ -48,15 +48,15 @@ Deux mécanismes complémentaires sont disponibles :
 <AccordionGroup>
   <Accordion title="IPN (Webhook) - mécanisme recommandé" icon="webhook">
     Notification automatique envoyée à l'URL fournie lors de l'initiation.
-    
+
     Transmission de l'état final de la transaction :
+
     - **SUCCESS** : Transaction réussie
     - **FAILED** : Transaction échouée
   </Accordion>
-  
   <Accordion title="Consultation du statut (usage limité)" icon="search">
     Endpoint dédié pour récupérer l'état d'une transaction.
-    
+
     <Warning>
       À utiliser uniquement en cas de non-réception de l'IPN. L'interrogation répétée peut entraîner un blocage.
     </Warning>
@@ -87,23 +87,19 @@ L'API EASYTRANSFERT BUSINESS s'adresse principalement à :
     - Suppression des traitements manuels
     - Gestion programmatique des transactions Mobile Money
   </Accordion>
-  
   <Accordion title="Sécurité" icon="shield">
     - Authentification par clé API
     - Accès restreint aux partenaires autorisés
     - Communication sécurisée via HTTPS obligatoire
   </Accordion>
-  
   <Accordion title="Traçabilité" icon="file-invoice">
     - Identifiant unique pour chaque transaction
     - Champs custom_data pour le rapprochement métier
     - Historique et suivi via IPN et endpoint de statut
   </Accordion>
-  
   <Accordion title="Scalabilité" icon="chart-bar">
     - Architecture adaptée aux volumes élevés
     - Support multi-opérateurs sans changement d'intégration
     - Compatible avec des systèmes distribués et micro-services
   </Accordion>
 </AccordionGroup>
-
