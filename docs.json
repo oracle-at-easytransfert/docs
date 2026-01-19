@@ -102,7 +102,6 @@
           {
             "group": "TRANSACTION",
             "pages": [
-              "api-reference/transaction/verifier-le-status",
               "api-reference/endpoint/transaction"
             ]
           }
