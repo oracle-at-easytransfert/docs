@@ -1,0 +1,89 @@
+---
+title: "Réponses Webhook (IPN)"
+openapi: "POST /votre_url_webhook"
+---
+
+Cette page documente les notifications IPN (Instant Payment Notification) que vous recevrez sur votre webhook.
+
+Description:
+
+- Type: Webhook (callback POST)
+- Utilisation: EASYTRANSFERT envoie automatiquement les mises à jour de statut de transaction à l'URL IPN que vous avez configurée.
+
+## Exemple de réponse Webhook - SUCCESS
+
+```json
+{
+  "transaction_id": "EFB.144358",
+  "amount": 1000,
+  "benefice": 1000,
+  "commission": 0,
+  "destination": "0500156008",
+  "fee": 0,
+  "response": "operation success",
+  "error": "",
+  "service_id": 14,
+  "customer_name": "easytransfert",
+  "state": "SUCCESS",
+  "custom_data": "custom_data",
+  "ipn_url": "",
+  "provider_id": null,
+  "sms_link": 0,
+  "created_at": "2022-10-18T02:38:44.000+00:00",
+  "updated_at": "2022-10-18T02:38:44.000+00:00",
+  "ipn_state": 0,
+  "w_amount_after_transaction": "",
+  "p_last_wallet_amount": 11,
+  "p_new_wallet_amount": null,
+  "p_id": 1,
+  "hash": ""
+}
+```
+
+## Exemple de réponse Webhook - FAILED
+
+```json
+{
+  "transaction_id": "EFB.144359",
+  "amount": 2000,
+  "benefice": 2000,
+  "commission": 0,
+  "destination": "0670123456",
+  "fee": 0,
+  "response": "",
+  "error": "message de l'erreur",
+  "service_id": 10,
+  "customer_name": "easytransfert",
+  "state": "FAILED",
+  "custom_data": "transaction_ref_123",
+  "ipn_url": "",
+  "provider_id": null,
+  "sms_link": 0,
+  "created_at": "2022-10-18T02:38:44.000+00:00",
+  "updated_at": "2022-10-18T02:38:44.000+00:00",
+  "ipn_state": 0,
+  "w_amount_after_transaction": "",
+  "p_last_wallet_amount": 11,
+  "p_new_wallet_amount": null,
+  "p_id": 1,
+  "hash": ""
+}
+```
+
+## Champs importants
+
+- `transaction_id`: Identifiant unique de la transaction
+- `state`: Statut final de la transaction (`SUCCESS` ou `FAILED`)
+- `response`: Message de réponse en cas de succès
+- `error`: Message d'erreur en cas d'échec
+- `amount`: Montant de la transaction
+- `custom_data`: Données personnalisées que vous avez envoyées lors de l'initiation
+
+## Notes
+
+- ⚠️ **Important:** Vous devez retourner un code HTTP 200 pour confirmer la réception du webhook.
+- Si vous ne répondez pas, EASYTRANSFERT tentera de renvoyer la notification plusieurs fois.
+- Les webhooks arrivent généralement dans les secondes suivant le traitement de la transaction.
+- Utilisez le champ `custom_data` pour réconcilier les transactions avec vos données internes.
+
+Il n'existe pas de méthode spécifique pour configurer les webhooks, l'IPN est transféré directement dans [la requête pendant l'initialisation de la transaction](/api-reference/endpoint/transaction).

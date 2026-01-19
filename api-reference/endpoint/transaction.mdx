@@ -1,12 +1,12 @@
 ---
-title: 'Initier Transaction'
+title: 'Initier une transaction'
 openapi: 'POST /airtime'
 ---
 
 Cette page documente l'opération d'initiation de transaction (cashout / cashin).
 
 Description:
-- Endpoint: POST `/airtime` (base URL défini dans la collection Testeur d'API)
+- Endpoint: POST `/airtime` (base URL défini dans la collection Postman)
 - Utilisation: initie une transaction et déclenche une IPN (callback) pour la confirmation finale.
 
 Exemple de requête (JSON):
@@ -23,7 +23,7 @@ Exemple de requête (JSON):
 ```
 
 Notes:
-- `service_id` identifie le fournisseur/service (MTN, Orange, etc.).
+- `service_id` identifie le fournisseur (MTN, Orange, etc.) et le type d'opération.
 - La réponse immédiate confirme la réception; la confirmation finale arrive via l'IPN.
 
-Exemples de services (variables disponibles dans la collection Testeur d'API): `service_id_mtn_cashin`, `service_id_mtn_cashout`, `service_id_orange_cashin`, etc.
+Vous trouverez la liste des services dans la [documentation](/documentation/services)
