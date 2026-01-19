@@ -112,7 +112,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@easytransfert.ci"
       }
     ]
   },
@@ -137,5 +137,8 @@
   },
   "search": {
     "prompt": "Vous recherchez quelque chose que vous ne trouvez pas ?"
+  },
+  "appearance": {
+    "strict": false
   }
 }
