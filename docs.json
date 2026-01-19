@@ -29,8 +29,16 @@
     "tabs": [
       {
         "tab": "Accueil",
+        "anchors": [
+          {
+            "anchor": "C'est quoi le Mobile Money ?"
+          }
+        ]
+      },
+      {
+        "tab": "Accueil",
         "pages": [
-          "index"
+          "index-copied-1"
         ]
       },
       {
@@ -94,6 +102,7 @@
           {
             "group": "TRANSACTION",
             "pages": [
+              "api-reference/transaction/verifier-le-status",
               "api-reference/endpoint/transaction"
             ]
           }
