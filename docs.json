@@ -16,11 +16,11 @@
   },
   "fonts": {
     "heading": {
-      "family": "Inter",
+      "family": "Poppins",
       "weight": 600
     },
     "body": {
-      "family": "Inter",
+      "family": "Poppins",
       "weight": 400
     }
   },
@@ -137,8 +137,5 @@
   },
   "search": {
     "prompt": "Vous recherchez quelque chose que vous ne trouvez pas ?"
-  },
-  "appearance": {
-    "strict": false
   }
 }
