@@ -4,8 +4,25 @@
   "name": "Easy Transfert",
   "colors": {
     "primary": "#1d60d5",
-    "light": "#1d60d5",
-    "dark": "#1d60d5"
+    "light": "#3b82f6",
+    "dark": "#0f4c9e"
+  },
+  "appearance": {
+    "default": "system",
+    "strict": false,
+    "background": {
+      "decoration": "gradient"
+    }
+  },
+  "fonts": {
+    "heading": {
+      "family": "Inter",
+      "weight": 600
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
   },
   "favicon": "/images/téléchargement.png",
   "navigation": {
@@ -20,52 +37,54 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Documentation",
+            "group": "INTRODUCTION",
             "pages": [
-              "documentation/dictionnaire",
-              "documentation/rate-limits",
+              "documentation/introduction/presentation-api"
+            ]
+          },
+          {
+            "group": "DÉMARRAGE RAPIDE",
+            "pages": [
+              "documentation/demarrage-rapide/vue-ensemble-flux",
+              "documentation/demarrage-rapide/preparation-environnement",
+              "documentation/demarrage-rapide/initier-transaction",
+              "documentation/demarrage-rapide/reception-ipn",
+              "documentation/demarrage-rapide/verifier-statut",
+              "documentation/demarrage-rapide/checklist-pre-production"
+            ]
+          },
+          {
+            "group": "AUTHENTIFICATION & SÉCURITÉ",
+            "pages": [
+              "documentation/authentification-securite/authentification",
+              "documentation/authentification-securite/securite"
+            ]
+          },
+          {
+            "group": "GESTION DES ERREURS",
+            "pages": [
               "documentation/gestion-des-erreurs",
-              "documentation/services"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "guides/introduction",
-              "guides/quickstart",
-              "guides/getting-started/securite",
-              "guides/development"
+              "documentation/gestion-erreurs/codes-http"
             ]
           },
           {
-            "group": "Transferts",
+            "group": "LIMITATIONS & RÈGLES MÉTIER",
             "pages": [
-              "guides/transferts/introduction",
-              "guides/transferts/integration"
+              "documentation/limitations-regles-metier/rate-limiting",
+              "documentation/limitations-regles-metier/bonnes-pratiques"
             ]
           },
           {
-            "group": "Webhooks",
+            "group": "ANNEXES",
             "pages": [
-              "guides/webhooks/introduction"
+              "documentation/annexes/glossaire-variables-testeur-api",
+              "documentation/annexes/support-disponibilite",
+              "documentation/annexes/tarification-conditions-financieres",
+              "documentation/annexes/kyc-conformite",
+              "documentation/annexes/comptes-business",
+              "documentation/annexes/gestion-plaintes",
+              "documentation/dictionnaire"
             ]
-          },
-          {
-            "group": "Paiements",
-            "pages": [
-              "guides/paiements/introduction",
-              "guides/paiements/integration",
-              "guides/paiements/authentication"
-            ]
-          },
-          {
-            "group": "Autres",
-            "pages": []
           }
         ]
       },
@@ -73,17 +92,13 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "Transactions",
+            "group": "TRANSACTION",
             "pages": [
               "api-reference/endpoint/transaction",
               "api-reference/endpoint/transaction-status",
-              "api-reference/endpoint/webhook-response",
-              "api-reference/endpoint/balance"
+              "api-reference/endpoint/balance",
+              "api-reference/endpoint/webhook-response"
             ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": []
           }
         ]
       }
@@ -99,12 +114,7 @@
         "label": "Support",
         "href": "mailto:support@easytransfert.ci"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -117,13 +127,6 @@
      "cursor",
      "vscode"
    ]
-  },
-  "footer": {
-    "socials": {
-      "linkedin": "https://linkedin.com/company/easytransfert",
-      "website": "https://easytransfert.ci/",
-      "facebook": "https://facebook.com/easytransfertciv"
-    }
   },
   "description": "Just Easy",
   "api": {

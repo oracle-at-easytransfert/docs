@@ -1,0 +1,80 @@
+---
+title: "Glossaire des variables Testeur d'API"
+description: "Référence complète des variables d'environnement Testeur d'API pour l'API EASYTRANSFERT"
+icon: list-alt
+---
+
+Ce glossaire détaille toutes les variables d'environnement Testeur d'API utilisées avec l'API EASYTRANSFERT BUSINESS.
+
+## Variables principales
+
+| Variable | Valeur par défaut | Type | Description détaillée | Notes importantes |
+|----------|-------------------|------|----------------------|-------------------|
+| `base_url` | `http://proxy-airtime.easytransfert.app/api_v1/transaction` | string | URL de base de l'API EASYTRANSFERT Business pour toutes les requêtes de transactions et de statut. | Toute requête doit être préfixée par cette URL. |
+| `api_key` | `votre_cle_api_ici` | secret | Clé API fournie par EASYTRANSFERT pour authentifier vos requêtes. | À ne jamais exposer dans le code public. Pour production, générer une clé sécurisée via le portail EASYTRANSFERT. |
+| `transaction_id` | `EFB.001158` (vide par défaut) | string | Identifiant unique d'une transaction généré par EASYTRANSFERT après la création d'une transaction. | Cette valeur est automatiquement mise à jour après l'appel "Initier Transaction" via les scripts Testeur d'API. |
+| `ipn_url` | `http://votre-site.com/webhook/easytransfert` | string | URL de callback (webhook) où EASYTRANSFERT enverra les notifications de statut des transactions (IPN). | Doit être une URL accessible publiquement et sécurisée (HTTPS recommandé). L'IPN envoie l'état final "SUCCESS" ou "FAILED". |
+
+## Variables de service (service_id)
+
+| Variable | Valeur | Type | Description |
+|----------|--------|------|-------------|
+| `service_id_mtn_cashin` | `10` | string | Identifiant du service MTN Cashin (ajout d'argent sur le mobile money client). |
+| `service_id_mtn_cashout` | `11` | string | Identifiant du service MTN Cashout (retrait depuis le mobile money client). |
+| `service_id_orange_cashin` | `12` | string | Identifiant du service Orange Cashin. Pour ajouter de l'argent sur un compte Orange Money. |
+| `service_id_orange_cashout` | `13` | string | Identifiant du service Orange Cashout. Pour retirer de l'argent d'un compte Orange Money. |
+| `service_id_moov_cashin` | `14` | string | Identifiant du service Moov Cashin. Pour ajouter de l'argent sur un compte Moov Money. |
+| `service_id_moov_cashout` | `15` | string | Identifiant du service Moov Cashout. Pour retirer de l'argent d'un compte Moov Money. |
+| `service_id_flooz_cashin` | `16` | string | Identifiant du service Flooz Cashin. Pour ajouter de l'argent sur un compte Flooz. |
+| `service_id_flooz_cashout` | `17` | string | Identifiant du service Flooz Cashout. Pour retirer de l'argent d'un compte Flooz. |
+
+## Notes générales sur l'utilisation
+
+### Interpolation dans Testeur d'API
+
+Toutes ces variables peuvent être utilisées dans les requêtes en utilisant la syntaxe `{{variable}}`.
+
+**Exemple :**
+
+```json
+{
+    "amount": 1000,
+    "api_key": "{{api_key}}",
+    "destination": "0670123456",
+    "service_id": "{{service_id_mtn_cashin}}",
+    "ipn_url": "{{ipn_url}}"
+}
+```
+
+### Sécurité
+
+<CardGroup cols={2}>
+  <Card title="api_key secrète" icon="lock" color="#dc2626">
+    api_key doit rester secrète. Dans Testeur d'API, marquer comme "secret" dans l'environnement.
+  </Card>
+  <Card title="HTTPS pour IPN" icon="shield" color="#16a34a">
+    L'IPN doit être sur HTTPS pour éviter les interceptions.
+  </Card>
+</CardGroup>
+
+### Automatisation
+
+<CardGroup cols={2}>
+  <Card title="transaction_id automatique" icon="cog">
+    transaction_id peut être automatiquement stocké après chaque création de transaction via un script Testeur d'API.
+  </Card>
+  <Card title="Changer facilement de service" icon="exchange-alt">
+    Les service_id permettent de changer facilement de prestataire mobile money sans modifier le corps de la requête.
+  </Card>
+</CardGroup>
+
+### Références pour développeurs
+
+<CardGroup cols={2}>
+  <Card title="Base URL et service_id" icon="link">
+    Base URL et service_id sont souvent utilisés ensemble pour composer correctement les endpoints de transactions.
+  </Card>
+  <Card title="IPN" icon="webhook" color="#1d60d5">
+    IPN doit être configuré avant d'initier une transaction pour recevoir les notifications de succès/échec.
+  </Card>
+</CardGroup>

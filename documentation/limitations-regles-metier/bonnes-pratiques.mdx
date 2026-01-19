@@ -1,0 +1,40 @@
+---
+title: "Bonnes pratiques générales"
+description: "Règles métier transversales et pratiques recommandées pour garantir la fiabilité des transactions"
+icon: check-double
+---
+
+Cette section résume les règles métier transversales et les pratiques recommandées pour garantir la fiabilité des transactions.
+
+## Principes généraux
+
+| Principe | Description |
+|----------|-------------|
+| **Automatisation intelligente** | Préférez l'automatisation via API tout en respectant le rate limit (15 minutes par appel) |
+| **Sécurité** | Ne partagez jamais vos clés API. Utilisez HTTPS pour toutes les requêtes. Stockez les clés de manière sécurisée |
+| **Gestion des erreurs** | Implémentez un suivi systématique des transactions FAILED et des codes HTTP (429, 400, 500) |
+| **Surveillance et reporting** | Centralisez les logs des transactions et des IPN pour audit et suivi. Conservez les informations de `transaction_id`, `custom_data`, et `state` |
+
+## Bonnes pratiques concrètes
+
+### 1. Webhook IPN
+
+L'IPN est la source principale pour confirmer le succès ou l'échec d'une transaction.
+
+### 2. Validation côté client
+
+Avant d'envoyer une transaction, vérifiez :
+- **Numéro valide** : Numéro du bénéficiaire valide et conforme à l'opérateur
+- **Montant dans les limites** : Montant respectant les plafonds (min: 500, max: 500 000 FCFA) et multiple de 100
+- **Service ID correct** : `service_id` correspondant à l'opérateur et au type d'opération (Cashin/Cashout)
+- **Devise = FCFA** : Toutes les transactions doivent être en FCFA
+
+### 3. Gestion des limites et plafonds
+
+- **Fractionner les transactions** : Implémentez une logique interne pour fractionner les transactions si nécessaire
+- **Respecter les restrictions** : Respectez les restrictions géographiques et les limites par type de transaction
+
+
+<Tip>
+  En suivant ces bonnes pratiques, vous garantissez une intégration robuste et fiable avec l'API EASYTRANSFERT BUSINESS.
+</Tip>

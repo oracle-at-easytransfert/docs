@@ -1,0 +1,72 @@
+---
+title: "Checklist pré-production"
+description: "Vérifications avant le passage en production"
+icon: "list-check"
+---
+
+## Vérifications recommandées
+
+<CardGroup cols={2}>
+  <Card title="Clés API" icon="key" color="#1d60d5">
+    Clé API de production configurée et stockée de manière sécurisée. Ne jamais utiliser la clé de test en production.
+  </Card>
+  <Card title="URLs et endpoints" icon="link" color="#16a34a">
+    `base_url` pointe vers la production. `ipn_url` accessible publiquement en HTTPS. Tester la réception des IPN.
+  </Card>
+  <Card title="Service IDs" icon="cog" color="#1d60d5">
+    Valider que les `service_id` correspondent aux services de production pour chaque opérateur et type d'opération.
+  </Card>
+  <Card title="Gestion des erreurs" icon="exclamation-triangle" color="#dc2626">
+    Gestion d'erreurs robuste pour tous les codes HTTP. Tester les scénarios d'échec. Traiter les IPN FAILED.
+  </Card>
+  <Card title="Sécurité" icon="shield-alt" color="#16a34a">
+    Toutes les requêtes en HTTPS. Clé API jamais exposée côté frontend. Validation des données avant envoi.
+  </Card>
+  <Card title="Monitoring" icon="chart-line" color="#1d60d5">
+    Système de logs pour toutes les transactions. Alertes pour erreurs critiques. Suivi via `transaction_id` et `custom_data`.
+  </Card>
+</CardGroup>
+
+## Migration vers la production
+
+La migration se fait en changeant uniquement les clés API. Aucune modification de code n'est nécessaire si l'architecture est correctement configurée.
+
+<Steps>
+  <Step title="Obtenir la clé API de production">
+    Contacter le support KAYBIC AFRICA pour obtenir votre clé API de production.
+  </Step>
+  <Step title="Configurer les variables d'environnement">
+    Remplacer la clé API de test par la clé API de production dans vos variables d'environnement.
+  </Step>
+  <Step title="Vérifier l'URL de base">
+    S'assurer que base_url est correctement configurée.
+  </Step>
+  <Step title="Tester une transaction">
+    Effectuer une transaction de test avec un montant minimal pour valider la configuration.
+  </Step>
+</Steps>
+
+<Warning>
+  Ne jamais utiliser la clé API de production pour des tests, et vice versa.
+</Warning>
+
+## Rollback
+
+En cas de problème après le déploiement, le retour arrière se fait en contactant le service client via les canaux dédiés (groupe WhatsApp, email support).
+
+<CardGroup cols={2}>
+  <Card title="Rétablir la clé de test" icon="key" color="#f59e0b">
+    Revenir temporairement à la clé API de test en attendant la résolution.
+  </Card>
+  <Card title="Contacter le support" icon="headset" color="#1d60d5">
+    Contacter immédiatement le support via le WhatsApp dédié ou l'email support.
+  </Card>
+</CardGroup>
+
+<Info>
+  En cas de besoin d'assistance, veuillez contactez votre responsable commercial ou le support KAYBIC AFRICA pour y accéder.
+</Info>
+
+<Tip>
+  Avant d'utiliser la clé API de production, effectuez des tests approfondis avec une clé API de test pour minimiser les risques.
+</Tip>

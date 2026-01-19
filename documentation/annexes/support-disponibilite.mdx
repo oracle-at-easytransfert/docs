@@ -1,0 +1,118 @@
+---
+title: "Support et disponibilité"
+description: "Canaux de support, SLA et disponibilité de l'API EASYTRANSFERT BUSINESS"
+icon: headset
+---
+
+## Canaux de support
+
+| Canal | Description | Disponibilité |
+|-------|-------------|---------------|
+| **Email support** | Pour toutes questions techniques sur l'API, incidents ou bugs | support@easytransfert.example.com – 24/7 |
+| **Téléphone** | Assistance directe pour problèmes critiques ou incidents de production | +221 33 123 45 67 (du lundi au vendredi, 9h–18h GMT) |
+| **Chat en ligne** | Support instantané pour questions sur intégration ou variables | https://chat.easytransfert.example.com – 9h–18h GMT |
+| **Portail développeur** | Documentation complète, FAQs, tickets de support et guides | https://developers.easytransfert.example.com – 24/7 |
+| **Groupe WhatsApp** | Support dédié pour assistance et onboarding | Disponible selon les groupes dédiés |
+
+## Processus de support technique
+
+### 1. Création d'un ticket
+
+<Steps>
+  <Step title="Se connecter">
+    Connectez-vous au portail développeur.
+  </Step>
+  <Step title="Sélectionner la catégorie">
+    Sélectionnez la catégorie : Bug, Question API, Demande de fonctionnalité, Problème IPN.
+  </Step>
+  <Step title="Remplir le formulaire">
+    Remplissez le formulaire avec :
+    - API Key utilisée
+    - Endpoint concerné (ex: /airtime, /status)
+    - Description détaillée du problème
+    - Logs ou captures si disponibles
+  </Step>
+  <Step title="Recevoir le numéro de ticket">
+    Un numéro de ticket unique est généré (ex: EFB-SUPPORT-20260113-001).
+  </Step>
+</Steps>
+
+### 2. Prise en charge
+
+Les tickets sont triés selon leur urgence :
+
+| Niveau | Temps de réponse indicatif | Temps de résolution cible |
+|--------|-----------------|---------------------------|
+| **Critique** | < 1h | < 4h |
+| **Haute** | < 4h | < 24h |
+| **Normale** | < 24h | < 72h |
+
+<Info>
+  Les engagements de temps de réponse ne sont pas précisés contractuellement. Les délais ci-dessus sont indicatifs et peuvent varier selon la charge et les priorités.
+</Info>
+
+Un ingénieur support est assigné et contacte le demandeur via email.
+
+### 3. Suivi
+
+Chaque ticket peut être suivi via le portail ou via email. Des mises à jour régulières sont envoyées jusqu'à résolution complète.
+
+### 4. Clôture
+
+Après résolution, le ticket est clôturé. Le demandeur peut laisser un retour ou demander un suivi complémentaire.
+
+## Support entreprise
+
+KAYBIC AFRICA accompagne le client dans l'initiation à l'utilisation de la plateforme API et assure un support d'exploitation.
+
+- **Initiation et onboarding** : Assistance et onboarding assurés via un groupe WhatsApp dédié
+- **Support d'exploitation** : Support assuré dans le cadre de l'exploitation des services API
+
+## SLA et disponibilité
+
+KAYBIC AFRICA assure la maintenance technique de l'API mise à disposition du client.
+
+### Maintenance technique
+
+| Aspect | Description |
+|--------|-------------|
+| **Maintenance planifiée** | KAYBIC AFRICA informe le client de toute activité de maintenance planifiée susceptible d'entraîner une interruption de service |
+| **Maintenance corrective** | Les interventions de maintenance corrective sont effectuées pour garantir la stabilité et la sécurité de l'API |
+
+### Limitations de responsabilité
+
+KAYBIC AFRICA ne peut être tenue responsable des interruptions de service liées à :
+
+| Cause | Description |
+|-------|-------------|
+| **Opérations de maintenance** | Interruptions liées aux opérations de maintenance planifiées ou correctives |
+| **Pannes des réseaux partenaires** | Pannes ou indisponibilités des réseaux ou des établissements partenaires (opérateurs Mobile Money, fournisseurs d'infrastructure) |
+| **Force majeure** | Cas de force majeure : catastrophes naturelles, conflits, décisions gouvernementales, pannes généralisées d'électricité ou d'internet |
+
+<Warning>
+  Les interruptions de service dues aux causes mentionnées ci-dessus ne donnent pas lieu à compensation ou remboursement.
+</Warning>
+
+### Communication des interruptions
+
+Pour les maintenances planifiées, KAYBIC AFRICA informe le client via :
+- Email de notification
+- Groupe WhatsApp dédié
+- Dashboard partenaire (si disponible)
+
+## Informations utiles pour le contact
+
+| Contact | Information |
+|---------|-------------|
+| **Email technique** | support-tech@easytransfert.example.com |
+| **Email commercial** | sales@easytransfert.example.com |
+| **Téléphone assistance** | +221 33 123 45 67 |
+| **Adresse du siège** | EASYTRANSFERT BUSINESS, 123 Rue de l'Innovation, Dakar, Sénégal |
+
+## Bonnes pratiques
+
+- **Gestion d'erreurs** : Implémenter une gestion d'erreurs robuste pour les interruptions temporaires
+- **Retry avec backoff** : Utiliser un mécanisme de retry avec backoff progressif
+- **Surveiller les notifications** : Surveiller les canaux de communication (email, WhatsApp)
+- **Tests post-maintenance** : Effectuer des tests de validation après une maintenance planifiée
+- **Fournir des informations complètes** : Pour un traitement plus rapide, fournir toujours le maximum d'informations : transaction_id, logs, captures d'écran, et description détaillée du problème

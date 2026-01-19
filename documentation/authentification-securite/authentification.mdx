@@ -1,0 +1,50 @@
+---
+title: "Authentification"
+description: "Mécanisme d'authentification par clé API de l'API EASYTRANSFERT"
+icon: "key"
+---
+
+L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par clé API (`api_key`).
+
+## Principe général
+
+- L'authentification se fait exclusivement via une clé API statique
+- La clé API est transmise dans le corps (body) des requêtes, au format string
+- Aucun token dynamique n'est utilisé
+- Aucun header Authorization n'est requis
+- Il n'y a ni expiration, ni renouvellement automatique de la clé API
+
+<Info>
+  La clé API permet d'identifier de manière unique le compte partenaire appelant l'API.
+</Info>
+
+## Transmission de la clé API
+
+La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFERT, sous la forme ci-dessous :
+
+```json
+"api_key": "votre_cle_api"
+```
+
+<Warning>
+  Ce champ est obligatoire. Toute requête sans clé API valide sera rejetée.
+</Warning>
+
+## Gestion de la clé API
+
+- La clé API est fournie par EASYTRANSFERT
+- Elle doit être conservée de manière sécurisée
+- En production, elle doit être stockée dans :
+  - les variables d'environnement
+  - ou encore un gestionnaire de secrets (Vault, Secret Manager, etc.)
+
+## Bonnes pratiques de sécurité
+
+- Ne jamais exposer la clé API côté frontend ou dans un dépôt public
+- Utiliser uniquement des appels serveur à serveur
+- Restreindre l'accès à l'API aux adresses IP autorisées si possible
+
+## Renouvellement
+
+- Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
+- Les applications doivent alors mettre à jour la variable `api_key` dans leur environnement

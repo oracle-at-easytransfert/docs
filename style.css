@@ -1,0 +1,329 @@
+/* ============================================
+   STYLES GLOBAUX EASYTRANSFERT
+   ============================================ */
+
+/* Dégradé de fond basé sur la palette EasyTransfert */
+:root {
+  --gradient-start: #0f4c9e;
+  --gradient-mid: #1d60d5;
+  --gradient-end: #3b82f6;
+}
+
+/* Background style pawaPay - gradients radiaux subtils */
+body,
+html {
+  background-color: #ffffff !important;
+  background-image: 
+    /* Gradients radiaux (blooms) */
+    radial-gradient(800px circle at 100% -10%, rgba(29, 96, 213, 0.08), transparent 40%),
+    radial-gradient(900px circle at 0% -20%, rgba(59, 130, 246, 0.06), transparent 45%),
+    radial-gradient(1100px circle at 50% 120%, rgba(29, 96, 213, 0.04), transparent 55%);
+  background-size: auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] html,
+.dark body,
+.dark html {
+  background-color: #0b1020 !important;
+  background-image: 
+    /* Gradients radiaux (blooms) */
+    radial-gradient(800px circle at 100% -10%, rgba(29, 96, 213, 0.18), transparent 40%),
+    radial-gradient(900px circle at 0% -20%, rgba(59, 130, 246, 0.15), transparent 45%),
+    radial-gradient(1100px circle at 50% 120%, rgba(29, 96, 213, 0.12), transparent 55%);
+  background-size: auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0;
+  background-attachment: fixed;
+}
+
+/* Application du dégradé sur les conteneurs de contenu */
+main,
+.mdx-content,
+.content-wrapper,
+[class*="content"] {
+  background: transparent;
+}
+
+/* ============================================
+   LOGO ET TEXTE EASYTRANSFERT - UN SEUL LOGO, UNE SEULE MENTION À DROITE
+   ============================================ */
+
+/* Masquer TOUS les logos sauf le premier dans la sidebar/navbar */
+.nav-logo img:nth-child(n+2),
+.nav-logo svg:nth-child(n+2),
+.nav-logo picture:nth-child(n+2),
+.nav-logo + .nav-logo,
+nav [class*="logo"]:not(:first-child),
+[class*="sidebar"] [class*="logo"]:not(:first-child),
+[class*="navbar"] [class*="logo"]:not(:first-child),
+header [class*="logo"]:not(:first-child),
+[class*="nav"] [class*="logo"]:not(:first-child),
+aside [class*="logo"]:not(:first-child) {
+  display: none !important;
+}
+
+/* Masquer toutes les mentions EASYTRANSFERT en texte dans la navigation */
+/* On utilise une approche plus large pour cibler tous les éléments possibles */
+nav *:not([class*="logo"]):not([class*="logo"] *) {
+  /* On ne masque pas tout, mais on va cibler spécifiquement */
+}
+
+/* Masquer les éléments qui contiennent "EASYTRANSFERT" ou "Easy Transfert" dans la navbar/sidebar */
+[class*="sidebar"] a,
+[class*="sidebar"] span,
+[class*="sidebar"] div,
+[class*="navbar"] a,
+[class*="navbar"] span,
+[class*="navbar"] div,
+nav a,
+nav span {
+  /* On va utiliser JavaScript pour masquer ceux qui contiennent le texte */
+}
+
+/* Configuration du premier logo avec texte EASYTRANSFERT à droite */
+.nav-logo:first-child,
+nav [class*="logo"]:first-child,
+[class*="navbar"] [class*="logo"]:first-child,
+header [class*="logo"]:first-child,
+aside [class*="logo"]:first-child,
+[class*="sidebar"] [class*="logo"]:first-child {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  position: relative !important;
+  flex-direction: row !important;
+}
+
+/* Texte EASYTRANSFERT à droite du logo */
+.nav-logo:first-child::after,
+nav [class*="logo"]:first-child::after,
+[class*="navbar"] [class*="logo"]:first-child::after,
+header [class*="logo"]:first-child::after,
+aside [class*="logo"]:first-child::after,
+[class*="sidebar"] [class*="logo"]:first-child::after {
+  content: "EASYTRANSFERT" !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.5px !important;
+  margin-left: 12px !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  order: 2 !important;
+}
+
+[data-theme="dark"] .nav-logo:first-child::after,
+.dark .nav-logo:first-child::after,
+[data-theme="dark"] nav [class*="logo"]:first-child::after,
+.dark nav [class*="logo"]:first-child::after {
+  color: #ffffff !important;
+}
+
+/* S'assurer que le logo (image) est à gauche */
+.nav-logo:first-child img,
+.nav-logo:first-child svg,
+.nav-logo:first-child picture,
+nav [class*="logo"]:first-child img,
+nav [class*="logo"]:first-child svg {
+  order: 1 !important;
+  display: block !important;
+}
+
+/* ============================================
+   AUGMENTATION DE LA TAILLE DU TEXTE GLOBALE
+   ============================================ */
+
+/* Body et texte de base */
+body,
+html {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+}
+
+/* Titres principaux */
+h1,
+.mdx h1,
+[class*="heading"] h1 {
+  font-size: 2.5rem !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+}
+
+h2,
+.mdx h2,
+[class*="heading"] h2 {
+  font-size: 2rem !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+}
+
+h3,
+.mdx h3,
+[class*="heading"] h3 {
+  font-size: 1.5rem !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+h4,
+.mdx h4,
+[class*="heading"] h4 {
+  font-size: 1.25rem !important;
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+}
+
+h5,
+.mdx h5 {
+  font-size: 1.1rem !important;
+  line-height: 1.5 !important;
+}
+
+h6,
+.mdx h6 {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Paragraphes */
+p,
+.mdx p,
+[class*="paragraph"] {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  margin-bottom: 1rem;
+}
+
+/* Listes */
+li,
+ul li,
+ol li,
+.mdx li {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  margin-bottom: 0.5rem;
+}
+
+ul,
+ol {
+  font-size: 16px !important;
+}
+
+/* Tableaux */
+table,
+.mdx table {
+  font-size: 15px !important;
+}
+
+table th,
+table td,
+.mdx table th,
+.mdx table td {
+  font-size: 15px !important;
+  padding: 0.75rem !important;
+}
+
+/* Code inline */
+code,
+.mdx code:not(pre code) {
+  font-size: 14px !important;
+  padding: 0.2em 0.4em;
+}
+
+/* Blocs de code */
+pre,
+pre code,
+.mdx pre,
+.mdx pre code {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+/* Textes dans les composants Mintlify */
+[class*="Card"] p,
+[class*="Card"] li {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+}
+
+[class*="Accordion"] p,
+[class*="Accordion"] li {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+}
+
+/* Navigation et sidebar */
+nav,
+[class*="sidebar"],
+[class*="navigation"] {
+  font-size: 15px !important;
+}
+
+nav a,
+[class*="sidebar"] a {
+  font-size: 15px !important;
+}
+
+/* Footer */
+footer,
+[class*="footer"] {
+  font-size: 15px !important;
+}
+
+footer p,
+footer li {
+  font-size: 15px !important;
+}
+
+/* Barre de recherche */
+[class*="search"],
+input[type="search"] {
+  font-size: 15px !important;
+}
+
+/* Boutons */
+button,
+[class*="button"],
+a[class*="button"] {
+  font-size: 15px !important;
+}
+
+/* Alerts, Info, Warning, Tip */
+[class*="Info"],
+[class*="Warning"],
+[class*="Tip"],
+[class*="Alert"] {
+  font-size: 15px !important;
+}
+
+[class*="Info"] p,
+[class*="Warning"] p,
+[class*="Tip"] p,
+[class*="Alert"] p {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+/* API Reference */
+[class*="api"],
+[class*="endpoint"] {
+  font-size: 15px !important;
+}
+
+/* Tous les éléments de texte génériques */
+span,
+div,
+section,
+article {
+  font-size: inherit;
+}
+
+/* Amélioration de la lisibilité globale */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
