@@ -80,7 +80,7 @@ La confirmation finale d'une transaction est envoyée de façon asynchrone à vo
 | `created_at`     | string      | Date de création (ISO 8601)                                                                 |
 | `updated_at`     | string      | Date de mise à jour (ISO 8601)                                                              |
 | `ipn_state`      | number      | État de l'IPN                                                                               |
-| `hash`           | string      | Cette valeur de confirmer que la reponse du webhook proviens véritablement de EasyTransfert |
+| `hash`           | string      | Cette valeur vient confirmer que la réponse du webhook provient véritablement de EasyTransfert |
 
 ## États possibles
 
@@ -94,4 +94,4 @@ La confirmation finale d'une transaction est envoyée de façon asynchrone à vo
 - Toujours répondre HTTP 200 OK à l'IPN pour confirmer la réception
 - Vérifier l'unicité du `transaction_id` pour éviter les traitements en double
 - Utiliser `custom_data` pour faire le lien avec votre système interne
-- Vérifier que la reponse proviens de nous véritablement à partir du `hash`
+- Vérifier que la réponse provient de nous véritablement à partir du `hash`

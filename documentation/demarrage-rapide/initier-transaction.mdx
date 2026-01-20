@@ -41,25 +41,25 @@ POST {{base_url}}/airtime
 }
 ```
 
-Pour les cas qui demande des confirmations avec des codes OTP, veuillez consulter le tableau ci-dessous pour connaitre les syntaxes à composer par pays et par opérateur
+Pour les cas qui demandent des confirmations avec des codes OTP, veuillez consulter le tableau ci-dessous pour connaître les syntaxes à composer par pays et par opérateur
 
 | Pays          | Opérateur     | Syntaxe                               | Note                                                     |
 | ------------- | ------------- | ------------------------------------- | -------------------------------------------------------- |
-| Côte d'Ivoire | Orange        | #144\*82#                             | Payment by otp code                                      |
-|               | Moov          | NO                                    | A composer apres réception du sms de debit               |
+| Côte d'Ivoire | Orange        | #144\*82#                             | Payment by OTP code                                      |
+|               | Moov          | NO                                    | À composer après réception du SMS de débit               |
 |               | Mtn CI        | \*133#                                | Confirmation by secret code after receiving the push sms |
 |               | Wave          | NO                                    | Confirmation par QR Code                                 |
-| Senegal       | Orange        | #144#391#                             | Payment by otp code                                      |
-|               | Expresso      | _\*444_\*3\*3#                        | A composer apres réception du sms de debit               |
+| Senegal       | Orange        | #144#391#                             | Payment by OTP code                                      |
+|               | Expresso      | _\*444_\*3\*3#                        | À composer après réception du SMS de débit               |
 |               | Free          | NO                                    | Confirmation by secret code after receiving the push sms |
 |               | Wave          | NO                                    | Confirmation par QR Code                                 |
-| Mali          | Orange        | #144#77#                              | Payment by otp code                                      |
+| Mali          | Orange        | #144#77#                              | Payment by OTP code                                      |
 |               | Moov          | NO                                    | Confirmation by secret code after receiving the push sms |
 | Togo          | Tmoney        | NO                                    | Confirmation by secret code after receiving the push sms |
 |               | Flooz         | NO                                    | Confirmation by secret code after receiving the push sms |
 | Benin         | Moov          | \_\*855_7\*8#                         | Confirmation by secret code after receiving the push sms |
 |               | Mtn           | NO                                    | Confirmation by secret code after receiving the push sms |
-| Burkina Faso  | Orange        | \_\*144_4\*6\*100#                    | Payment by otp code                                      |
+| Burkina Faso  | Orange        | \_\*144_4\*6\*100#                    | Payment by OTP code                                      |
 |               | Moov          | _\*555_\*6#                           | Confirmation by secret code after receiving the push sms |
 | Cameroun      | Orange        | #150\*50#                             | Confirmation by secret code after receiving the push sms |
 |               | Mtn           | \*126#                                | Confirmation by secret code after receiving the push sms |
@@ -69,7 +69,7 @@ Pour les cas qui demande des confirmations avec des codes OTP, veuillez consulte
 |               | Airtel CD     | NO                                    | Confirmation by secret code after receiving the push sms |
 |               | Orange CDUSD  | NO                                    | Confirmation by secret code after receiving the push sms |
 |               | Mpesa CDUSD   | NO                                    | Confirmation by secret code after receiving the push sms |
-| Guinée        | Orange        | #144#, Choice option 4 and l'option 2 | Payment by otp code                                      |
+| Guinée        | Orange        | #144#, choisir l'option 4 puis l'option 2 | Payment by OTP code                                 |
 |               | Mtn           | NO                                    | Confirmation by secret code after receiving the push sms |
 
 ## Exemple – Orange CI Cashout avec OTP
@@ -107,4 +107,4 @@ Pour les transactions où le paramètre `om_otp` est requis :
 }
 ```
 
-La reponse complète peut être consulter dans [la section Api Reference](/api-reference/endpoint/transaction)
+La réponse complète peut être consultée dans [la section API Reference](/api-reference/endpoint/transaction)

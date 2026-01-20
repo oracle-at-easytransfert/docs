@@ -11,12 +11,12 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
 | Code    | Nom                   | Description / Exemple                                                                                                                              |
 | ------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **200** | OK                    | La requête a été reçue et traitée avec succès. Exemple : initiation d'une transaction. La confirmation finale arrive via IPN.                      |
-| **406** | Bad Request           | Cette erreur signifie qu'un champ recquis n'a pas été saisi.                                                                                       |
+| **406** | Bad Request           | Cette erreur signifie qu'un champ requis n'a pas été saisi.                                                                                        |
 | **401** | Unauthorized          | Clé API absente ou invalide. Vérifier la variable api_key dans l'environnement Testeur d'API.                                                      |
 | **422** | Request unprocessable | La requête ne peut pas être traitée. Par exemple vous pouvez avoir une erreur métier du type `destination field is not applicable`                 |
 | **500** | Internal Server Error | Il s'agit ici d'une erreur côté serveur EASYTRANSFERT. Et vous pouvez trouver des explications dans le champ `erreur` dans l'objet `response.data` |
 
-## Erreurs métiers (propable de rencontrer dans les cas de bad request)
+## Erreurs métiers (probable de rencontrer dans les cas de bad request)
 
 | Erreur                              | Code | Description                                                            |
 | ----------------------------------- | ---- | ---------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
 
 <CardGroup cols={2}>
   <Card title="Ne pas confondre HTTP et erreurs métier" icon="exclamation-triangle" color="#dc2626">
-    HTTP 200 peut contenir un state: FAILED dans la réponse JSON si la transaction a échoué. Les champs state, reponse, et error doivent toujours être vérifiés après une réponse HTTP 200.
+    HTTP 200 peut contenir un state: FAILED dans la réponse JSON si la transaction a échoué. Les champs state, `response`, et `error` doivent toujours être vérifiés après une réponse HTTP 200.
   </Card>
   <Card title="Gérer les erreurs réseau et serveur" icon="server" color="#1d60d5">
     Si l’API retourne une erreur 500 (erreur interne du serveur), il est recommandé de relancer automatiquement la requête après un délai, en augmentant progressivement le temps d’attente entre chaque tentative (backoff progressif).
@@ -36,7 +36,7 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
     Vérifier les paramètres requis avant l'envoi de la requête surtout le `service_id` et votre `api_key`.
   </Card>
   <Card title="Journaliser les erreurs HTTP" icon="file-alt" color="#1d60d5">
-    Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter les réclammations.
+    Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter les réclamations.
   </Card>
 </CardGroup>
 
