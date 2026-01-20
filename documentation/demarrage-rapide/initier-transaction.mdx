@@ -28,6 +28,19 @@ POST {{base_url}}/airtime
 | `custom_data` | string | Non          | Référence interne qui sera retournée dans l'IPN                                                                                                     |
 | `om_otp`      | string | Conditionnel | **Uniquement pour Orange Money Cashout** (service_id 23, 27, 29). Code d'autorisation obtenu par le client via `#144*82#` (CI) ou `#144#391#` (SN). |
 
+## Exemple – MTN Cashout
+
+```json
+{
+  "amount": 5000,
+  "api_key": "xxxxxxxxxxxxxxx",
+  "destination": "0103444777",
+  "service_id": 25,
+  "ipn_url": "https://votre_webhook.url",
+  "custom_data": "order_789"
+}
+```
+
 Pour les cas qui demande des confirmations avec des codes OTP, veuillez consulter le tableau ci-dessous pour connaitre les syntaxes à composer par pays et par opérateur
 
 | Pays          | Opérateur     | Syntaxe                               | Note                                                     |
@@ -44,9 +57,9 @@ Pour les cas qui demande des confirmations avec des codes OTP, veuillez consulte
 |               | Moov          | NO                                    | Confirmation by secret code after receiving the push sms |
 | Togo          | Tmoney        | NO                                    | Confirmation by secret code after receiving the push sms |
 |               | Flooz         | NO                                    | Confirmation by secret code after receiving the push sms |
-| Benin         | Moov          | _\*855_7\*8#                          | Confirmation by secret code after receiving the push sms |
+| Benin         | Moov          | \_\*855_7\*8#                         | Confirmation by secret code after receiving the push sms |
 |               | Mtn           | NO                                    | Confirmation by secret code after receiving the push sms |
-| Burkina Faso  | Orange        | _\*144_4\*6\*100#                     | Payment by otp code                                      |
+| Burkina Faso  | Orange        | \_\*144_4\*6\*100#                    | Payment by otp code                                      |
 |               | Moov          | _\*555_\*6#                           | Confirmation by secret code after receiving the push sms |
 | Cameroun      | Orange        | #150\*50#                             | Confirmation by secret code after receiving the push sms |
 |               | Mtn           | \*126#                                | Confirmation by secret code after receiving the push sms |
@@ -59,22 +72,9 @@ Pour les cas qui demande des confirmations avec des codes OTP, veuillez consulte
 | Guinée        | Orange        | #144#, Choice option 4 and l'option 2 | Payment by otp code                                      |
 |               | Mtn           | NO                                    | Confirmation by secret code after receiving the push sms |
 
-## Exemple – MTN Cashout
+## Exemple – Orange CI Cashout avec OTP
 
-```json
-{
-  "amount": 5000,
-  "api_key": "xxxxxxxxxxxxxxx",
-  "destination": "0103444777",
-  "service_id": 25,
-  "ipn_url": "https://votre_webhook.url",
-  "custom_data": "order_789"
-}
-```
-
-## Exemple – Orange Cashout avec OTP
-
-Pour les transactions Orange Money Cashout, le paramètre `om_otp` est requis :
+Pour les transactions où le paramètre `om_otp` est requis :
 
 ```json
 {
@@ -89,11 +89,7 @@ Pour les transactions Orange Money Cashout, le paramètre `om_otp` est requis :
 ```
 
 <Info>
-  **Comment obtenir l'OTP Orange Money :**
-
-  - **Côte d'Ivoire** : Le client compose `#144*82#` sur son téléphone
-  - **Sénégal** : Le client compose `#144#391#` sur son téléphone
-  - Le code reçu doit être transmis dans `om_otp` en chaîne de caractères
+  
 </Info>
 
 ## Réponse immédiate
