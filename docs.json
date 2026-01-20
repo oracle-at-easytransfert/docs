@@ -34,6 +34,12 @@
         ]
       },
       {
+        "tab": "Accueil",
+        "pages": [
+          "index-copied-1"
+        ]
+      },
+      {
         "tab": "Documentation",
         "groups": [
           {
