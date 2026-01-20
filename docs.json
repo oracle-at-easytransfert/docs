@@ -9,10 +9,7 @@
   },
   "appearance": {
     "default": "system",
-    "strict": false,
-    "background": {
-      "decoration": "gradient"
-    }
+    "strict": false
   },
   "fonts": {
     "heading": {
@@ -31,12 +28,6 @@
         "tab": "Accueil",
         "pages": [
           "index"
-        ]
-      },
-      {
-        "tab": "Accueil",
-        "pages": [
-          "index-copied-1"
         ]
       },
       {
@@ -108,7 +99,21 @@
           }
         ]
       }
-    ]
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "C'est quoi le mobile money ?",
+          "href": "/global/mobile-money",
+          "icon": "book-open-cover"
+        },
+        {
+          "anchor": "Bon à savoir",
+          "href": "/global/good-to-know",
+          "icon": "info"
+        }
+      ]
+    }
   },
   "logo": {
     "light": "/images/téléchargement.png",
@@ -124,15 +129,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "description": "Just Easy",
   "api": {
