@@ -39,7 +39,9 @@
           {
             "group": "INTRODUCTION",
             "pages": [
-              "documentation/introduction/presentation-api"
+              "documentation/introduction/presentation-api",
+              "documentation/dictionnaire",
+              "documentation/annexes/glossaire-variables-testeur-api"
             ]
           },
           {
@@ -77,13 +79,11 @@
           {
             "group": "ANNEXES",
             "pages": [
-              "documentation/annexes/glossaire-variables-testeur-api",
               "documentation/annexes/support-disponibilite",
               "documentation/annexes/tarification-conditions-financieres",
               "documentation/annexes/kyc-conformite",
               "documentation/annexes/comptes-business",
-              "documentation/annexes/gestion-plaintes",
-              "documentation/dictionnaire"
+              "documentation/annexes/gestion-plaintes"
             ]
           }
         ]
