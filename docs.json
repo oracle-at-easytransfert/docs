@@ -9,10 +9,7 @@
   },
   "appearance": {
     "default": "system",
-    "strict": false,
-    "background": {
-      "decoration": "gradient"
-    }
+    "strict": false
   },
   "fonts": {
     "heading": {
@@ -26,6 +23,20 @@
   },
   "favicon": "/images/téléchargement.png",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "C'est quoi le mobile money ?",
+          "icon": "book-open-cover",
+          "href": "/global/mobile-money"
+        },
+        {
+          "anchor": "Bon à savoir",
+          "icon": "info",
+          "href": "/global/good-to-know"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Accueil",
@@ -39,7 +50,9 @@
           {
             "group": "INTRODUCTION",
             "pages": [
-              "documentation/introduction/presentation-api"
+              "documentation/introduction/presentation-api",
+              "documentation/dictionnaire",
+              "documentation/annexes/glossaire-variables-testeur-api"
             ]
           },
           {
@@ -77,13 +90,10 @@
           {
             "group": "ANNEXES",
             "pages": [
-              "documentation/annexes/glossaire-variables-testeur-api",
               "documentation/annexes/support-disponibilite",
-              "documentation/annexes/tarification-conditions-financieres",
               "documentation/annexes/kyc-conformite",
               "documentation/annexes/comptes-business",
-              "documentation/annexes/gestion-plaintes",
-              "documentation/dictionnaire"
+              "documentation/annexes/gestion-plaintes"
             ]
           }
         ]
@@ -112,21 +122,9 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@easytransfert.ci"
+        "href": "mailto:support-business@easytransfert.ci"
       }
     ]
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
   },
   "description": "Just Easy",
   "api": {

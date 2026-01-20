@@ -8,15 +8,20 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
 
 ## Codes principaux et signification
 
-| Code    | Nom                   | Description / Exemple                                                                                                                                      |
-| ------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **200** | OK                    | La requête a été reçue et traitée avec succès. Exemple : initiation d'une transaction. La confirmation finale arrive via IPN.                              |
-| **400** | Bad Request           | La requête est mal formée. Exemples : JSON invalide, amount manquant, amount n'est pas un multiple de 100, service_id incorrect, destination mal formatée. |
-| **401** | Unauthorized          | Clé API absente ou invalide. Vérifier la variable {api_key} dans l'environnement Testeur d'API.                                                            |
-| **403** | Forbidden             | Accès interdit. Exemple : tentative de retrait sur un service non autorisé.                                                                                |
-| **404** | Not Found             | Ressource introuvable. Exemple : transaction_id inexistant lors de l'interrogation du statut.                                                              |
-| **429** | Too Many Requests     | Trop de requêtes envoyées en peu de temps (rate limiting). Respecter le Retry-After si fourni.                                                             |
-| **500** | Internal Server Error | Erreur côté serveur EASYTRANSFERT. La requête peut être retentée après un délai.                                                                           |
+| Code    | Nom                   | Description / Exemple                                                                                                                              |
+| ------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **200** | OK                    | La requête a été reçue et traitée avec succès. Exemple : initiation d'une transaction. La confirmation finale arrive via IPN.                      |
+| **406** | Bad Request           | Cette erreur signifie qu'un champ recquis n'a pas été saisi.                                                                                       |
+| **401** | Unauthorized          | Clé API absente ou invalide. Vérifier la variable api_key dans l'environnement Testeur d'API.                                                      |
+| **422** | Request unprocessable | La requête ne peut pas être traitée. Par exemple vous pouvez avoir une erreur métier du type `destination field is not applicable`                 |
+| **500** | Internal Server Error | Il s'agit ici d'une erreur côté serveur EASYTRANSFERT. Et vous pouvez trouver des explications dans le champ `erreur` dans l'objet `response.data` |
+
+## Erreurs métiers (propable de rencontrer dans les cas de bad request)
+
+| Erreur                              | Code | Description                                                            |
+| ----------------------------------- | ---- | ---------------------------------------------------------------------- |
+| destination field is not applicable | 422  | Le numéro du destinataire n'est probablement pas alligné à l'opérateur |
+| amount is not applicable            | 422  | Le montant doit être un multiple de cinq (5) ou de cent (100).         |
 
 ## Bonnes pratiques liées aux codes HTTP
 
@@ -28,10 +33,10 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
     Si l’API retourne une erreur 500 (erreur interne du serveur), il est recommandé de relancer automatiquement la requête après un délai, en augmentant progressivement le temps d’attente entre chaque tentative (backoff progressif).
   </Card>
   <Card title="Valider les entrées avant l'envoi" icon="check-circle" color="#16a34a">
-    Vérifier les paramètres requis avant l'envoi de la requête.
+    Vérifier les paramètres requis avant l'envoi de la requête surtout le `service_id` et votre `api_key`.
   </Card>
   <Card title="Journaliser les erreurs HTTP" icon="file-alt" color="#1d60d5">
-    Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter le debugging.
+    Conserver le transaction_id, le code HTTP et le message de la réponse pour faciliter les réclammations.
   </Card>
 </CardGroup>
 
