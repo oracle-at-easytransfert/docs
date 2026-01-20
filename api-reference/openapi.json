@@ -44,7 +44,7 @@
 									},
 									"ipn_url": {
 										"type": "string",
-										"description": "Url de notifaction. Sur cette url vous recevrez les status des opérations de cashin ou cashout",
+										"description": "Url de notification. Sur cette url vous recevrez les statuts des opérations de cashin ou cashout",
 										"examples": [
 											"https://webhook.site/6da1dcfa-4cb2-4fb9-991a-8a841e246803"
 										]
