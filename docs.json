@@ -23,6 +23,20 @@
   },
   "favicon": "/images/téléchargement.png",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "C'est quoi le mobile money ?",
+          "icon": "book-open-cover",
+          "href": "/global/mobile-money"
+        },
+        {
+          "anchor": "Bon à savoir",
+          "icon": "info",
+          "href": "/global/good-to-know"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Accueil",
@@ -77,7 +91,6 @@
             "group": "ANNEXES",
             "pages": [
               "documentation/annexes/support-disponibilite",
-              "documentation/annexes/tarification-conditions-financieres",
               "documentation/annexes/kyc-conformite",
               "documentation/annexes/comptes-business",
               "documentation/annexes/gestion-plaintes"
@@ -99,21 +112,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "C'est quoi le mobile money ?",
-          "href": "/global/mobile-money",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Bon à savoir",
-          "href": "/global/good-to-know",
-          "icon": "info"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/images/téléchargement.png",

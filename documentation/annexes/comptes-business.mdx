@@ -1,17 +1,21 @@
 ---
 title: "Comptes Business"
 description: "Gestion du compte business, solde, rapprochement et facturation"
-icon: wallet
+icon: "wallet"
 ---
 
 Gestion du compte business partenaire : suivi du solde, rapprochement comptable et facturation.
 
 ## Prévision de solde
 
-| Aspect | Description |
-|--------|-------------|
-| **Dashboard** | Dashboard "Dash Easytransfert partenaire" disponible pour suivre le solde |
+| Aspect            | Description                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| **Dashboard**     | Dashboard "Dash Easytransfert partenaire" disponible pour suivre le solde            |
 | **Endpoints API** | **GET STATUS** : état d'une transaction • **GET BALANCE** : solde du compte business |
+
+`Menu principal → Historique portefeuille collecte`
+
+![Solde](/solde.jpeg)
 
 ## Rapprochement comptable
 
@@ -19,10 +23,10 @@ Le dashboard "Dash Easytransfert partenaire" permet le suivi des transactions. P
 
 ## Reporting financier
 
-| Aspect | Description |
-|--------|-------------|
-| **Dashboard** | Dashboard "Dash Easytransfert partenaire" disponible |
-| **Fonctionnalités** | Permet le suivi des transactions |
+| Aspect              | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| **Dashboard**       | Dashboard "Dash Easytransfert partenaire" disponible |
+| **Fonctionnalités** | Permet le suivi des transactions                     |
 
 <Tip>
   Utilisez le champ `custom_data` et conservez les `transaction_id` pour faciliter le rapprochement avec vos systèmes comptables internes.
@@ -53,9 +57,26 @@ Le rechargement se fait par **virement bancaire** vers le compte désigné par K
   Sans preuve de virement, le rechargement ne peut pas être validé. Assurez-vous de conserver et transmettre la confirmation.
 </Warning>
 
-## Facturation
+## Demande de reversement
 
-Les modalités de facturation sont décrites dans la documentation de référence. Pour les détails complets (périodicité, format, modalités de paiement), consultez votre contrat ou contactez le support commercial.
+Un formulaire sur le dashboard est dédié pour la demande de reversement.
+
+Clic sur le bouton « Demande Reversement »
+
+![Rev3](/images/rev3.jpeg)
+
+![Rev4](/images/rev4.jpeg)
+
+Vous aurez à fournir deux (2) informations au travers des champs du formulaire
+
+- Type: Ce champ reprense le moyen par lequel vous voulez recevoir les fonds. Il en existe deux `Virement bancaire` et `Mobile money`
+- Montant: Le montant que vous souhaitez récuperer
+
+  <Note>
+    Assuez vous de saisir un montant valide en fonction de ce que vous avez sur votre compte
+  </Note>
+
+Une fois validé, le service financier reçoit et traite la demande. Un retour est fait au marchand dans un délai bref.
 
 ## Plafonds de compte
 
