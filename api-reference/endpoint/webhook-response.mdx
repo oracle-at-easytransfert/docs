@@ -10,7 +10,7 @@ Description:
 - Type: Webhook (callback POST)
 - Utilisation: EASYTRANSFERT envoie automatiquement les mises à jour de statut de transaction à l'URL IPN que vous avez configurée.
 
-## Exemple de réponse Webhook - SUCCESS
+## Exemple de réponse Webhook - SUCCESSFUL
 
 ```json
 {
@@ -24,7 +24,7 @@ Description:
   "error": "",
   "service_id": 14,
   "customer_name": "easytransfert",
-  "state": "SUCCESS",
+  "state": "SUCCESSFUL",
   "custom_data": "custom_data",
   "ipn_url": "",
   "provider_id": null,
@@ -73,7 +73,7 @@ Description:
 ## Champs importants
 
 - `transaction_id`: Identifiant unique de la transaction
-- `state`: Statut final de la transaction (`SUCCESS` ou `FAILED`)
+- `state`: Statut final de la transaction (`SUCCESSFUL` ou `FAILED`)
 - `response`: Message de réponse en cas de succès
 - `error`: Message d'erreur en cas d'échec
 - `amount`: Montant de la transaction

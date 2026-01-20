@@ -30,7 +30,7 @@ L'API EASYTRANSFERT BUSINESS utilise les codes HTTP classiques pour signaler l'�
     HTTP 200 peut contenir un state: FAILED dans la réponse JSON si la transaction a échoué. Les champs state, `response`, et `error` doivent toujours être vérifiés après une réponse HTTP 200.
   </Card>
   <Card title="Gérer les erreurs réseau et serveur" icon="server" color="#1d60d5">
-    Si l’API retourne une erreur 500 (erreur interne du serveur), il est recommandé de relancer automatiquement la requête après un délai, en augmentant progressivement le temps d’attente entre chaque tentative (backoff progressif).
+    Si l’API retourne une erreur 500 dans le cas d'un paiement (erreur interne du serveur), il est recommandé de relancer automatiquement la requête après un délai, en augmentant progressivement le temps d’attente entre chaque tentative (backoff progressif). Dans le cas d'un transfert, il recommandé de faire une vérification manuel avant de relancer la transaction.
   </Card>
   <Card title="Valider les entrées avant l'envoi" icon="check-circle" color="#16a34a">
     Vérifier les paramètres requis avant l'envoi de la requête surtout le `service_id` et votre `api_key`.

@@ -1,4 +1,63 @@
 ---
-title: 'Récupérer le solde marchand'
-openapi: 'POST /get-balance'
+title: 'Récupérer la balance du marchand'
+openapi: 'POST /api_v1/admin/partner/wallet/single'
 ---
+
+Cette page documente l'opération pour récupérer la balance du wallet de votre compte marchand.
+
+Description:
+
+- Endpoint: POST `/api_v1/admin/partner/wallet/single` (base URL défini dans la collection Postman)
+- Utilisation: récupère le solde disponible du wallet partenaire. Aucun body n'est requis pour cette requête.
+
+## Exemple de requête
+
+Avec l'en-tête requis:
+
+```
+POST /api_v1/admin/partner/wallet/single
+Content-Type: application/json
+x-api-key: votre_cle_api
+```
+
+Aucun body requis - la requête est vide.
+
+## Exemple de réponse
+
+```json
+{
+  "data": {
+    "wallet_amount": 139403535,
+    "currency": "XOF",
+    "last_updated": "2022-10-18T02:38:44.000+00:00"
+  },
+  "message": "Balance retrieved successfully",
+  "statut_code": 200
+}
+```
+
+## Paramètres requis
+
+**En-têtes HTTP:**
+
+| Paramètre | Type | Description | Exemple |
+|-----------|------|-------------|---------|
+| `Content-Type` | string | Type de contenu | `application/json` |
+| `x-api-key` | string | Votre clé d'API | `xxxxxxxxxxxxxxxxx` |
+
+## Champs de réponse
+
+- `wallet_amount`: Solde disponible du wallet partenaire
+- `currency`: Devise du compte (généralement XOF pour les pays francophones)
+- `last_updated`: Timestamp de la dernière mise à jour du solde
+- `message`: Message de confirmation
+- `statut_code`: Code de statut HTTP
+
+## Notes
+
+- ✅ **Important:** Utilisez cet endpoint pour vérifier votre solde avant d'initier des transactions.
+- Cette requête ne nécessite pas de body JSON.
+- Assurez-vous que votre clé API est valide dans le header `x-api-key`.
+- Le solde retourné est en temps réel après chaque transaction.
+- Ce endpoint ne procure pas de limite de débit - vous pouvez l'utiliser librement pour surveiller votre balance.
+

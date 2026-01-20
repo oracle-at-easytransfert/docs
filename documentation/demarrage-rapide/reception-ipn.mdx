@@ -22,7 +22,7 @@ La confirmation finale d'une transaction est envoyée de façon asynchrone à vo
   "error": "",
   "service_id": 14,
   "customer_name": "easytransfert",
-  "state": "SUCCESS",
+  "state": "SUCCESSFUL",
   "custom_data": "order_789",
   "ipn_url": "",
   "provider_id": null,
@@ -63,13 +63,13 @@ La confirmation finale d'une transaction est envoyée de façon asynchrone à vo
 | Champ            | Type        | Description                                                                                 |
 | ---------------- | ----------- | ------------------------------------------------------------------------------------------- |
 | `transaction_id` | string      | Identifiant unique de la transaction                                                        |
-| `state`          | string      | État de la transaction : SUCCESS ou FAILED                                                  |
+| `state`          | string      | État de la transaction : SUCCESSFUL ou FAILED                                                  |
 | `amount`         | number      | Montant de la transaction en FCFA                                                           |
 | `benefice`       | number      | Bénéfice de la transaction                                                                  |
 | `commission`     | number      | Commission appliquée                                                                        |
 | `destination`    | string      | Numéro du bénéficiaire                                                                      |
 | `fee`            | number      | Frais de transaction                                                                        |
-| `reponse`        | string      | Message de succès (si SUCCESS)                                                              |
+| `reponse`        | string      | Message de succès (si SUCCESSFUL)                                                              |
 | `error`          | string      | Message d'erreur (si FAILED)                                                                |
 | `service_id`     | number      | Identifiant du service utilisé                                                              |
 | `customer_name`  | string      | Nom du client/partenaire                                                                    |
@@ -86,7 +86,7 @@ La confirmation finale d'une transaction est envoyée de façon asynchrone à vo
 
 | État      | Description         |
 | --------- | ------------------- |
-| `SUCCESS` | Transaction réussie |
+| `SUCCESSFUL` | Transaction réussie |
 | `FAILED`  | Transaction échouée |
 
 ## Recommandations

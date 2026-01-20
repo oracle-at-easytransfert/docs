@@ -20,7 +20,7 @@ Tout d'abord, vous pouvez utiliser le point de terminaison [Check Status](/api-r
 
 ### Via les webhooks
 
-Ensuite, vous pouvez configurer des URL de callback (IPN) que vous allez placer dans [le DTO d'initialisation de la transaction](/documentation/demarrage-rapide/initier-transaction#paramètres-de-la-requête). Cela permettra d'envoyer automatiquement un rappel à l'URL de rappel que vous avez configurée dès qu'un paiement aura atteint son statut final. Vous devrez mettre en place un gestionnaire de rappel capable de recevoir les appels provenant de notre plateforme et de les traiter en conséquence.
+Ensuite, vous pouvez configurer des URL de callback (IPN) que vous allez placer dans [le payload d'initialisation de la transaction](/documentation/demarrage-rapide/initier-transaction#paramètres-de-la-requête). Cela permettra d'envoyer automatiquement un rappel à l'URL de rappel que vous avez configurée dès qu'un paiement aura atteint son statut final. Vous devrez mettre en place un gestionnaire de rappel capable de recevoir les appels provenant de notre plateforme et de les traiter en conséquence.
 
 ### Adresses IP à whitelister
 
