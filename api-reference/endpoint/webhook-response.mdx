@@ -8,7 +8,7 @@ Cette page documente les notifications IPN (Instant Payment Notification) que vo
 Description:
 
 - Type: Webhook (callback POST)
-- Utilisation: EASYTRANSFERT envoie automatiquement les mises à jour de statut de transaction à l'URL IPN que vous avez configurée.
+- Utilisation: KAYBIC AFRICA envoie automatiquement les mises à jour de statut de transaction à l'URL IPN que vous avez configurée.
 
 ## Exemple de réponse Webhook - SUCCESSFUL
 
@@ -23,7 +23,7 @@ Description:
   "response": "operation success",
   "error": "",
   "service_id": 14,
-  "customer_name": "easytransfert",
+  "customer_name": "KAYBIC AFRICA",
   "state": "SUCCESSFUL",
   "custom_data": "custom_data",
   "ipn_url": "",
@@ -53,7 +53,7 @@ Description:
   "response": "",
   "error": "message de l'erreur",
   "service_id": 10,
-  "customer_name": "easytransfert",
+  "customer_name": "KAYBIC AFRICA",
   "state": "FAILED",
   "custom_data": "transaction_ref_123",
   "ipn_url": "",
@@ -82,7 +82,7 @@ Description:
 ## Notes
 
 - ⚠️ **Important:** Vous devez retourner un code HTTP 200 pour confirmer la réception du webhook.
-- Si vous ne répondez pas, EASYTRANSFERT tentera de renvoyer la notification plusieurs fois.
+- Si vous ne répondez pas, KAYBIC AFRICA tentera de renvoyer la notification plusieurs fois.
 - Les webhooks arrivent généralement dans les secondes suivant le traitement de la transaction.
 - Utilisez le champ `custom_data` pour réconcilier les transactions avec vos données internes.
 

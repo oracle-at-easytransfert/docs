@@ -1,19 +1,19 @@
 ---
 title: "Glossaire des variables"
-description: "Référence complète des variables d'environnement pour l'API EASYTRANSFERT"
+description: "Référence complète des variables d'environnement pour l'API KAYBIC AFRICA"
 icon: "list-alt"
 ---
 
-Ce glossaire détaille toutes les variables utilisées pour l'initialisation d'une transaction avec l'API EASYTRANSFERT BUSINESS.
+Ce glossaire détaille toutes les variables utilisées pour l'initialisation d'une transaction avec l'API KAYBIC AFRICA .
 
 ## Variables principales
 
 | Variable         | Valeur par défaut                                           | Type   | Description détaillée                                                                                  | Notes importantes                                                                                                           |
 | ---------------- | ----------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `base_url`       | `http://proxy-airtime.easytransfert.app/api_v1/transaction` | string | URL de base de l'API EASYTRANSFERT Business pour toutes les requêtes de transactions et de statut.     | Toute requête doit être préfixée par cette URL.                                                                             |
-| `api_key`        | `votre_cle_api_ici`                                         | secret | Clé API fournie par EASYTRANSFERT pour authentifier vos requêtes.                                      | À ne jamais exposer dans le code public. Pour production, générer une clé sécurisée via le portail EASYTRANSFERT.           |
-| `transaction_id` | `EFB.001158` (vide par défaut)                              | string | Identifiant unique d'une transaction généré par EASYTRANSFERT après la création d'une transaction.     | Cette valeur est automatiquement mise à jour après l'appel "Initier Transaction" via les scripts Testeur d'API.             |
-| `ipn_url`        | `http://votre-site.com/webhook/easytransfert`               | string | URL de callback (webhook) où EASYTRANSFERT enverra les notifications de statut des transactions (IPN). | Doit être une URL accessible publiquement et sécurisée (HTTPS recommandé). L'IPN envoie l'état final "SUCCESSFUL" ou "FAILED". |
+| `base_url`       | `http://proxy-airtime.KAYBIC AFRICA.app/api_v1/transaction` | string | URL de base de l'API KAYBIC AFRICA  pour toutes les requêtes de transactions et de statut.     | Toute requête doit être préfixée par cette URL.                                                                             |
+| `api_key`        | `votre_cle_api_ici`                                         | secret | Clé API fournie par KAYBIC AFRICA pour authentifier vos requêtes.                                      | À ne jamais exposer dans le code public. Pour production, générer une clé sécurisée via le portail KAYBIC AFRICA.           |
+| `transaction_id` | `EFB.001158` (vide par défaut)                              | string | Identifiant unique d'une transaction généré par KAYBIC AFRICA après la création d'une transaction.     | Cette valeur est automatiquement mise à jour après l'appel "Initier Transaction" via les scripts Testeur d'API.             |
+| `ipn_url`        | `http://votre-site.com/webhook/KAYBIC AFRICA`               | string | URL de callback (webhook) où KAYBIC AFRICA enverra les notifications de statut des transactions (IPN). | Doit être une URL accessible publiquement et sécurisée (HTTPS recommandé). L'IPN envoie l'état final "SUCCESSFUL" ou "FAILED". |
 
 ## Identifiant de services (service_id)
 

@@ -11,7 +11,7 @@ Avant toute requête, il est nécessaire de configurer les variables d'environne
 | Variable       | Description                                          |
 | -------------- | ---------------------------------------------------- |
 | `base_url`     | URL de base de l'API                                 |
-| `api_key`      | Clé API fournie par EASYTRANSFERT                    |
+| `api_key`      | Clé API fournie par KAYBIC AFRICA                    |
 | `ipn_url`      | URL de votre webhook pour recevoir les notifications |
 | `service_id_*` | Identifiants des services (Cashin / Cashout)         |
 
@@ -19,16 +19,16 @@ Avant toute requête, il est nécessaire de configurer les variables d'environne
 
 ```text
 
-  BASE_URL=http://proxy-airtime.easytransfert.app/api_v1/transaction
+  BASE_URL=http://proxy-airtime.KAYBIC AFRICA.app/api_v1/transaction
   API_KEY=xxxxxxxxxxxx
-  IPN_URL=https://votre-site.com/webhook/easytransfert
+  IPN_URL=https://votre-site.com/webhook/KAYBIC AFRICA
 ```
 
 ## Bonnes pratiques
 
 - La variable `api_key` doit être définie comme secret dans votre fichier d'environnement
 - L'`ipn_url` doit être accessible publiquement en HTTPS et sans restriction
-- Les `service_id` doivent être validés par EASYTRANSFERT. Les services sont disponibles pour consultation dans [la section Services](/documentation/annexes/glossaire-variables-testeur-api).
+- Les `service_id` doivent être validés par KAYBIC AFRICA. Les services sont disponibles pour consultation dans [la section Services](/documentation/annexes/glossaire-variables-testeur-api).
 
 <Danger>
   Ne jamais exposer la clé API dans le code source ou les logs

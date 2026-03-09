@@ -1,13 +1,13 @@
 {
 	"openapi": "3.1.0",
 	"info": {
-		"title": "API MARCHAND EASYTRANSFERT",
-		"description": "Collection pour l'API EASYTRANSFERT BUSINESS API V1\n\nDocumentation: https://documenter.getpostman.com/view/23936159/2s84DoT3w1\n\nBASE_URL: http://proxy-airtime.easytransfert.app/api_v1/transaction\n\n**Prérequis:**\n- Clé API valide\n- Pour Cashout: au moins un wallet opérateur configuré\n- Pour Cashin: suffisamment de fonds sur le compte partenaire",
+		"title": "API MARCHAND KAYBIC AFRICA",
+		"description": "Collection pour l'API KAYBIC AFRICA  API V1\n\nDocumentation: https://documenter.getpostman.com/view/23936159/2s84DoT3w1\n\nBASE_URL: http://proxy-airtime.KAYBIC AFRICA.app/api_v1/transaction\n\n**Prérequis:**\n- Clé API valide\n- Pour Cashout: au moins un wallet opérateur configuré\n- Pour Cashin: suffisamment de fonds sur le compte partenaire",
 		"version": "1.0.0"
 	},
 	"servers": [
 		{
-			"url": "http://proxy-airtime.easytransfert.app/api_v1/transaction"
+			"url": "http://proxy-airtime.KAYBIC AFRICA.app/api_v1/transaction"
 		}
 	],
 	"paths": {
@@ -142,7 +142,7 @@
 											"type": "string",
 											"description": "Nom du client",
 											"examples": [
-												"easytransfert"
+												"KAYBIC AFRICA"
 											]
 										},
 										"state": {
@@ -184,7 +184,7 @@
 											"type": "string",
 											"description": "Lien SMS pour la validation de la transaction",
 											"examples": [
-												"https://api.easytransfert.app/sms/xxxx"
+												"https://api.KAYBIC AFRICA.app/sms/xxxx"
 											]
 										},
 										"p_id": {
@@ -397,7 +397,7 @@
 												},
 												"customer_name": {
 													"type": "string",
-													"example": "easytransfert"
+													"example": "KAYBIC AFRICA"
 												},
 												"state": {
 													"type": "string",
@@ -506,7 +506,7 @@
 									},
 									"customer_name": {
 										"type": "string",
-										"example": "easytransfert"
+										"example": "KAYBIC AFRICA"
 									},
 									"state": {
 										"type": "string",

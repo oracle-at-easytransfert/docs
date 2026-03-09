@@ -1,8 +1,8 @@
 /* ============================================
-   STYLES GLOBAUX EASYTRANSFERT
+   STYLES GLOBAUX KAYBIC AFRICA
    ============================================ */
 
-/* Dégradé de fond basé sur la palette EasyTransfert */
+/* Dégradé de fond basé sur la palette KAYBIC AFRICA */
 :root {
   --gradient-start: #0f4c9e;
   --gradient-mid: #1d60d5;
@@ -48,7 +48,7 @@ main,
 }
 
 /* ============================================
-   LOGO ET TEXTE EASYTRANSFERT - UN SEUL LOGO, UNE SEULE MENTION À DROITE
+   LOGO ET TEXTE KAYBIC AFRICA - UN SEUL LOGO, UNE SEULE MENTION À DROITE
    ============================================ */
 
 /* Masquer TOUS les logos sauf le premier dans la sidebar/navbar */
@@ -65,10 +65,10 @@ aside [class*="logo"]:not(:first-child) {
   display: none !important;
 }
 
-/* Masquer toutes les mentions EASYTRANSFERT en texte dans la navigation */
-/* Le masquage est géré par le JavaScript hide-duplicate-easytransfert.js */
+/* Masquer toutes les mentions KAYBIC AFRICA en texte dans la navigation */
+/* Le masquage est géré par le JavaScript hide-duplicate-KAYBIC AFRICA.js */
 
-/* Configuration du premier logo avec texte EASYTRANSFERT à droite */
+/* Configuration du premier logo avec texte KAYBIC AFRICA à droite */
 .nav-logo:first-child,
 nav [class*="logo"]:first-child,
 [class*="navbar"] [class*="logo"]:first-child,
@@ -82,14 +82,14 @@ aside [class*="logo"]:first-child,
   flex-direction: row !important;
 }
 
-/* Texte EASYTRANSFERT à droite du logo */
+/* Texte KAYBIC AFRICA à droite du logo */
 .nav-logo:first-child::after,
 nav [class*="logo"]:first-child::after,
 [class*="navbar"] [class*="logo"]:first-child::after,
 header [class*="logo"]:first-child::after,
 aside [class*="logo"]:first-child::after,
 [class*="sidebar"] [class*="logo"]:first-child::after {
-  content: "EASYTRANSFERT" !important;
+  content: "KAYBIC AFRICA" !important;
   font-weight: 700 !important;
   font-size: 18px !important;
   line-height: 1 !important;

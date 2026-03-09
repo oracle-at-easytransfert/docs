@@ -21,7 +21,7 @@ POST {{base_url}}/airtime
 | Champ         | Type   | Obligatoire  | Description                                                                                                                                         |
 | ------------- | ------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `amount`      | int    | Oui          | Montant de la transaction en FCFA. **Doit être un multiple de 100** (ex: 500, 1000, 1500).                                                          |
-| `api_key`     | string | Oui          | Clé API EASYTRANSFERT pour authentification                                                                                                         |
+| `api_key`     | string | Oui          | Clé API KAYBIC AFRICA pour authentification                                                                                                         |
 | `destination` | string | Oui          | Numéro mobile du bénéficiaire **sans indicatif international** (ex: 0103444777, pas +2250103444777)                                                 |
 | `service_id`  | int    | Oui          | [Identifiant du service](/documentation/annexes/glossaire-variables-testeur-api) (Cashin ou Cashout selon l'opérateur)                              |
 | `ipn_url`     | string | **Oui**      | URL de callback pour recevoir les notifications IPN                                                                                                 |

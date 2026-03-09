@@ -1,10 +1,10 @@
 ---
 title: "Authentification"
-description: "Mécanisme d'authentification par clé API de l'API EASYTRANSFERT"
+description: "Mécanisme d'authentification par clé API de l'API KAYBIC AFRICA"
 icon: "key"
 ---
 
-L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par clé API (`api_key`).
+L'API KAYBIC AFRICA  utilise un mécanisme d'authentification simple par clé API (`api_key`).
 
 ## Principe général
 
@@ -20,7 +20,7 @@ L'API EASYTRANSFERT BUSINESS utilise un mécanisme d'authentification simple par
 
 ## Transmission de la clé API
 
-La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFERT, sous la forme ci-dessous :
+La clé API doit être incluse dans toutes les requêtes vers l'API KAYBIC AFRICA, sous la forme ci-dessous :
 
 ```json
 "api_key": "votre_cle_api"
@@ -32,7 +32,7 @@ La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFER
 
 ## Gestion de la clé API
 
-- La clé API est fournie par EASYTRANSFERT
+- La clé API est fournie par KAYBIC AFRICA
 - Elle doit être conservée de manière sécurisée
 - En production, elle doit être stockée dans :
   - les variables d'environnement
@@ -46,5 +46,5 @@ La clé API doit être incluse dans toutes les requêtes vers l'API EASYTRANSFER
 
 ## Renouvellement
 
-- Si la clé API doit être remplacée (ex: compromise ou rotation), EASYTRANSFERT fournit une nouvelle clé
+- Si la clé API doit être remplacée (ex: compromise ou rotation), KAYBIC AFRICA fournit une nouvelle clé
 - Les applications doivent alors mettre à jour la variable `api_key` dans leur environnement
